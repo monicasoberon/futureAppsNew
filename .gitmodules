@@ -1,0 +1,3 @@
+[submodule "backEnd/backend"]
+	path = backEnd/backend
+	url = https://github.com/monicasoberon/futureAppsNew
