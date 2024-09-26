@@ -1,10 +1,3 @@
-//
-//  NovedadesLegalesView.swift
-//  Bufetec
-//
-//  Created by Luis Gzz on 25/09/24.
-//
-
 import SwiftUI
 
 struct LegalNews: Identifiable {
@@ -13,7 +6,6 @@ struct LegalNews: Identifiable {
     let description: String
     let date: String
 }
-
 
 struct NovedadesLegales: View {
     @State private var legalNews: [LegalNews] = [
@@ -26,8 +18,6 @@ struct NovedadesLegales: View {
     @State private var searchText = ""
     @State private var chatGPTResponse = ""
     @State private var isFetchingResponse = false
-    
-    var chatAPI = ChatGPTAPI() // Instancia de la clase ChatGPTAPI
     
     var filteredNews: [LegalNews] {
         if searchText.isEmpty {
@@ -43,54 +33,40 @@ struct NovedadesLegales: View {
     var body: some View {
         NavigationView {
             VStack {
-                if isFetchingResponse {
-                    ProgressView("Consultando a ChatGPT...") // Indicador de carga mientras se espera la respuesta
-                } else if !chatGPTResponse.isEmpty {
-                    Text("Respuesta de ChatGPT: \(chatGPTResponse)")
-                        .padding()
-                }
-                
+                // Search Bar
+                TextField("Buscar novedades legales...", text: $searchText)
+                    .padding(10)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
+                    .padding(.horizontal)
+
+                // Legal News List
                 List(filteredNews) { news in
                     VStack(alignment: .leading) {
                         Text(news.title)
                             .font(.headline)
-                            .foregroundColor(Color.blue) // Título en azul
                         Text(news.description)
                             .font(.subheadline)
-                            .foregroundColor(Color.gray) // Descripción en gris
                         Text(news.date)
                             .font(.footnote)
-                            .foregroundColor(Color.secondary)
-                    }
-                    .padding(.vertical, 5)
-                    .background(Color.blue.opacity(0.1)) // Fondo ligeramente azul para cada noticia
-                    .cornerRadius(8)
-                }
-                .listStyle(PlainListStyle())
-                .navigationTitle("Novedades Legales en México")
-                .background(Color.blue.opacity(0.05))
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbarBackground(.visible, for: .navigationBar)
-                .toolbarColorScheme(.light, for: .navigationBar)
-                .searchable(text: $searchText, prompt: "Buscar noticias legales o preguntar a ChatGPT")
-                .onChange(of: searchText) { newValue in
-                    if !newValue.isEmpty {
-                        // Llamar a ChatGPT cuando se ingrese texto
-                        fetchResponse(for: newValue)
+                            .foregroundColor(.gray)
                     }
                 }
+                
+                // ChatGPT Response
+                if isFetchingResponse {
+                    ProgressView("Cargando respuesta...")
+                } else if !chatGPTResponse.isEmpty {
+                    Text(chatGPTResponse)
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+                }
+                
+                Spacer()
             }
-        }
-    }
-    
-    // Método para llamar a ChatGPT
-    func fetchResponse(for query: String) {
-        isFetchingResponse = true
-        chatAPI.sendQuery(query) { response in
-            DispatchQueue.main.async {
-                self.chatGPTResponse = response
-                self.isFetchingResponse = false
-            }
+            .navigationTitle("Novedades Legales")
         }
     }
 }
