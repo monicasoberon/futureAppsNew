@@ -4,7 +4,7 @@ struct LawyerDetailView: View {
     var user: UserModel
 
     @State private var showDetail = false  // State variable to toggle detail view
-    
+
     var body: some View {
         ZStack {
             // Gradient Background for an appealing look
@@ -13,6 +13,13 @@ struct LawyerDetailView: View {
             
             VStack(alignment: .center, spacing: 20) {
                 
+                // Custom title for "Detalles del Abogado"
+                Text("Detalles del Abogado")
+                    .font(.largeTitle)
+                    .bold()
+                    .foregroundColor(Color(hex: "#003366"))
+                    .padding(.top, 30)  // Adjust padding to control vertical positioning
+
                 // Adjusted Profile Picture Position
                 HStack {
                     Spacer()
@@ -103,8 +110,7 @@ struct LawyerDetailView: View {
                 Spacer()
             }
         }
-        .navigationTitle("Detalles del Abogado")
-        // Automatically trigger the animation after 5 seconds when the view appears
+        // No need for a custom back button; let the default one handle it
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 withAnimation(.spring()) {
