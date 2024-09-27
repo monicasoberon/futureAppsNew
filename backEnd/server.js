@@ -1,12 +1,13 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const connectDB = require('./config/db');
-const faqRoutes = require('./routes/faqRoutes');
-const noticiasRoutes = require('./routes/noticiasRoutes');
-const usuariosRoutes = require('./routes/usuariosRoutes');
-const citasRoutes = require('./routes/citasRoutes');
-const casosRoutes = require('./routes/casosRoutes');
-const tareasCasosRoutes = require('./routes/tareasCasosRoutes');
+const express = require("express");
+const dotenv = require("dotenv");
+const connectDB = require("./config/db");
+const faqRoutes = require("./routes/faqRoutes");
+const noticiasRoutes = require("./routes/noticiasRoutes");
+const usuariosRoutes = require("./routes/usuariosRoutes");
+const citasRoutes = require("./routes/citasRoutes");
+const casosRoutes = require("./routes/casosRoutes");
+const tareasCasosRoutes = require("./routes/tareasCasosRoutes");
+const chatGPTRoutes = require("./routes/chatGPTRoutes");
 
 dotenv.config();
 connectDB();
@@ -17,12 +18,13 @@ app.use(express.json());
 
 app.use("/media", express.static("media"));
 
-app.use('/api/faq', faqRoutes);
-app.use('/api/noticias', noticiasRoutes);
-app.use('/api/usuarios', usuariosRoutes);
-app.use('/api/citas', citasRoutes);
-app.use('/api/casos', casosRoutes);
-app.use('/api/tareasCasos', tareasCasosRoutes);
+app.use("/api/faq", faqRoutes);
+app.use("/api/noticias", noticiasRoutes);
+app.use("/api/usuarios", usuariosRoutes);
+app.use("/api/citas", citasRoutes);
+app.use("/api/casos", casosRoutes);
+app.use("/api/tareasCasos", tareasCasosRoutes);
+app.use("/api/gpt", chatGPTRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
@@ -41,4 +43,4 @@ app.listen(PORT, () => {
 // get abogado by id: nombre, especialidad, descripcion y foto?
 
 // get all casos numero, nombre y estado
-// 
+//
