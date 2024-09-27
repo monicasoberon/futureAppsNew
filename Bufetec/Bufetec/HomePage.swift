@@ -19,13 +19,18 @@ struct HomePageView: View {
         GridItem(.flexible(), spacing: 20)  // Segunda columna
     ]
     
+    @State private var showProfileView = false
     @Environment(\.presentationMode) var presentationMode
-    @State private var showLogin = false
-    @State private var showLogoutAlert = false // State to control alert visibility
+ 
+    
+    @StateObject private var userModel = UserModel()
     
     var body: some View {
         NavigationView {
-            VStack {Spacer()
+            VStack {
+                
+                Spacer()
+                
                 VStack {
                             Text("Welcome, \(firstName ?? "User") \(lastName ?? "")!")
                             Text("Email: \(userEmail ?? "No email")")
@@ -67,13 +72,16 @@ struct HomePageView: View {
             .edgesIgnoringSafeArea(.all)
             .navigationBarTitleDisplayMode(.large) // Estilo del título
             .navigationBarItems(trailing:
-                Button(action: {
-                    showLogoutAlert = true // Show the alert when the button is tapped
-                }) {
-                    Image(systemName: "person.crop.circle")
-                        .foregroundColor(Color(hex: "#003366")) // Color azul oscuro para el ícono
+                NavigationLink(destination: ProfileView(user: userModel), isActive: $showProfileView) {
+                    Button(action: {
+                        showProfileView = true
+                    }) {
+                        Image(systemName: "person.crop.circle")
+                            .foregroundColor(Color(hex: "#003366")) // Color azul oscuro para el ícono
+                    }
                 }
             )
+
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("Bufetec")
@@ -82,32 +90,7 @@ struct HomePageView: View {
                         .foregroundColor(Color(hex: "#003366")) // Color azul oscuro para el título
                 }
             }
-            // If user logs out, show the login view
-            .fullScreenCover(isPresented: $showLogin) {
-                LoginView()
-            }
-            // Alert to confirm sign-out
-            .alert(isPresented: $showLogoutAlert) {
-                Alert(
-                    title: Text("Cerrar sesión"),
-                    message: Text("¿Estás seguro de que quieres cerrar sesión?"),
-                    primaryButton: .destructive(Text("Cerrar sesión")) {
-                        logOut() // Proceed with logging out
-                    },
-                    secondaryButton: .cancel(Text("Cancelar"))
-                )
-            }
-        }
-    }
-    
-    // Function to log out the user
-    private func logOut() {
-        do {
-            try Auth.auth().signOut()
-            // Redirect to login view after signing out
-            showLogin = true
-        } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)
+
         }
     }
 }

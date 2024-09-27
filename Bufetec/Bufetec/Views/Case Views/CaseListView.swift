@@ -22,7 +22,7 @@ struct CaseListView: View {
                     CaseRowView(legalCase: legalCase)
                         .opacity(isVisible.indices.contains(index) && isVisible[index] ? 1 : 0) // Control visibility
                         .offset(y: isVisible.indices.contains(index) && isVisible[index] ? 0 : 20) // Apply offset animation
-                        .animation(.easeOut(duration: 1.5).delay(Double(index) * 0.1), value: isVisible)
+                        .animation(.easeOut(duration: 1.5).delay(Double(index) * 0.3), value: isVisible)
                         .onAppear {
                             if index < isVisible.count {
                                 withAnimation {

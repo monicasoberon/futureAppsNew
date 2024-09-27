@@ -10,6 +10,7 @@ import SwiftUI
 struct CaseDetailView: View {
     
     var legalCase: LegalCase
+    
     @State private var isVisible: Bool = false
     
     var body: some View {
@@ -80,12 +81,25 @@ struct CaseDetailView: View {
                 .animation(.easeInOut(duration: 0.5).delay(0.2), value: isVisible)
                 
                 // Affected person
-                Text("Persona afectada: \(legalCase.clientID)")
-                    .font(.body)
-                    .padding(.horizontal)
-                    .opacity(isVisible ? 1 : 0)
-                    .animation(.easeInOut(duration: 0.5).delay(0.3), value: isVisible)
-                
+                HStack {
+                    Image(systemName: "person.fill")
+                        .foregroundColor(.gray)
+                    
+                    Text("Persona afectada: \(legalCase.clientID)")
+                        .font(.body)
+                        .padding(.horizontal)
+                        .opacity(isVisible ? 1 : 0)
+                        .animation(.easeInOut(duration: 0.5).delay(0.3), value: isVisible)
+                }
+                .padding()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color(hex: "#D0E8F2")) // Azul claro
+                .cornerRadius(12)
+                .shadow(color: Color(hex: "#0D214D").opacity(0.3), radius: 4, x: 0, y: 4)
+                .padding(.horizontal)
+                .opacity(isVisible ? 1 : 0)
+                .animation(.easeInOut(duration: 0.5).delay(0.2), value: isVisible)
+                    
                 Divider()
                     .padding(.horizontal)
                     .opacity(isVisible ? 1 : 0)
@@ -143,7 +157,7 @@ struct CaseDetailView: View {
                 
                 Spacer()
             }
-            .navigationTitle("Detalles del Caso")
+            .navigationTitle("\(legalCase.caseName)")
             .padding(.top)
             .background(Color(hex: "#E6F2FF").ignoresSafeArea()) // Fondo azul claro
             .onAppear {
