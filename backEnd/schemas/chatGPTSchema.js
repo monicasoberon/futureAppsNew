@@ -7,8 +7,8 @@ let threadId = null;
 async function askQuestion(question) {
   const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
-    organization: "org-proj_nG7m0i26MwEqn3aTeTMKQBra",
-    project: "$Bufetec",
+    organization: "org-proj_nG7m0i26MwEqn3aTeTMKQBra", //nuestra org
+    project: "$Bufetec", //bufetec
   });
 
   // Check if a thread already exists
@@ -29,7 +29,7 @@ async function askQuestion(question) {
     // Stream assistant's response
     const run = openai.beta.threads.runs
       .stream(threadId, {
-        assistant_id: "asst_XW6riICPege7OaEWC8wz3drt", // Replace with the actual assistant ID
+        assistant_id: "asst_XW6riICPege7OaEWC8wz3drt", //asistente bufetec
       })
       .on("textCreated", (text) => {
         response += text;
