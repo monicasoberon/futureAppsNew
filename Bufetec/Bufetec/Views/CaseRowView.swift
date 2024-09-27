@@ -12,10 +12,15 @@ struct CaseRowView: View {
     
     var body: some View {
         HStack {
-            // Case ID
-            Text("N°: \(legalCase.caseID)")
-                .font(.headline)
-                .padding(.leading, 8)
+            VStack(alignment: .leading) {
+                Text(legalCase.caseName)
+                    .font(.headline)
+                    .bold()
+                
+                Text("N°: \(legalCase.caseID)")
+                    .font(.caption)
+            }
+            .padding(.leading, 8)
             
             Spacer()
             
@@ -27,7 +32,7 @@ struct CaseRowView: View {
                 .foregroundColor(statusColor(for: legalCase.status))
         }
         .padding()
-        .background(Color(UIColor.systemGray6))
+        .background(Color(UIColor.systemBackground))
         .cornerRadius(12)
         .shadow(color: Color.gray.opacity(0.2), radius: 4, x: 0, y: 4)
     }

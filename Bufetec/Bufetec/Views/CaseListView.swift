@@ -8,27 +8,39 @@
 import SwiftUI
 
 struct CaseListView: View {
-    @State private var cases: [LegalCase] = [
-        LegalCase(caseID: "caso_001", clientID: "c001", lawyerAssigned: "a001", status: "en progreso", caseDetails: "Caso de robo de identidad", files: ["documento_prueba.pdf"]),
-        LegalCase(caseID: "caso_002", clientID: "c002", lawyerAssigned: "a002", status: "abierto", caseDetails: "Caso de fraude financiero", files: ["reporte_inicial.pdf"]),
-        LegalCase(caseID: "caso_003", clientID: "c003", lawyerAssigned: "a003", status: "cerrado", caseDetails: "Caso de disputa de contrato", files: ["contrato_disputado.pdf"])
-    ]
+    @State private var cases: [LegalCase] = LegalCase.sampleCases
+    @State private var isVisible: [Bool] = [] // Array to track each item's visibility
     
     var body: some View {
         NavigationView {
-            List(cases) { legalCase in
-                NavigationLink(destination: CaseDetailView(legalCase: legalCase)
-                    .navigationBarBackButtonHidden(true) // Hide extra back button
+            List(cases.indices, id: \.self) { index in
+                let legalCase = cases[index]
+                NavigationLink(
+                    destination: CaseDetailView(legalCase: legalCase)
+                        .navigationBarBackButtonHidden(true) // Hide extra back button
                 ) {
                     CaseRowView(legalCase: legalCase)
+                        .opacity(isVisible.indices.contains(index) && isVisible[index] ? 1 : 0) // Control visibility
+                        .offset(y: isVisible.indices.contains(index) && isVisible[index] ? 0 : 20) // Apply offset animation
+                        .animation(.easeOut(duration: 1.5).delay(Double(index) * 0.1), value: isVisible)
+                        .onAppear {
+                            if index < isVisible.count {
+                                withAnimation {
+                                    isVisible[index] = true
+                                }
+                            }
+                        }
                 }
                 .buttonStyle(PlainButtonStyle())
+            }
+            .onAppear {
+                // Initialize isVisible array based on the number of cases
+                isVisible = Array(repeating: false, count: cases.count)
             }
             .navigationTitle("Mis Casos")
         }
     }
 }
-
 
 #Preview {
     CaseListView()

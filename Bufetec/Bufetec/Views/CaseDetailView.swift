@@ -4,11 +4,13 @@
 //
 //  Created by Jorge on 17/09/24.
 //
+
 import SwiftUI
 
 struct CaseDetailView: View {
     
     var legalCase: LegalCase
+    @State private var isVisible: Bool = false
     
     var body: some View {
         ScrollView {
@@ -30,6 +32,8 @@ struct CaseDetailView: View {
                     .background(Color(hex: "#D0E8F2")) // Azul claro
                     .cornerRadius(12)
                     .shadow(color: Color(hex: "#0D214D").opacity(0.3), radius: 4, x: 0, y: 4)
+                    .opacity(isVisible ? 1 : 0)
+                    .animation(.easeInOut(duration: 0.5), value: isVisible)
                     
                     Spacer()
                     
@@ -53,6 +57,8 @@ struct CaseDetailView: View {
                     .background(Color(hex: "#D0E8F2")) // Azul claro
                     .cornerRadius(12)
                     .shadow(color: Color(hex: "#0D214D").opacity(0.3), radius: 4, x: 0, y: 4)
+                    .opacity(isVisible ? 1 : 0)
+                    .animation(.easeInOut(duration: 0.5).delay(0.1), value: isVisible)
                 }
                 .padding(.horizontal)
                 
@@ -70,13 +76,20 @@ struct CaseDetailView: View {
                 .cornerRadius(12)
                 .shadow(color: Color(hex: "#0D214D").opacity(0.3), radius: 4, x: 0, y: 4)
                 .padding(.horizontal)
+                .opacity(isVisible ? 1 : 0)
+                .animation(.easeInOut(duration: 0.5).delay(0.2), value: isVisible)
                 
                 // Affected person
                 Text("Persona afectada: \(legalCase.clientID)")
                     .font(.body)
                     .padding(.horizontal)
+                    .opacity(isVisible ? 1 : 0)
+                    .animation(.easeInOut(duration: 0.5).delay(0.3), value: isVisible)
+                
                 Divider()
                     .padding(.horizontal)
+                    .opacity(isVisible ? 1 : 0)
+                    .animation(.easeInOut(duration: 0.5).delay(0.4), value: isVisible)
                 
                 // Case Details
                 VStack(alignment: .leading, spacing: 8) {
@@ -92,6 +105,8 @@ struct CaseDetailView: View {
                 .cornerRadius(12)
                 .shadow(color: Color(hex: "#0D214D").opacity(0.3), radius: 4, x: 0, y: 4)
                 .padding(.horizontal)
+                .opacity(isVisible ? 1 : 0)
+                .animation(.easeInOut(duration: 0.5).delay(0.5), value: isVisible)
                 
                 // Documents Section
                 VStack(alignment: .leading, spacing: 8) {
@@ -123,12 +138,17 @@ struct CaseDetailView: View {
                 .cornerRadius(12)
                 .shadow(color: Color(hex: "#0D214D").opacity(0.3), radius: 4, x: 0, y: 4)
                 .padding(.horizontal)
+                .opacity(isVisible ? 1 : 0)
+                .animation(.easeInOut(duration: 0.5).delay(0.6), value: isVisible)
                 
                 Spacer()
             }
             .navigationTitle("Detalles del Caso")
             .padding(.top)
             .background(Color(hex: "#E6F2FF").ignoresSafeArea()) // Fondo azul claro
+            .onAppear {
+                isVisible = true
+            }
         }
         .background(Color(hex: "#E6F2FF").ignoresSafeArea()) // Fondo azul claro
     }
