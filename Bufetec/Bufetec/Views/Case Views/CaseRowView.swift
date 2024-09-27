@@ -1,10 +1,3 @@
-//
-//  CaseRowView.swift
-//  Bufetec
-//
-//  Created by Jorge on 19/09/24.
-//
-
 import SwiftUI
 
 struct CaseRowView: View {
@@ -24,11 +17,9 @@ struct CaseRowView: View {
             
             Spacer()
             
-            // Status Button
+            // Indicador de estado
             Circle()
                 .frame(width: 30, height: 30)
-                .font(.body)
-                .padding(3)
                 .foregroundColor(statusColor(for: legalCase.status))
         }
         .padding()
@@ -37,7 +28,7 @@ struct CaseRowView: View {
         .shadow(color: Color.gray.opacity(0.2), radius: 4, x: 0, y: 4)
     }
     
-    // Function to get status color
+    // Función para obtener el color del estado
     private func statusColor(for status: String) -> Color {
         switch status.lowercased() {
         case "abierto":
@@ -50,8 +41,4 @@ struct CaseRowView: View {
             return Color.gray
         }
     }
-}
-
-#Preview {
-    CaseRowView(legalCase: LegalCase.defaultValue)
 }

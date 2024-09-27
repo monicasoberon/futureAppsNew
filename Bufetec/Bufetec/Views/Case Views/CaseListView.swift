@@ -1,27 +1,17 @@
-//
-//  CaseListView.swift
-//  Bufetec
-//
-//  Created by Jorge on 17/09/24.
-//
-
 import SwiftUI
 
 struct CaseListView: View {
-    @State private var cases: [LegalCase] = LegalCase.sampleCases
-    @State private var isVisible: [Bool] = [] // Array to track each item's visibility
+    @StateObject var viewModel = CaseViewModel()
+    @State private var isVisible: [Bool] = [] // Array para rastrear la visibilidad de cada elemento
     
     var body: some View {
         NavigationView {
-            List(cases.indices, id: \.self) { index in
-                let legalCase = cases[index]
-                NavigationLink(
-                    destination: CaseDetailView(legalCase: legalCase)
-                        .navigationBarBackButtonHidden(true) // Hide extra back button
-                ) {
+            List(viewModel.cases.indices, id: \.self) { index in
+                let legalCase = viewModel.cases[index]
+                NavigationLink(destination: CaseDetailView(legalCase: legalCase)) {
                     CaseRowView(legalCase: legalCase)
-                        .opacity(isVisible.indices.contains(index) && isVisible[index] ? 1 : 0) // Control visibility
-                        .offset(y: isVisible.indices.contains(index) && isVisible[index] ? 0 : 20) // Apply offset animation
+                        .opacity(isVisible.indices.contains(index) && isVisible[index] ? 1 : 0) // Controlar visibilidad
+                        .offset(y: isVisible.indices.contains(index) && isVisible[index] ? 0 : 20) // Animación de desplazamiento
                         .animation(.easeOut(duration: 1.5).delay(Double(index) * 0.3), value: isVisible)
                         .onAppear {
                             if index < isVisible.count {
@@ -34,14 +24,13 @@ struct CaseListView: View {
                 .buttonStyle(PlainButtonStyle())
             }
             .onAppear {
-                // Initialize isVisible array based on the number of cases
-                isVisible = Array(repeating: false, count: cases.count)
+                viewModel.fetchCases()
+            }
+            .onChange(of: viewModel.cases) { newCases in
+                // Actualiza el array isVisible solo cuando los casos se actualizan
+                isVisible = Array(repeating: false, count: newCases.count)
             }
             .navigationTitle("Mis Casos")
         }
     }
-}
-
-#Preview {
-    CaseListView()
 }

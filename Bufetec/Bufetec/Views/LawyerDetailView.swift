@@ -3,47 +3,47 @@ import SwiftUI
 struct LawyerDetailView: View {
     var user: UserModel
 
-    @State private var showDetail = false  // State variable to toggle detail view
+    @State private var showDetail = false  // Estado para alternar la vista detallada
 
     var body: some View {
         ZStack {
-            // Gradient Background for an appealing look
+            // Fondo degradado azul claro
             LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.3), Color.blue.opacity(0.1)]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
-            
+
             VStack(alignment: .center, spacing: 20) {
-                
-                // Custom title for "Detalles del Abogado"
+
+                // Título personalizado para los detalles del abogado
                 Text("Detalles del Abogado")
                     .font(.largeTitle)
                     .bold()
                     .foregroundColor(Color(hex: "#003366"))
-                    .padding(.top, 30)  // Adjust padding to control vertical positioning
+                    .padding(.top, 30)
 
-                // Adjusted Profile Picture Position
+                // Imagen ajustada del perfil
                 HStack {
                     Spacer()
                     ZStack {
                         Circle()
                             .fill(Color.blue.opacity(0.2))
-                            .frame(width: showDetail ? 240 : 280, height: showDetail ? 240 : 280) // Start large, shrink when details are shown
+                            .frame(width: showDetail ? 240 : 280, height: showDetail ? 240 : 280) // Animación de escala
                             .shadow(color: Color.blue.opacity(0.4), radius: 20, x: 0, y: 10)
-                        
+
                         Image("default_picture")
                             .resizable()
                             .scaledToFill()
-                            .frame(width: showDetail ? 220 : 260, height: showDetail ? 220 : 260) // Start large, shrink when details are shown
+                            .frame(width: showDetail ? 220 : 260, height: showDetail ? 220 : 260)
                             .clipShape(Circle())
                             .overlay(Circle().stroke(Color.white, lineWidth: 4))
                             .shadow(radius: 10)
-                            .opacity(1) // Picture always visible
-                            .scaleEffect(showDetail ? 1 : 1.1) // Slight scaling effect for emphasis
+                            .opacity(1)
+                            .scaleEffect(showDetail ? 1 : 1.1)
                     }
                     Spacer()
                 }
-                .padding(.top, 10) // Adjusted the padding to move the profile picture higher up
-                
-                // Animated User Information in a rounded card with a transition
+                .padding(.top, 10)
+
+                // Información del abogado en una tarjeta animada
                 if showDetail {
                     HStack {
                         Spacer()
@@ -53,15 +53,15 @@ struct LawyerDetailView: View {
                                 .fontWeight(.bold)
                                 .foregroundColor(.blue)
                                 .padding(.bottom, 5)
-                            
-                            // Lawyer's Name
+
+                            // Nombre del abogado
                             Text(user.name)
                                 .font(.title)
                                 .fontWeight(.bold)
                                 .foregroundColor(.primary)
                                 .shadow(color: .blue.opacity(0.2), radius: 2, x: 0, y: 2)
 
-                            // Email with Icon
+                            // Correo con icono
                             HStack {
                                 Image(systemName: "envelope.fill")
                                     .foregroundColor(.blue)
@@ -70,7 +70,7 @@ struct LawyerDetailView: View {
                                     .foregroundColor(.secondary)
                             }
 
-                            // Specialization with Icon
+                            // Especialidad con icono
                             HStack {
                                 Image(systemName: "briefcase.fill")
                                     .foregroundColor(.blue)
@@ -78,12 +78,12 @@ struct LawyerDetailView: View {
                                     .font(.subheadline)
                                     .foregroundColor(.primary)
                             }
-                            
-                            // Description with a Bold Label
+
+                            // Descripción con etiqueta en negrita
                             Text("Descripción:")
                                 .font(.headline)
                                 .foregroundColor(.primary)
-                            
+
                             Text(user.description)
                                 .font(.body)
                                 .foregroundColor(.secondary)
@@ -100,17 +100,16 @@ struct LawyerDetailView: View {
                             RoundedRectangle(cornerRadius: 20)
                                 .stroke(Color.blue.opacity(0.4), lineWidth: 2)
                         )
-                        .transition(.move(edge: .bottom).combined(with: .opacity))  // Move in from bottom and fade in
-                        .animation(.easeInOut(duration: 0.6), value: showDetail) // Animate the card
+                        .transition(.move(edge: .bottom).combined(with: .opacity))
+                        .animation(.easeInOut(duration: 0.6), value: showDetail)
                         Spacer()
                     }
                     .padding(.horizontal)
                 }
-                
+
                 Spacer()
             }
         }
-        // No need for a custom back button; let the default one handle it
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 withAnimation(.spring()) {
@@ -119,8 +118,4 @@ struct LawyerDetailView: View {
             }
         }
     }
-}
-
-#Preview {
-    LawyerDetailView(user: UserModel.defaultValue)
 }
