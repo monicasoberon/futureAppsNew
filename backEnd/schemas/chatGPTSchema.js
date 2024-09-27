@@ -1,16 +1,21 @@
 //chatGPTSchema.js
+require("dotenv").config();
 // Initialize threadId outside the function so it can persist across function calls
 const OpenAI = require("openai");
-
 let threadId = null;
+
+const key = process.env.OPENAI_API_KEY;
 
 async function askQuestion(question) {
   const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
-    organization: "org-proj_nG7m0i26MwEqn3aTeTMKQBra", //nuestra org
-    project: "$Bufetec", //bufetec
+    organization: process.env.OPENAI_ORG, //nuestra org
+    project: "proj_nG7m0i26MwEqn3aTeTMKQBra", //bufetec
   });
 
+  const assistant = await openai.beta.assistants.retrieve(
+    "asst_XW6riICPege7OaEWC8wz3drt"
+  );
   // Check if a thread already exists
   if (!threadId) {
     const thread = await openai.beta.threads.create();
@@ -23,26 +28,10 @@ async function askQuestion(question) {
     content: question,
   });
 
-  return new Promise((resolve, reject) => {
-    let response = "";
-
-    // Stream assistant's response
-    const run = openai.beta.threads.runs
-      .stream(threadId, {
-        assistant_id: "asst_XW6riICPege7OaEWC8wz3drt", //asistente bufetec
-      })
-      .on("textCreated", (text) => {
-        response += text;
-      })
-      .on("textDelta", (textDelta) => {
-        response += textDelta.value;
-      })
-      .on("end", () => {
-        resolve(response);
-      })
-      .on("error", (error) => {
-        reject(error);
-      });
+  const run = await openai.beta.threads.runs.create(threadId, {
+    assistant_id: assistant.id,
+    instructions:
+      "Responde si encuentras información relacionada, o solo informa que no encontraste nada relevante.",
   });
 }
 
