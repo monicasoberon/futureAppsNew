@@ -1,1 +1,161 @@
-backEnd/.env
+# Node.js / Express
+
+# Node.js modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Environment variables
+.env
+
+# Build files
+dist/
+build/
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Debugger files
+.vscode/
+
+# Coverage directory
+coverage/
+*.lcov
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.node_repl_history
+
+# Project directories
+.DS_Store
+.idea/
+*.swo
+*.swp
+
+# Express specific
+public/uploads/
+
+# Xcode / SwiftUI Project
+
+# Xcode
+.DS_Store
+build/
+DerivedData/
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+
+# Swift Package Manager
+/.build/
+/Packages
+Package.pins
+Package.resolved
+*.xcodeproj/project.xcworkspace/xcuserdata/
+
+# CocoaPods
+Pods/
+Podfile.lock
+project.xcworkspace/
+
+# Carthage
+Carthage/Build/
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# Accio dependency manager
+Dependencies/
+.accio/
+
+# SwiftPM binary artefacts
+/.build/
+
+# Personal settings
+.idea/
+*.swp
+*.swo
+*.orig
+*.old
+
+# Logs
+*.log
+*.lock
+
+# Temporary Files
+*~
+
+# Xcode / SwiftUI Project
+
+# Xcode
+.DS_Store
+build/
+DerivedData/
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+
+# Swift Package Manager
+/.build/
+/Packages
+Package.pins
+Package.resolved
+*.xcodeproj/project.xcworkspace/xcuserdata/
+
+# CocoaPods
+Pods/
+Podfile.lock
+project.xcworkspace/
+
+# Carthage
+Carthage/Build/
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# Accio dependency manager
+Dependencies/
+.accio/
+
+# SwiftPM binary artefacts
+/.build/
+
+# Personal settings
+.idea/
+*.swp
+*.swo
+*.orig
+*.old
+
+# Logs
+*.log
+*.lock
+
+# macOS metadata
+.DS_Store
+
+# Xcode user-specific settings
+xcuserdata/
+
+# Temporary Files
+*~
+
