@@ -16,6 +16,7 @@ jspm_packages/
 
 # Environment variables
 .env
+backEnd/.env
 
 # Build files
 dist/
