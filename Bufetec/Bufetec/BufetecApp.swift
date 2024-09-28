@@ -30,7 +30,7 @@ import GoogleSignIn
         }
     }()
     
-    //@State var legalCase: LegalCase = LegalCase.defaultValue
+    @State var legalCase: LegalCase = LegalCase.defaultValue
 
 
     var body: some Scene {
