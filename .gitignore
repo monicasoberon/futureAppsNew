@@ -155,7 +155,6 @@ Dependencies/
 
 # Xcode user-specific settings
 xcuserdata/
-*.pbxproj
 
 # Temporary Files
 *~
