@@ -6,9 +6,8 @@ exports.preguntar = async (req, res) => {
   if (!pregunta) {
     return res.status(400).json({ message: "No question provided" });
   }
-
   try {
-    const chatResponse = await preguntar.askQuestion(pregunta);
+    const chatResponse = await preguntar.main(pregunta);
     res.status(200).json({ message: chatResponse });
   } catch (error) {
     res.status(500).json({ message: error.message });
