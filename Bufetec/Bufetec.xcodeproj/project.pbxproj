@@ -16,6 +16,13 @@
 		B476F19A2CA5D90200BFA846 /* LawyerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B476F1992CA5D90200BFA846 /* LawyerDetailView.swift */; };
 		B476F19C2CA5D91D00BFA846 /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B476F19B2CA5D91D00BFA846 /* UserListView.swift */; };
 		B4897A9D2CA4ACF800B209EA /* NovedadesLegalesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4897A9C2CA4ACF800B209EA /* NovedadesLegalesView.swift */; };
+		B4BAC48B2CAA54A800BC2755 /* GoogleAPIClientForRESTCore in Frameworks */ = {isa = PBXBuildFile; productRef = B4BAC48A2CAA54A800BC2755 /* GoogleAPIClientForRESTCore */; };
+		B4BAC48D2CAA54A800BC2755 /* GoogleAPIClientForREST_ACMEDNS in Frameworks */ = {isa = PBXBuildFile; productRef = B4BAC48C2CAA54A800BC2755 /* GoogleAPIClientForREST_ACMEDNS */; };
+		B4BAC48F2CAA54A800BC2755 /* GoogleAPIClientForREST_AIPlatformNotebooks in Frameworks */ = {isa = PBXBuildFile; productRef = B4BAC48E2CAA54A800BC2755 /* GoogleAPIClientForREST_AIPlatformNotebooks */; };
+		B4BAC4912CAA54A800BC2755 /* GoogleAPIClientForREST_APIGateway in Frameworks */ = {isa = PBXBuildFile; productRef = B4BAC4902CAA54A800BC2755 /* GoogleAPIClientForREST_APIGateway */; };
+		B4BAC4932CAA54A800BC2755 /* GoogleAPIClientForREST_APIManagement in Frameworks */ = {isa = PBXBuildFile; productRef = B4BAC4922CAA54A800BC2755 /* GoogleAPIClientForREST_APIManagement */; };
+		B4BAC4952CAA54A800BC2755 /* GoogleAPIClientForREST_Calendar in Frameworks */ = {isa = PBXBuildFile; productRef = B4BAC4942CAA54A800BC2755 /* GoogleAPIClientForREST_Calendar */; };
+		B4BAC4972CAA54A800BC2755 /* GoogleAPIClientForREST_Oauth2 in Frameworks */ = {isa = PBXBuildFile; productRef = B4BAC4962CAA54A800BC2755 /* GoogleAPIClientForREST_Oauth2 */; };
 		D8053CEF2C9CA291006DE5ED /* CaseRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8053CEE2C9CA291006DE5ED /* CaseRowView.swift */; };
 		D8295AAD2C9B5E7E0031DAF2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8295AAA2C9B5E0A0031DAF2 /* GoogleService-Info.plist */; };
 		D860C96C2CA4859D0000C728 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D860C96B2CA4859D0000C728 /* ProfileView.swift */; };
@@ -79,12 +86,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4BAC48B2CAA54A800BC2755 /* GoogleAPIClientForRESTCore in Frameworks */,
+				B4BAC4912CAA54A800BC2755 /* GoogleAPIClientForREST_APIGateway in Frameworks */,
 				FB1F39C32C9B4D2300C918B3 /* GoogleSignIn in Frameworks */,
 				FBAD65D82C9A07A700A8A7D3 /* FirebaseAuth in Frameworks */,
+				B4BAC48D2CAA54A800BC2755 /* GoogleAPIClientForREST_ACMEDNS in Frameworks */,
+				B4BAC48F2CAA54A800BC2755 /* GoogleAPIClientForREST_AIPlatformNotebooks in Frameworks */,
 				FB1F39BE2C9B4AA300C918B3 /* FirebaseFirestoreCombine-Community in Frameworks */,
+				B4BAC4972CAA54A800BC2755 /* GoogleAPIClientForREST_Oauth2 in Frameworks */,
+				B4BAC4952CAA54A800BC2755 /* GoogleAPIClientForREST_Calendar in Frameworks */,
 				FB1F39C52C9B4D2300C918B3 /* GoogleSignInSwift in Frameworks */,
 				FB1F39BA2C9B4AA300C918B3 /* FirebaseAuthCombine-Community in Frameworks */,
 				FB1F39BC2C9B4AA300C918B3 /* FirebaseFirestore in Frameworks */,
+				B4BAC4932CAA54A800BC2755 /* GoogleAPIClientForREST_APIManagement in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +227,13 @@
 				FB1F39BD2C9B4AA300C918B3 /* FirebaseFirestoreCombine-Community */,
 				FB1F39C22C9B4D2300C918B3 /* GoogleSignIn */,
 				FB1F39C42C9B4D2300C918B3 /* GoogleSignInSwift */,
+				B4BAC48A2CAA54A800BC2755 /* GoogleAPIClientForRESTCore */,
+				B4BAC48C2CAA54A800BC2755 /* GoogleAPIClientForREST_ACMEDNS */,
+				B4BAC48E2CAA54A800BC2755 /* GoogleAPIClientForREST_AIPlatformNotebooks */,
+				B4BAC4902CAA54A800BC2755 /* GoogleAPIClientForREST_APIGateway */,
+				B4BAC4922CAA54A800BC2755 /* GoogleAPIClientForREST_APIManagement */,
+				B4BAC4942CAA54A800BC2755 /* GoogleAPIClientForREST_Calendar */,
+				B4BAC4962CAA54A800BC2755 /* GoogleAPIClientForREST_Oauth2 */,
 			);
 			productName = Bufetec;
 			productReference = FBAD65B72C99F99200A8A7D3 /* Bufetec.app */;
@@ -245,6 +266,7 @@
 			packageReferences = (
 				FBAD65D62C9A07A700A8A7D3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				FB1F39C12C9B4D2300C918B3 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				B4BAC4892CAA54A800BC2755 /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */,
 			);
 			productRefGroup = FBAD65B82C99F99200A8A7D3 /* Products */;
 			projectDirPath = "";
@@ -506,6 +528,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B4BAC4892CAA54A800BC2755 /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/google-api-objectivec-client-for-rest.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		FB1F39C12C9B4D2300C918B3 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -525,6 +555,41 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B4BAC48A2CAA54A800BC2755 /* GoogleAPIClientForRESTCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4BAC4892CAA54A800BC2755 /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */;
+			productName = GoogleAPIClientForRESTCore;
+		};
+		B4BAC48C2CAA54A800BC2755 /* GoogleAPIClientForREST_ACMEDNS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4BAC4892CAA54A800BC2755 /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */;
+			productName = GoogleAPIClientForREST_ACMEDNS;
+		};
+		B4BAC48E2CAA54A800BC2755 /* GoogleAPIClientForREST_AIPlatformNotebooks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4BAC4892CAA54A800BC2755 /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */;
+			productName = GoogleAPIClientForREST_AIPlatformNotebooks;
+		};
+		B4BAC4902CAA54A800BC2755 /* GoogleAPIClientForREST_APIGateway */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4BAC4892CAA54A800BC2755 /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */;
+			productName = GoogleAPIClientForREST_APIGateway;
+		};
+		B4BAC4922CAA54A800BC2755 /* GoogleAPIClientForREST_APIManagement */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4BAC4892CAA54A800BC2755 /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */;
+			productName = GoogleAPIClientForREST_APIManagement;
+		};
+		B4BAC4942CAA54A800BC2755 /* GoogleAPIClientForREST_Calendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4BAC4892CAA54A800BC2755 /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */;
+			productName = GoogleAPIClientForREST_Calendar;
+		};
+		B4BAC4962CAA54A800BC2755 /* GoogleAPIClientForREST_Oauth2 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4BAC4892CAA54A800BC2755 /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */;
+			productName = GoogleAPIClientForREST_Oauth2;
+		};
 		FB1F39B92C9B4AA300C918B3 /* FirebaseAuthCombine-Community */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FBAD65D62C9A07A700A8A7D3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

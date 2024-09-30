@@ -9,6 +9,7 @@ import Foundation
 import Firebase
 import FirebaseAuth
 import GoogleSignIn
+import GoogleAPIClientForREST_Calendar
 
 struct Authentication {
     @MainActor
