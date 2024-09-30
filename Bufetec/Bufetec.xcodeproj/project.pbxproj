@@ -10,6 +10,8 @@
 		8F6862AA2CA86BAB00BB397D /* CaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6862A92CA86BAB00BB397D /* CaseViewModel.swift */; };
 		8F6862AC2CA86BC600BB397D /* FaqViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6862AB2CA86BC600BB397D /* FaqViewModel.swift */; };
 		8F6862AE2CA86BDA00BB397D /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6862AD2CA86BDA00BB397D /* UserViewModel.swift */; };
+		8F6862B42CAB178900BB397D /* LegalNewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6862B32CAB178900BB397D /* LegalNewsViewModel.swift */; };
+		8F6862B62CAB17B000BB397D /* LegalNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6862B52CAB17B000BB397D /* LegalNews.swift */; };
 		8FAEC9012CA5D1B500CD1860 /* FaqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAEC9002CA5D1B500CD1860 /* FaqModel.swift */; };
 		8FAEC9052CA5D4E200CD1860 /* FaqListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAEC9042CA5D4E200CD1860 /* FaqListView.swift */; };
 		B4595C292CA33C0500920969 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4595C282CA33C0500920969 /* HomePage.swift */; };
@@ -53,6 +55,8 @@
 		8F6862A92CA86BAB00BB397D /* CaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseViewModel.swift; sourceTree = "<group>"; };
 		8F6862AB2CA86BC600BB397D /* FaqViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqViewModel.swift; sourceTree = "<group>"; };
 		8F6862AD2CA86BDA00BB397D /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		8F6862B32CAB178900BB397D /* LegalNewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalNewsViewModel.swift; sourceTree = "<group>"; };
+		8F6862B52CAB17B000BB397D /* LegalNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalNews.swift; sourceTree = "<group>"; };
 		8FAEC9002CA5D1B500CD1860 /* FaqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqModel.swift; sourceTree = "<group>"; };
 		8FAEC9042CA5D4E200CD1860 /* FaqListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqListView.swift; sourceTree = "<group>"; };
 		B4595C282CA33C0500920969 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 				8F6862A92CA86BAB00BB397D /* CaseViewModel.swift */,
 				8F6862AB2CA86BC600BB397D /* FaqViewModel.swift */,
 				8F6862AD2CA86BDA00BB397D /* UserViewModel.swift */,
+				8F6862B32CAB178900BB397D /* LegalNewsViewModel.swift */,
 			);
 			path = ViewsModels;
 			sourceTree = "<group>";
@@ -139,6 +144,7 @@
 				D8EE89412C9A1750002BD006 /* LegalCase.swift */,
 				D860C9712CA48CD70000C728 /* UserModel.swift */,
 				8FAEC9002CA5D1B500CD1860 /* FaqModel.swift */,
+				8F6862B52CAB17B000BB397D /* LegalNews.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -298,6 +304,7 @@
 				FBAD65BD2C99F99200A8A7D3 /* ContentView.swift in Sources */,
 				8F6862AE2CA86BDA00BB397D /* UserViewModel.swift in Sources */,
 				B4595C292CA33C0500920969 /* HomePage.swift in Sources */,
+				8F6862B42CAB178900BB397D /* LegalNewsViewModel.swift in Sources */,
 				D8EE89462C9A7481002BD006 /* CaseListView.swift in Sources */,
 				FBAD65BF2C99F99200A8A7D3 /* Item.swift in Sources */,
 				D860C96C2CA4859D0000C728 /* ProfileView.swift in Sources */,
@@ -312,6 +319,7 @@
 				D860C9722CA48CD70000C728 /* UserModel.swift in Sources */,
 				D8053CEF2C9CA291006DE5ED /* CaseRowView.swift in Sources */,
 				FB1F39C82C9B4E6200C918B3 /* HomeView.swift in Sources */,
+				8F6862B62CAB17B000BB397D /* LegalNews.swift in Sources */,
 				B4897A9D2CA4ACF800B209EA /* NovedadesLegalesView.swift in Sources */,
 				8FAEC9012CA5D1B500CD1860 /* FaqModel.swift in Sources */,
 				D8F6AB702C99FDC800E74EFB /* LoginView.swift in Sources */,
