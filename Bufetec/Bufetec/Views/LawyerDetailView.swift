@@ -110,6 +110,7 @@ struct LawyerDetailView: View {
                 Spacer()
             }
         }
+        .padding(.top, -80)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 withAnimation(.spring()) {

@@ -5,7 +5,7 @@ struct CaseListView: View {
     @State private var isVisible: [Bool] = [] // Array para rastrear la visibilidad de cada elemento
     
     var body: some View {
-        NavigationView {
+        ZStack {
             List(viewModel.cases.indices, id: \.self) { index in
                 let legalCase = viewModel.cases[index]
                 NavigationLink(destination: CaseDetailView(legalCase: legalCase)) {

@@ -86,15 +86,20 @@ struct ContactView: View {
             Spacer().frame(height: 30)
             
             // Contact Information Section
-            HStack(spacing: 20) {
-                ContactInfoView(iconName: "phone.fill", contactDetail: "+1 (234) 567-890")
+            VStack(alignment:.leading, spacing: 20) {
+                Link(destination: URL(string: "https://wa.me/8183284344")!) {
+                    ContactInfoView(iconName: "phone.fill", contactDetail: "+52 (81) 8328 4344")
+                        .underline()
+                }
                 ContactInfoView(iconName: "envelope.fill", contactDetail: "contact@bufetec.com")
+                ContactInfoView(iconName: "mappin.and.ellipse", contactDetail: "Edificio Pabellón Tec, segundo piso, oficina PT-138-24")
             }
             .padding(.horizontal, 20)
             
             Spacer()
         }
         .background(Color(hex: "#F0F4FF"))
+        .padding(.top, -80)
     }
 }
 

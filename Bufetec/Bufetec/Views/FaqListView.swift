@@ -27,10 +27,12 @@ struct FaqListView: View {
                         .foregroundColor(.gray)
                 }
             }
-            .navigationTitle("Preguntas Frecuentes")
-            .onAppear {
-                viewModel.fetchFAQs()
-            }
+            .padding(.top, -20)
+        }
+        .padding(.top, -80)
+        .navigationTitle("Preguntas Frecuentes")
+        .onAppear {
+            viewModel.fetchFAQs()
         }
     }
 }

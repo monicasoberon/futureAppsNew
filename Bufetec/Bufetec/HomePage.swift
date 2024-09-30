@@ -59,7 +59,7 @@ struct HomePageView: View {
                         HomeButton(title: "Preguntas Frecuentes", iconName: "questionmark.circle.fill", color: Color(hex: "#4A90E2"))
                     }
                     
-                    NavigationLink(destination: ContactarView()) {
+                    NavigationLink(destination: ContactView(user: userModel)) {
                         HomeButton(title: "Contactar", iconName: "phone.fill", color: Color(hex: "#4A90E2"))
                     }
                 }
