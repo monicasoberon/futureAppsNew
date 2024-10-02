@@ -12,13 +12,13 @@ struct LawyerDetailView: View {
                 .edgesIgnoringSafeArea(.all)
 
             VStack(alignment: .center, spacing: 20) {
-
+                
                 // Título personalizado para los detalles del abogado
                 Text("Detalles del Abogado")
                     .font(.largeTitle)
                     .bold()
                     .foregroundColor(Color(hex: "#003366"))
-                    .padding(.top, 30)
+                    .padding(.top,70)
 
                 // Imagen ajustada del perfil
                 HStack {
