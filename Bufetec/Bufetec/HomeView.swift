@@ -20,7 +20,7 @@ struct HomeView: View {
             VStack {
                 if userLoggedIn {
                     // Navigate to HomePage if the user is logged in
-                    HomePageView(userEmail: userEmail, firstName: userFirstName, lastName: userLastName)
+                    MainPageView()
                 } else {
                     // Stay on the Login page if the user isn't logged in
                     LoginView()
