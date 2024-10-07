@@ -14,12 +14,10 @@ struct NavigationMenu: View {
     
     @Binding var isShowing: Bool
     @Binding var selectedTab: SideMenuOptionModel
+    @Binding var showLogoutAlert: Bool // Binding for the logout alert
+    
     @State private var selectedOption: SideMenuOptionModel? = .homeView
-    
-    @State private var showLogin = false
-    @State private var showLogoutAlert = false
-    
-    
+
     var body: some View {
         ZStack {
             if isShowing {
@@ -51,7 +49,7 @@ struct NavigationMenu: View {
                         
                         // Sign Out button at the bottom
                         Button(action: {
-                            showLogoutAlert = true
+                            showLogoutAlert = true // Trigger logout alert
                         }, label: {
                             HStack {
                                 Image(systemName: SideMenuOptionModel.signOut.systemImageName)
@@ -71,10 +69,6 @@ struct NavigationMenu: View {
                 .transition(.move(edge: .leading))
             }
         }
-        .fullScreenCover(isPresented: $showLogin) {
-            LoginView() // Show LoginView if user logs out
-        }
-        // Alert to confirm sign-ou
     }
     
     private func onOptionTapped(_ option: SideMenuOptionModel) {
@@ -84,19 +78,19 @@ struct NavigationMenu: View {
             isShowing = false
         }
     }
-    
-    // Function to log out the user
-    private func logOut() {
-        do {
-            try Auth.auth().signOut()
-            selectedTab = .homeView // Reset to the home view after logout
-            showLogin = true // Show the login screen
-        } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)
-        }
-    }
 }
 
+
+
 #Preview {
-    NavigationMenu(user: UserModel.defaultValue, isShowing: .constant(true), selectedTab: .constant(.homeView))
+    @State var isShowingMenu = true
+    @State var selectedTab = SideMenuOptionModel.homeView
+    @State var showLogoutAlert = false // Add this state for preview
+
+    return NavigationMenu(
+        user: UserModel.defaultValue,
+        isShowing: $isShowingMenu,
+        selectedTab: $selectedTab,
+        showLogoutAlert: $showLogoutAlert // Pass this binding
+    )
 }

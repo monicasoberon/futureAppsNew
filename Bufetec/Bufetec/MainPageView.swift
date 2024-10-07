@@ -16,7 +16,8 @@ struct MainPageView: View {
     @State private var showProfile = false
     @State private var selectedMenuOption: SideMenuOptionModel = .homeView
     @State private var showLoginView = false
-    
+    @State private var showLogoutAlert = false // Add this for logout alert
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -36,26 +37,28 @@ struct MainPageView: View {
                     FaqListView()
                 case .contactView:
                     ContactView(user: user)
-                    
                 case .signOut:
-                    // Log out and show the login view
-                    Color.white // Blank view to avoid crashing due to missing case
-                    .onAppear {
-                        logOut()
-                    }
+                    // No action needed here as logout will be handled by alert
+                    Color.clear
                 }
                 
-                // Your navigation menu
-                NavigationMenu(user: user, isShowing: $showMenu, selectedTab: $selectedMenuOption)
+                // Pass showLogoutAlert to NavigationMenu
+                NavigationMenu(
+                    user: user,
+                    isShowing: $showMenu,
+                    selectedTab: $selectedMenuOption,
+                    showLogoutAlert: $showLogoutAlert // Pass this parameter here
+                )
             }
-            .navigationTitle(selectedMenuOption.title)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
                         showMenu.toggle()
                     }) {
                         Image(systemName: "line.3.horizontal")
-                            .foregroundColor(.blue)
+                            .font(.system(size: 20))
+                            .foregroundColor(Color(hex: "#FFFFFF"))
+                            .opacity(0.8)
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -63,35 +66,44 @@ struct MainPageView: View {
                         showProfile.toggle()
                     }) {
                         Image(systemName: "person.crop.circle")
+                            .font(.system(size: 20))
+                            .foregroundColor(Color(hex: "#FFFFFF"))
+                            .opacity(0.8)
                     }
                 }
             }
-            .toolbarBackground(Color.pink, for: .navigationBar)
+            .toolbarBackground(Color(hex: "#0164d2"), for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .navigationBarTitleDisplayMode(.inline)
-
-            // NavigationLink to ProfileView triggered by the state variable
-            NavigationLink(destination: ProfileView(user: user), isActive: $showProfile) {
-                EmptyView()
+            .alert(isPresented: $showLogoutAlert) {
+                Alert(
+                    title: Text("Log Out"),
+                    message: Text("Are you sure you want to log out?"),
+                    primaryButton: .destructive(Text("Log Out")) {
+                        logOut()
+                    },
+                    secondaryButton: .cancel()
+                )
             }
-
-            // Full screen login view if the user logs out
             .fullScreenCover(isPresented: $showLoginView) {
                 LoginView()
             }
         }
     }
     
-    // Function to log out the user
+    // Unified logOut function to handle actual logout process
     private func logOut() {
         do {
             try Auth.auth().signOut()
-            showLoginView = true // Show login view when user logs out
+            showLoginView = true
         } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)
+            print("Error signing out: \(signOutError)")
         }
     }
 }
+
+
+
 
 #Preview {
     MainPageView()

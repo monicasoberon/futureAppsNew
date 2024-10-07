@@ -69,8 +69,6 @@ struct UserListView: View {
         .onAppear {
             viewModel.fetchUsers()
         }
-        .padding(.top, -80)
-
     }
 }
 
