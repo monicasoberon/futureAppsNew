@@ -6,16 +6,11 @@
 //
 
 import SwiftUI
-import FirebaseAuth
-
 
 struct ProfileView: View {
     @Environment(\.dismiss) var dismiss
 
     @ObservedObject var user: UserModel
-    
-    @State private var showLogin = false
-    @State private var showLogoutAlert = false // State to control alert visibility
     
     var body: some View {
         VStack {
@@ -78,42 +73,8 @@ struct ProfileView: View {
                 }
             }
         }
-        .navigationBarItems(trailing:
-                                Button(action: {
-            showLogoutAlert = true
-        }) {
-            Image(systemName: "rectangle.portrait.and.arrow.forward")
-                .foregroundColor(Color(hex: "#003366"))
-        }
-        )
-        
-        // If user logs out, show the login view
-        .fullScreenCover(isPresented: $showLogin) {
-            LoginView()
-        }
-        // Alert to confirm sign-out
-        .alert(isPresented: $showLogoutAlert) {
-            Alert(
-                title: Text("Cerrar sesión"),
-                message: Text("¿Estás seguro de que quieres cerrar sesión?"),
-                primaryButton: .destructive(Text("Cerrar sesión")) {
-                    logOut() // Proceed with logging out
-                },
-                secondaryButton: .cancel(Text("Cancelar"))
-            )
-        }
     }
     
-    // Function to log out the user
-    private func logOut() {
-        do {
-            try Auth.auth().signOut()
-            // Redirect to login view after signing out
-            showLogin = true
-        } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)
-        }
-    }
     
     // Function to add a new case ID to the list
     private func addNewCaseID() {
