@@ -13,7 +13,6 @@ const threadID = "thread_bLAfoLKfTBGCTqtWrlvtdBuw";
 
 // Bring it all together
 async function main(question) {
-  console.log(process.env.OPENAI_KEY);
   console.log("Pensando...");
 
   // Create a message
