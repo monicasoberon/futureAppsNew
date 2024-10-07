@@ -25,6 +25,7 @@
 		B4BAC4932CAA54A800BC2755 /* GoogleAPIClientForREST_APIManagement in Frameworks */ = {isa = PBXBuildFile; productRef = B4BAC4922CAA54A800BC2755 /* GoogleAPIClientForREST_APIManagement */; };
 		B4BAC4952CAA54A800BC2755 /* GoogleAPIClientForREST_Calendar in Frameworks */ = {isa = PBXBuildFile; productRef = B4BAC4942CAA54A800BC2755 /* GoogleAPIClientForREST_Calendar */; };
 		B4BAC4972CAA54A800BC2755 /* GoogleAPIClientForREST_Oauth2 in Frameworks */ = {isa = PBXBuildFile; productRef = B4BAC4962CAA54A800BC2755 /* GoogleAPIClientForREST_Oauth2 */; };
+		D8046B7F2CB4531400768348 /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8046B7E2CB4531400768348 /* HexColor.swift */; };
 		D8053CEF2C9CA291006DE5ED /* CaseRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8053CEE2C9CA291006DE5ED /* CaseRowView.swift */; };
 		D8295AAD2C9B5E7E0031DAF2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8295AAA2C9B5E0A0031DAF2 /* GoogleService-Info.plist */; };
 		D860C96C2CA4859D0000C728 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D860C96B2CA4859D0000C728 /* ProfileView.swift */; };
@@ -68,6 +69,7 @@
 		B476F1992CA5D90200BFA846 /* LawyerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LawyerDetailView.swift; sourceTree = "<group>"; };
 		B476F19B2CA5D91D00BFA846 /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
 		B4897A9C2CA4ACF800B209EA /* NovedadesLegalesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovedadesLegalesView.swift; sourceTree = "<group>"; };
+		D8046B7E2CB4531400768348 /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
 		D8053CEE2C9CA291006DE5ED /* CaseRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseRowView.swift; sourceTree = "<group>"; };
 		D8295AAA2C9B5E0A0031DAF2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D860C96B2CA4859D0000C728 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				D8CE74472CAF7D1800F841D7 /* SideMenuOptionModel.swift */,
+				D8046B7E2CB4531400768348 /* HexColor.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				D8EE89422C9A1750002BD006 /* LegalCase.swift in Sources */,
 				D8CE744E2CAF7F4600F841D7 /* SideMenuRowView.swift in Sources */,
 				D8CE744A2CAF7EDB00F841D7 /* NavigationMenuView.swift in Sources */,
+				D8046B7F2CB4531400768348 /* HexColor.swift in Sources */,
 				B476F19A2CA5D90200BFA846 /* LawyerDetailView.swift in Sources */,
 				FB13834A2CA48B24003AFDCF /* CreateEventView.swift in Sources */,
 				D87DF1142CA8FBF7000C80E5 /* ContactInfoView.swift in Sources */,
