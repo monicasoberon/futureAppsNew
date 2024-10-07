@@ -1,9 +1,9 @@
-// require("dotenv").config();
+require("dotenv").config();
 const OpenAI = require("openai");
 // let threadId = null;
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_KEY,
   organization: "org-FSuVnhJmnpoo2Z0dKeYXAzIj",
 });
 
@@ -13,6 +13,7 @@ const threadID = "thread_bLAfoLKfTBGCTqtWrlvtdBuw";
 
 // Bring it all together
 async function main(question) {
+  console.log(process.env.OPENAI_KEY);
   console.log("Pensando...");
 
   // Create a message
@@ -53,7 +54,7 @@ async function createMessage(question) {
 async function runThread() {
   const run = await openai.beta.threads.runs.create(threadID, {
     assistant_id: asstID,
-    instructions: `Responde con datos, precedentes y artículos pertinentes a la pregunta, siempre indicando el número de artículo, registro digital o tesis referenciada. No puedes responder sin dar referencia. Responde solo con datos en archivos a tu disposición de las leyes en México. Responde con "Disculpa, no encontre nada relacionado al tema." si no encuentras nada.`,
+    instructions: `Eres un experto legal para asesoría legal en México. Te preguntaran temas o palabras claves, y responde con el número o números de registro digital de tesis que son similares a la pregunta. Regresa solamente número de  registro digital. E.g.: 2029350.  Responde solo con datos en archivos a tu disposición de las leyes en México. Responde con "Disculpa, no encontre nada." si no encuentras nada. Ejemplo de respuesta: "2029350""`,
   });
   return run;
 }
