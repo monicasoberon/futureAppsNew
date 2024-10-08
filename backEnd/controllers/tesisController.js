@@ -11,7 +11,7 @@ exports.getTesis = async (req, res) => {
 
 exports.getTesisById = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
+  //   console.log(id);
 
   try {
     const tesis = await TESIS.findOne({ "Registro digital": id });
