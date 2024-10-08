@@ -2,7 +2,7 @@ import pdfplumber
 import json
 
 # Path to the PDF file
-pdf_path = "listado-de-tesis-2024-09-26.pdf"
+pdf_path = "backEnd\\jsonify\\tesisFinal1.pdf"
 
 # List to hold the extracted data
 data = []
