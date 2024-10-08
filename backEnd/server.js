@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const faqRoutes = require("./routes/faqRoutes");
@@ -13,9 +14,18 @@ const tesisRoutes = require("./routes/tesisRoutes");
 dotenv.config();
 connectDB();
 
+var admin = require("firebase-admin");
+
+var serviceAccount = require("./bufetectest-firebase-adminsdk-cyhvc-6db128251a.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.use("/media", express.static("media"));
 
@@ -32,17 +42,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
-// Get all citas
-// Get all citas por abogado
-// Create a cita
-
-// get all noticias titulo, fecha y id
-// get noticias por id
-// post noticias
-
-// get all usuarios tipo abogado: nombre, especialidad
-// get abogado by id: nombre, especialidad, descripcion y foto?
-
-// get all casos numero, nombre y estado
-//
