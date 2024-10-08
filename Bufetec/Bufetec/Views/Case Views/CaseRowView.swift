@@ -2,33 +2,35 @@ import SwiftUI
 
 struct CaseRowView: View {
     var legalCase: LegalCase
-    
+
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
                 Text(legalCase.caseName)
                     .font(.headline)
-                    .bold()
-                
+                    .fontWeight(.bold)
+                    .foregroundColor(Color(hex: "#003366"))
+
                 Text("N°: \(legalCase.caseID)")
                     .font(.caption)
+                    .foregroundColor(Color(hex: "#757575"))
             }
             .padding(.leading, 8)
-            
+
             Spacer()
-            
-            // Indicador de estado
+
+            // Status indicator circle
             Circle()
                 .frame(width: 30, height: 30)
                 .foregroundColor(statusColor(for: legalCase.status))
         }
         .padding()
-        .background(Color(UIColor.systemBackground))
+        .background(Color.white) // Consistent background for list rows
         .cornerRadius(12)
         .shadow(color: Color.gray.opacity(0.2), radius: 4, x: 0, y: 4)
     }
-    
-    // Función para obtener el color del estado
+
+    // Function to get status color
     private func statusColor(for status: String) -> Color {
         switch status.lowercased() {
         case "abierto":
@@ -41,4 +43,8 @@ struct CaseRowView: View {
             return Color.gray
         }
     }
+}
+
+#Preview {
+    CaseRowView(legalCase: LegalCase.defaultValue)
 }
