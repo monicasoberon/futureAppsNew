@@ -91,30 +91,38 @@ exports.getAbogados = async (req, res) => {
 
 
 exports.loginOrRegister = async (req, res) => {
-    const { email } = req.body;
-
-    // Verifica que el email esté presente en el cuerpo de la solicitud
-    if (!email) {
-        return res.status(400).json({ message: 'Email es requerido' });
-    }
-
+    console.log("loginOrRegister");
+    // Obtén los datos del usuario desde el token verificado
+    const { uid, email, name, picture } = req.user;
+  
     try {
-        // Busca el usuario en la base de datos por su correo electrónico
-        let usuario = await USUARIOS.findOne({ correo: email.trim() });
-
-        if (usuario) {
-            // Si el usuario ya existe, retornarlo
-            console.log('Usuario encontrado:', usuario);
-            return res.status(200).json({ message: 'Usuario ya registrado', usuario });
-        }
-
-        // Si el usuario no existe, llamar a la función para crear un nuevo usuario
-        return res.status(400).json({ message: 'Usuario no encontrado, por favor proporcione más datos para registrarse.' });
-        
+      // Busca si el usuario ya existe en la base de datos
+      let usuario = await USUARIOS.findOne({ uid });
+  
+      if (usuario) {
+        // Si el usuario ya existe, puedes actualizar su información si es necesario
+        usuario.email = email;
+        usuario.nombre = name;
+        usuario.foto = picture;
+        await usuario.save();
+        return res.status(200).json({ message: 'Usuario existente', usuario });
+      } else {
+        // Si el usuario no existe, créalo
+        const nuevoUsuario = new USUARIOS({
+          uid,
+          correo: email,
+          nombre: name,
+          foto: picture,
+          tipo: 'cliente', // O asigna el tipo según tu lógica
+          // Otros campos que desees inicializar
+        });
+  
+        const usuarioCreado = await nuevoUsuario.save();
+        return res.status(201).json({ message: 'Usuario creado', usuario: usuarioCreado });
+      }
     } catch (error) {
-        // Manejo de errores
-        console.log('Error:', error.message);
-        return res.status(500).json({ message: error.message });
+      console.error('Error al crear o actualizar el usuario:', error);
+      return res.status(500).json({ message: 'Error interno del servidor' });
     }
 };
 
