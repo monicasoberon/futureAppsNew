@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -96,6 +96,10 @@
 		FBAD65C02C99F99300A8A7D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FBAD65C32C99F99300A8A7D3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		8FA1B2172CB4C311006028F2 /* Services */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Services; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		FBAD65B42C99F99200A8A7D3 /* Frameworks */ = {
@@ -232,6 +236,7 @@
 				D8295AA82C9B5DF50031DAF2 /* Resources */,
 				FBAD65C02C99F99300A8A7D3 /* Assets.xcassets */,
 				FBAD65C22C99F99300A8A7D3 /* Preview Content */,
+				8FA1B2172CB4C311006028F2 /* Services */,
 			);
 			path = Bufetec;
 			sourceTree = "<group>";
@@ -258,6 +263,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				8FA1B2172CB4C311006028F2 /* Services */,
 			);
 			name = Bufetec;
 			packageProductDependencies = (

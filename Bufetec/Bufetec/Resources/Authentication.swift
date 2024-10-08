@@ -74,6 +74,13 @@ struct Authentication {
         GIDSignIn.sharedInstance.signOut()
         try Auth.auth().signOut()
     }
+    
+    func getIdToken() async throws -> String {
+        guard let currentUser = Auth.auth().currentUser else {
+            throw AuthenticationError.runtimeError("No hay usuario autenticado")
+        }
+        return try await currentUser.getIDToken()
+    }
 }
 
 enum AuthenticationError: Error {
