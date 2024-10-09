@@ -7,12 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3B43616E2CB5A99D000BF5B9 /* LawyerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B43616D2CB5A99D000BF5B9 /* LawyerListView.swift */; };
-		3B4361702CB5AA2F000BF5B9 /* LawyerAvailibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B43616F2CB5AA2F000BF5B9 /* LawyerAvailibilityView.swift */; };
 		8F6862AA2CA86BAB00BB397D /* CaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6862A92CA86BAB00BB397D /* CaseViewModel.swift */; };
 		8F6862AC2CA86BC600BB397D /* FaqViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6862AB2CA86BC600BB397D /* FaqViewModel.swift */; };
 		8F6862AE2CA86BDA00BB397D /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6862AD2CA86BDA00BB397D /* UserViewModel.swift */; };
-		8F6862B42CAB178900BB397D /* TesisModelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6862B32CAB178900BB397D /* TesisModelViewModel.swift */; };
+		8F6862B42CAB178900BB397D /* LegalNewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6862B32CAB178900BB397D /* LegalNewsViewModel.swift */; };
 		8F6862B62CAB17B000BB397D /* LegalNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6862B52CAB17B000BB397D /* LegalNews.swift */; };
 		8FA1B2192CB6FD8D006028F2 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA1B2182CB6FD8D006028F2 /* ProfileModel.swift */; };
 		8FA1B21B2CB6FDA3006028F2 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA1B21A2CB6FDA3006028F2 /* ProfileViewModel.swift */; };
@@ -39,7 +37,6 @@
 		D860C9722CA48CD70000C728 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D860C9712CA48CD70000C728 /* UserModel.swift */; };
 		D87DF1122CA8FB7A000C80E5 /* ContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DF1112CA8FB7A000C80E5 /* ContactView.swift */; };
 		D87DF1142CA8FBF7000C80E5 /* ContactInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DF1132CA8FBF7000C80E5 /* ContactInfoView.swift */; };
-		D8C953872CB6FD45003F43E5 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C953862CB6FD45003F43E5 /* SearchModel.swift */; };
 		D8CE74442CAF7C8300F841D7 /* MainPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CE74432CAF7C8300F841D7 /* MainPageView.swift */; };
 		D8CE74482CAF7D1800F841D7 /* SideMenuOptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CE74472CAF7D1800F841D7 /* SideMenuOptionModel.swift */; };
 		D8CE744A2CAF7EDB00F841D7 /* NavigationMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CE74492CAF7EDB00F841D7 /* NavigationMenuView.swift */; };
@@ -66,12 +63,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3B43616D2CB5A99D000BF5B9 /* LawyerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LawyerListView.swift; sourceTree = "<group>"; };
-		3B43616F2CB5AA2F000BF5B9 /* LawyerAvailibilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LawyerAvailibilityView.swift; sourceTree = "<group>"; };
 		8F6862A92CA86BAB00BB397D /* CaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseViewModel.swift; sourceTree = "<group>"; };
 		8F6862AB2CA86BC600BB397D /* FaqViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqViewModel.swift; sourceTree = "<group>"; };
 		8F6862AD2CA86BDA00BB397D /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
-		8F6862B32CAB178900BB397D /* TesisModelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesisModelViewModel.swift; sourceTree = "<group>"; };
+		8F6862B32CAB178900BB397D /* LegalNewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalNewsViewModel.swift; sourceTree = "<group>"; };
 		8F6862B52CAB17B000BB397D /* LegalNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalNews.swift; sourceTree = "<group>"; };
 		8FA1B2182CB6FD8D006028F2 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		8FA1B21A2CB6FDA3006028F2 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -91,7 +86,6 @@
 		D860C9712CA48CD70000C728 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		D87DF1112CA8FB7A000C80E5 /* ContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactView.swift; sourceTree = "<group>"; };
 		D87DF1132CA8FBF7000C80E5 /* ContactInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoView.swift; sourceTree = "<group>"; };
-		D8C953862CB6FD45003F43E5 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		D8CE74432CAF7C8300F841D7 /* MainPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageView.swift; sourceTree = "<group>"; };
 		D8CE74472CAF7D1800F841D7 /* SideMenuOptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuOptionModel.swift; sourceTree = "<group>"; };
 		D8CE74492CAF7EDB00F841D7 /* NavigationMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationMenuView.swift; sourceTree = "<group>"; };
@@ -150,8 +144,6 @@
 				8F6862B32CAB178900BB397D /* LegalNewsViewModel.swift */,
 				8FA1B21A2CB6FDA3006028F2 /* ProfileViewModel.swift */,
 				8FA1B21F2CB74028006028F2 /* SideMenuProfileViewModel.swift */,
-				8F6862B32CAB178900BB397D /* TesisModelViewModel.swift */,
-				D8C953862CB6FD45003F43E5 /* SearchModel.swift */,
 			);
 			path = ViewsModels;
 			sourceTree = "<group>";
@@ -218,8 +210,6 @@
 				FB1383492CA48B24003AFDCF /* CreateEventView.swift */,
 				B4897A9C2CA4ACF800B209EA /* NovedadesLegalesView.swift */,
 				D860C96B2CA4859D0000C728 /* ProfileView.swift */,
-				3B43616D2CB5A99D000BF5B9 /* LawyerListView.swift */,
-				3B43616F2CB5AA2F000BF5B9 /* LawyerAvailibilityView.swift */,
 				8FAEC9042CA5D4E200CD1860 /* FaqListView.swift */,
 				D87DF1112CA8FB7A000C80E5 /* ContactView.swift */,
 				D87DF1132CA8FBF7000C80E5 /* ContactInfoView.swift */,
@@ -371,7 +361,7 @@
 				FBAD65BD2C99F99200A8A7D3 /* ContentView.swift in Sources */,
 				8F6862AE2CA86BDA00BB397D /* UserViewModel.swift in Sources */,
 				B4595C292CA33C0500920969 /* HomePage.swift in Sources */,
-				8F6862B42CAB178900BB397D /* TesisModelViewModel.swift in Sources */,
+				8F6862B42CAB178900BB397D /* LegalNewsViewModel.swift in Sources */,
 				D8EE89462C9A7481002BD006 /* CaseListView.swift in Sources */,
 				FBAD65BF2C99F99200A8A7D3 /* Item.swift in Sources */,
 				D860C96C2CA4859D0000C728 /* ProfileView.swift in Sources */,
@@ -386,7 +376,6 @@
 				B476F19A2CA5D90200BFA846 /* LawyerDetailView.swift in Sources */,
 				FB13834A2CA48B24003AFDCF /* CreateEventView.swift in Sources */,
 				D87DF1142CA8FBF7000C80E5 /* ContactInfoView.swift in Sources */,
-				3B4361702CB5AA2F000BF5B9 /* LawyerAvailibilityView.swift in Sources */,
 				D8CE744C2CAF7F0E00F841D7 /* SideMenuHeaderView.swift in Sources */,
 				D87DF1122CA8FB7A000C80E5 /* ContactView.swift in Sources */,
 				D8EE89442C9A19B2002BD006 /* CaseDetailView.swift in Sources */,
@@ -398,7 +387,6 @@
 				B4897A9D2CA4ACF800B209EA /* NovedadesLegalesView.swift in Sources */,
 				8FA1B2202CB74028006028F2 /* SideMenuProfileViewModel.swift in Sources */,
 				8FAEC9012CA5D1B500CD1860 /* FaqModel.swift in Sources */,
-				D8C953872CB6FD45003F43E5 /* SearchModel.swift in Sources */,
 				D8F6AB702C99FDC800E74EFB /* LoginView.swift in Sources */,
 				8FA1B21E2CB7400B006028F2 /* SideMenuProfileModel.swift in Sources */,
 				FBAD65BB2C99F99200A8A7D3 /* BufetecApp.swift in Sources */,
@@ -406,11 +394,7 @@
 				8F6862AC2CA86BC600BB397D /* FaqViewModel.swift in Sources */,
 				8FAEC9052CA5D4E200CD1860 /* FaqListView.swift in Sources */,
 				D8CE74442CAF7C8300F841D7 /* MainPageView.swift in Sources */,
-<<<<<<< HEAD
 				8FA1B21B2CB6FDA3006028F2 /* ProfileViewModel.swift in Sources */,
-=======
-				3B43616E2CB5A99D000BF5B9 /* LawyerListView.swift in Sources */,
->>>>>>> main
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
