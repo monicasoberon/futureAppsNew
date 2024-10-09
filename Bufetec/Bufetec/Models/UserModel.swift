@@ -14,7 +14,7 @@ class UserModel: Identifiable, Codable, ObservableObject {
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         case type = "tipo"
-        case userID = "id"
+        case userID = "uid"
         case name = "nombre"
         case email = "correo"
         case especiality = "especialidad"

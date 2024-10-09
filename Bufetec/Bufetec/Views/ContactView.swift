@@ -17,8 +17,8 @@ struct ContactView: View {
             // Background gradient
             LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.1), Color.white]),
                            startPoint: .top, endPoint: .bottom)
-                .edgesIgnoringSafeArea(.all)
-
+            .edgesIgnoringSafeArea(.all)
+            
             VStack {
                 // Title
                 Text("Contactar")
@@ -26,15 +26,15 @@ struct ContactView: View {
                     .fontWeight(.bold)
                     .foregroundColor(Color(hex: "#003366"))
                     .padding(.top, 20)
-
+                
                 Spacer().frame(height: 20)
-
+                
                 // Name Input
                 VStack(alignment: .leading, spacing: 5) {
                     Text("Name")
                         .font(.headline)
                         .foregroundColor(Color(hex: "#333333"))
-
+                    
                     TextField("Your Name", text: $user.name)
                         .padding()
                         .background(Color.white)
@@ -43,13 +43,13 @@ struct ContactView: View {
                         .foregroundColor(Color(hex: "#757575"))
                 }
                 .padding(.horizontal, 20)
-
+                
                 // Email Input
                 VStack(alignment: .leading, spacing: 5) {
                     Text("Email")
                         .font(.headline)
                         .foregroundColor(Color(hex: "#333333"))
-
+                    
                     TextField("Email", text: $user.email)
                         .padding()
                         .background(Color.white)
@@ -58,13 +58,13 @@ struct ContactView: View {
                         .foregroundColor(Color(hex: "#757575"))
                 }
                 .padding(.horizontal, 20)
-
+                
                 // Message Input
                 VStack(alignment: .leading, spacing: 5) {
                     Text("Message")
                         .font(.headline)
                         .foregroundColor(Color(hex: "#333333"))
-
+                    
                     TextEditor(text: $message)
                         .padding()
                         .frame(height: 150)
@@ -74,7 +74,7 @@ struct ContactView: View {
                         .foregroundColor(Color(hex: "#757575"))
                 }
                 .padding(.horizontal, 20)
-
+                
                 // Send Button
                 Button(action: {
                     isSent = true
@@ -91,12 +91,12 @@ struct ContactView: View {
                 .alert(isPresented: $isSent) {
                     Alert(title: Text("Message Sent"), message: Text("Thank you for contacting us!"), dismissButton: .default(Text("OK")))
                 }
-
+                
                 Spacer().frame(height: 30)
-
+                
                 // Contact Information Section
                 VStack(alignment: .leading, spacing: 20) {
-                    Link(destination: URL(string: "https://wa.me/8183284344")!) {
+                    Link(destination: URL(string: "tel:528183284344")!) {
                         ContactInfoView(iconName: "phone.fill", contactDetail: "+52 (81) 8328 4344")
                     }
                     ContactInfoView(iconName: "envelope.fill", contactDetail: "contact@bufetec.com")
@@ -104,7 +104,13 @@ struct ContactView: View {
                 }
                 .padding(.horizontal, 20)
             }
+            
+            Spacer()
+            
         }
+        
+        Spacer()
+        
     }
 }
 

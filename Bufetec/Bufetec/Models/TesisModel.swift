@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct TesisModel: Identifiable {
+struct TesisModel: Identifiable, Codable {
     let id: String
     let registroDigital: String
     let tesis: String
     let description: String
-    let date: String
+    let location: String
 
     enum CodingKeys: String, CodingKey {
         case id = "_id"
