@@ -406,11 +406,8 @@
 				8F6862AC2CA86BC600BB397D /* FaqViewModel.swift in Sources */,
 				8FAEC9052CA5D4E200CD1860 /* FaqListView.swift in Sources */,
 				D8CE74442CAF7C8300F841D7 /* MainPageView.swift in Sources */,
-<<<<<<< HEAD
 				8FA1B21B2CB6FDA3006028F2 /* ProfileViewModel.swift in Sources */,
-=======
 				3B43616E2CB5A99D000BF5B9 /* LawyerListView.swift in Sources */,
->>>>>>> main
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
