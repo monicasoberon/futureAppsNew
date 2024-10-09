@@ -9,7 +9,7 @@ const openai = new OpenAI({
 
 // Assistant variables
 const asstID = "asst_XW6riICPege7OaEWC8wz3drt";
-const threadID = "thread_bLAfoLKfTBGCTqtWrlvtdBuw";
+const threadID = "thread_pZVai7VOqs2BgF0UjElPz8De";
 
 // Bring it all together
 async function main(question) {
@@ -53,7 +53,7 @@ async function createMessage(question) {
 async function runThread() {
   const run = await openai.beta.threads.runs.create(threadID, {
     assistant_id: asstID,
-    instructions: `Eres un experto legal para asesoría legal en México. Te preguntaran temas o palabras claves, y responde con el número o números de registro digital de tesis que son similares a la pregunta. Regresa solamente número de  registro digital. E.g.: 2029350.  Responde solo con datos en archivos a tu disposición de las leyes en México. Responde con "Disculpa, no encontre nada." si no encuentras nada. Ejemplo de respuesta: "2029350""`,
+    instructions: `Eres un experto legal para asesoría legal en México. Te preguntaran temas o palabras claves, y responde solamente con el número o números de registro digital de tesis que son similares a la pregunta. Importante: Regresa solamente número de  registro digital. E.g.: 2029350.  Responde solo con datos en archivos a tu disposición de las leyes en México. Responde con "Disculpa, no encontre nada." si no encuentras nada. Ejemplo de respuesta aceptada: "[2029350]", o "[2028909, 2028892, 2028884,2028910 ]". Usa [] para encerrar nuestro vector.`,
   });
   return run;
 }
