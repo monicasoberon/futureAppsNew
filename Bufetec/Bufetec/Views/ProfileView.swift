@@ -1,96 +1,125 @@
-//
-//  ProfileView.swift
-//  Bufetec
-//
-//  Created by Jorge on 25/09/24.
-//
+// ProfileView.swift
 
 import SwiftUI
+import FirebaseAuth
 
 struct ProfileView: View {
     @Environment(\.dismiss) var dismiss
+    @StateObject private var viewModel = ProfileViewModel()
 
-    @ObservedObject var user: UserModel
-    
     var body: some View {
         VStack {
-            // Circular Image at the top
-            Image(user.photo)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 240, height: 240)
-                .clipShape(Circle())
-                .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                .shadow(radius: 10)
-                .padding(20)
+            // Botón de cerrar para volver al menú
+            HStack {
+                Button(action: {
+                    dismiss() // Cierra la ProfileView
+                }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.title)
+                        .foregroundColor(.gray)
+                }
+                .padding()
+                
+                Spacer()
+            }
             
-            Form {
-                // Name Section
-                Section(header: Text("Personal Information")) {
-                    if user.type == "abogado" {
-                        TextField("Name", text: $user.name)
-                        TextField("Email", text: $user.email)
-                        TextField("Speciality", text: $user.especiality)
-                    } else {
-                        Text("Name: \(user.name)")
-                        Text("Email: \(user.email)")
-                        Text("Speciality: \(user.especiality)")
+            if viewModel.isLoading {
+                ProgressView("Loading...")
+            } else if let profile = viewModel.profile {
+                // Cargar imagen de perfil con AsyncImage
+                AsyncImage(url: URL(string: profile.photo)) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                            .frame(width: 240, height: 240)
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 240, height: 240)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                            .shadow(radius: 10)
+                            .padding(20)
+                    case .failure:
+                        Image(systemName: "person.crop.circle.fill.badge.exclamationmark")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 240, height: 240)
+                            .foregroundColor(.gray)
+                    @unknown default:
+                        EmptyView()
                     }
                 }
                 
-                // Description Section
-                Section(header: Text("Description")) {
-                    if user.type == "abogado" {
-                        TextEditor(text: $user.description)
-                            .frame(height: 100)
-                    } else {
-                        Text(user.description)
+                Form {
+                    Section(header: Text("Personal Information")) {
+                        Text("Name: \(profile.name)")
+                        Text("Email: \(profile.email)")
+                        
+                        if profile.type == "abogado" {
+                            TextField("Speciality", text: binding(for: \.especiality))
+                            TextEditor(text: binding(for: \.description))
+                                .frame(height: 100)
+                        } else {
+                            if let speciality = profile.especiality {
+                                Text("Speciality: \(speciality)")
+                            }
+                            if let description = profile.description {
+                                Text("Description: \(description)")
+                            }
+                        }
+                        
+                        Section(header: Text("Cases")) {
+                            ForEach(profile.caseID ?? [], id: \.self) { caseID in
+                                Text(caseID)
+                            }
+                        }
                     }
                 }
                 
-                // Cases Section
-                Section(header: Text("Case IDs")) {
-                    if user.type == "abogado" {
-                        ForEach($user.caseID, id: \.self) { $caseID in
-                            TextField("Case ID", text: $caseID)
-                        }
-                        Button(action: addNewCaseID) {
-                            Text("Add Case ID")
-                        }
-                    } else {
-                        ForEach(user.caseID, id: \.self) { caseID in
-                            Text(caseID)
+                if profile.type == "abogado" {
+                    Button(action: {
+                        viewModel.saveChanges()
+                    }) {
+                        if viewModel.isSaving {
+                            ProgressView()
+                        } else {
+                            Text("Save")
                         }
                     }
+                    .padding()
                 }
+                
+                if let errorMessage = viewModel.errorMessage {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .padding()
+                }
+            } else if let errorMessage = viewModel.errorMessage {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+                    .padding()
+            } else {
+                Text("No user profile available")
             }
         }
         .navigationTitle("User Details")
-        .toolbar {
-            if user.type == "abogado" {
-                Button(action: saveChanges) {
-                    Text("Save")
-                }
+        .onAppear {
+            if let user = Auth.auth().currentUser, let email = user.email {
+                viewModel.fetchUserProfile(email: email)
+            } else {
+                viewModel.errorMessage = "User is not authenticated"
+                print("User is not authenticated")
             }
         }
     }
     
-    
-    // Function to add a new case ID to the list
-    private func addNewCaseID() {
-        user.caseID.append("New Case ID")
-    }
-    
-    // Function to save changes (implementation can vary based on your app's backend or local storage)
-    private func saveChanges() {
-        print("Changes saved for user: \(user.name)")
-        dismiss()
-    }
-}
-
-// Preview for the UserDetailView
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView(user: UserModel.defaultValue)
+    // Helper function to create a binding for optional properties
+    private func binding(for keyPath: ReferenceWritableKeyPath<ProfileModel, String?>) -> Binding<String> {
+        Binding(
+            get: { viewModel.profile?[keyPath: keyPath] ?? "" },
+            set: { viewModel.profile?[keyPath: keyPath] = $0 }
+        )
     }
 }

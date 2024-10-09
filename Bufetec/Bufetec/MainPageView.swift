@@ -1,10 +1,3 @@
-//
-//  MainPageView.swift
-//  Bufetec
-//
-//  Created by Jorge on 03/10/24.
-//
-
 import SwiftUI
 import FirebaseAuth
 
@@ -16,7 +9,7 @@ struct MainPageView: View {
     @State private var showProfile = false
     @State private var selectedMenuOption: SideMenuOptionModel = .homeView
     @State private var showLoginView = false
-    @State private var showLogoutAlert = false // Add this for logout alert
+    @State private var showLogoutAlert = false
 
     var body: some View {
         NavigationStack {
@@ -38,7 +31,6 @@ struct MainPageView: View {
                 case .contactView:
                     ContactView(user: user)
                 case .signOut:
-                    // No action needed here as logout will be handled by alert
                     Color.clear
                 }
                 
@@ -47,7 +39,7 @@ struct MainPageView: View {
                     user: user,
                     isShowing: $showMenu,
                     selectedTab: $selectedMenuOption,
-                    showLogoutAlert: $showLogoutAlert // Pass this parameter here
+                    showLogoutAlert: $showLogoutAlert
                 )
             }
             .toolbar {
@@ -62,9 +54,10 @@ struct MainPageView: View {
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        showProfile.toggle()
-                    }) {
+                    NavigationLink(
+                        destination: ProfileView(),
+                        isActive: $showProfile
+                    ) {
                         Image(systemName: "person.crop.circle")
                             .font(.system(size: 20))
                             .foregroundColor(Color(hex: "#FFFFFF"))
@@ -91,7 +84,6 @@ struct MainPageView: View {
         }
     }
     
-    // Unified logOut function to handle actual logout process
     private func logOut() {
         do {
             try Auth.auth().signOut()
@@ -102,9 +94,9 @@ struct MainPageView: View {
     }
 }
 
-
-
-
-#Preview {
-    MainPageView()
+// Preview
+struct MainPageView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainPageView()
+    }
 }

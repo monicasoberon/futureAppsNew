@@ -12,6 +12,10 @@
 		8F6862AE2CA86BDA00BB397D /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6862AD2CA86BDA00BB397D /* UserViewModel.swift */; };
 		8F6862B42CAB178900BB397D /* LegalNewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6862B32CAB178900BB397D /* LegalNewsViewModel.swift */; };
 		8F6862B62CAB17B000BB397D /* LegalNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6862B52CAB17B000BB397D /* LegalNews.swift */; };
+		8FA1B2192CB6FD8D006028F2 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA1B2182CB6FD8D006028F2 /* ProfileModel.swift */; };
+		8FA1B21B2CB6FDA3006028F2 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA1B21A2CB6FDA3006028F2 /* ProfileViewModel.swift */; };
+		8FA1B21E2CB7400B006028F2 /* SideMenuProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA1B21D2CB7400B006028F2 /* SideMenuProfileModel.swift */; };
+		8FA1B2202CB74028006028F2 /* SideMenuProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA1B21F2CB74028006028F2 /* SideMenuProfileViewModel.swift */; };
 		8FAEC9012CA5D1B500CD1860 /* FaqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAEC9002CA5D1B500CD1860 /* FaqModel.swift */; };
 		8FAEC9052CA5D4E200CD1860 /* FaqListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAEC9042CA5D4E200CD1860 /* FaqListView.swift */; };
 		B4595C292CA33C0500920969 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4595C282CA33C0500920969 /* HomePage.swift */; };
@@ -64,6 +68,10 @@
 		8F6862AD2CA86BDA00BB397D /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		8F6862B32CAB178900BB397D /* LegalNewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalNewsViewModel.swift; sourceTree = "<group>"; };
 		8F6862B52CAB17B000BB397D /* LegalNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegalNews.swift; sourceTree = "<group>"; };
+		8FA1B2182CB6FD8D006028F2 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		8FA1B21A2CB6FDA3006028F2 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		8FA1B21D2CB7400B006028F2 /* SideMenuProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuProfileModel.swift; sourceTree = "<group>"; };
+		8FA1B21F2CB74028006028F2 /* SideMenuProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuProfileViewModel.swift; sourceTree = "<group>"; };
 		8FAEC9002CA5D1B500CD1860 /* FaqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqModel.swift; sourceTree = "<group>"; };
 		8FAEC9042CA5D4E200CD1860 /* FaqListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqListView.swift; sourceTree = "<group>"; };
 		B4595C282CA33C0500920969 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
@@ -134,6 +142,8 @@
 				8F6862AB2CA86BC600BB397D /* FaqViewModel.swift */,
 				8F6862AD2CA86BDA00BB397D /* UserViewModel.swift */,
 				8F6862B32CAB178900BB397D /* LegalNewsViewModel.swift */,
+				8FA1B21A2CB6FDA3006028F2 /* ProfileViewModel.swift */,
+				8FA1B21F2CB74028006028F2 /* SideMenuProfileViewModel.swift */,
 			);
 			path = ViewsModels;
 			sourceTree = "<group>";
@@ -183,6 +193,8 @@
 				8FAEC9002CA5D1B500CD1860 /* FaqModel.swift */,
 				8F6862B52CAB17B000BB397D /* LegalNews.swift */,
 				D8046B802CB5A55E00768348 /* TesisModel.swift */,
+				8FA1B2182CB6FD8D006028F2 /* ProfileModel.swift */,
+				8FA1B21D2CB7400B006028F2 /* SideMenuProfileModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -355,6 +367,7 @@
 				D860C96C2CA4859D0000C728 /* ProfileView.swift in Sources */,
 				B476F19C2CA5D91D00BFA846 /* UserListView.swift in Sources */,
 				D8CE74482CAF7D1800F841D7 /* SideMenuOptionModel.swift in Sources */,
+				8FA1B2192CB6FD8D006028F2 /* ProfileModel.swift in Sources */,
 				8F6862AA2CA86BAB00BB397D /* CaseViewModel.swift in Sources */,
 				D8EE89422C9A1750002BD006 /* LegalCase.swift in Sources */,
 				D8CE744E2CAF7F4600F841D7 /* SideMenuRowView.swift in Sources */,
@@ -372,13 +385,16 @@
 				FB1F39C82C9B4E6200C918B3 /* HomeView.swift in Sources */,
 				8F6862B62CAB17B000BB397D /* LegalNews.swift in Sources */,
 				B4897A9D2CA4ACF800B209EA /* NovedadesLegalesView.swift in Sources */,
+				8FA1B2202CB74028006028F2 /* SideMenuProfileViewModel.swift in Sources */,
 				8FAEC9012CA5D1B500CD1860 /* FaqModel.swift in Sources */,
 				D8F6AB702C99FDC800E74EFB /* LoginView.swift in Sources */,
+				8FA1B21E2CB7400B006028F2 /* SideMenuProfileModel.swift in Sources */,
 				FBAD65BB2C99F99200A8A7D3 /* BufetecApp.swift in Sources */,
 				FBA732562C9CA1FE0005D915 /* Authentication.swift in Sources */,
 				8F6862AC2CA86BC600BB397D /* FaqViewModel.swift in Sources */,
 				8FAEC9052CA5D4E200CD1860 /* FaqListView.swift in Sources */,
 				D8CE74442CAF7C8300F841D7 /* MainPageView.swift in Sources */,
+				8FA1B21B2CB6FDA3006028F2 /* ProfileViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

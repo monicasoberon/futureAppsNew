@@ -8,7 +8,7 @@ const usuariosSchema = new mongoose.Schema({
     especialidad: { type: String, required: false },
     descripcion: { type: String, required: false},
     caso_id: [{ type: String, required: false }],
-    foto: { type: String, required: false }
+    foto: { type: String, required: true }
 },{
     collection: 'usuarios'
 });

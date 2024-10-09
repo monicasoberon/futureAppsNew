@@ -14,9 +14,10 @@ struct NavigationMenu: View {
     
     @Binding var isShowing: Bool
     @Binding var selectedTab: SideMenuOptionModel
-    @Binding var showLogoutAlert: Bool // Binding for the logout alert
+    @Binding var showLogoutAlert: Bool
     
     @State private var selectedOption: SideMenuOptionModel? = .homeView
+    @State private var showProfileView = false
 
     var body: some View {
         ZStack {
@@ -25,17 +26,28 @@ struct NavigationMenu: View {
                     .opacity(0.3)
                     .ignoresSafeArea()
                     .onTapGesture {
+                        // Cierra el menú al hacer clic en el fondo
                         withAnimation {
-                            isShowing.toggle()
+                            isShowing = false
                         }
                     }
                 
                 HStack {
                     VStack(alignment: .leading, spacing: 32) {
-                        SideMenuHeaderView(user: user)
+                        // Envolver el header en un botón para mostrar ProfileView
+                        Button(action: {
+                            // Cierra el menú y muestra la vista de perfil
+                            withAnimation {
+                                isShowing = false
+                            }
+                            showProfileView = true
+                        }) {
+                            SideMenuHeaderView()
+                        }
+                        .buttonStyle(PlainButtonStyle())
                         
                         VStack {
-                            // Display all options except Sign Out
+                            // Mostrar todas las opciones excepto Sign Out
                             ForEach(SideMenuOptionModel.allCases.filter { $0 != .signOut }) { option in
                                 Button(action: {
                                     onOptionTapped(option)
@@ -47,9 +59,9 @@ struct NavigationMenu: View {
                         
                         Spacer()
                         
-                        // Sign Out button at the bottom
+                        // Botón de Sign Out en la parte inferior
                         Button(action: {
-                            showLogoutAlert = true // Trigger logout alert
+                            showLogoutAlert = true
                         }, label: {
                             HStack {
                                 Image(systemName: SideMenuOptionModel.signOut.systemImageName)
@@ -69,6 +81,10 @@ struct NavigationMenu: View {
                 .transition(.move(edge: .leading))
             }
         }
+        // Mostrar la ProfileView cuando showProfileView es verdadero
+        .fullScreenCover(isPresented: $showProfileView) {
+            ProfileView()
+        }
     }
     
     private func onOptionTapped(_ option: SideMenuOptionModel) {
@@ -80,17 +96,15 @@ struct NavigationMenu: View {
     }
 }
 
-
-
 #Preview {
     @State var isShowingMenu = true
     @State var selectedTab = SideMenuOptionModel.homeView
-    @State var showLogoutAlert = false // Add this state for preview
+    @State var showLogoutAlert = false
 
     return NavigationMenu(
         user: UserModel.defaultValue,
         isShowing: $isShowingMenu,
         selectedTab: $selectedTab,
-        showLogoutAlert: $showLogoutAlert // Pass this binding
+        showLogoutAlert: $showLogoutAlert
     )
 }

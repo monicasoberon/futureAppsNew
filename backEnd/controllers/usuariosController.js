@@ -38,12 +38,15 @@ exports.getUsuarios = async (req, res) => {
 
 exports.getUsuarioByEmail = async (req, res) => {
     const email = req.params.email;
+    console.log("getUsuarioByEmail: " + email);
 
     try {
         const usuario = await USUARIOS.findOne({ correo: email });
         if (!usuario) {
             return res.status(404).json({ message: 'Usuario no encontrado' });
         }
+
+        console.log(usuario);
         res.status(200).json(usuario);
     } catch (error) {
         res.status(500).json({ message: error.message });
