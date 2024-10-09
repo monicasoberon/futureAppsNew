@@ -28,15 +28,14 @@ struct LawyerDetailView: View {
                             .fill(Color.blue.opacity(0.2))
                             .frame(width: showDetail ? 240 : 280, height: showDetail ? 240 : 280) // Animación de escala
                             .shadow(color: Color.blue.opacity(0.4), radius: 20, x: 0, y: 10)
-
-                        Image("default_picture")
+                        
+                        Image(user.photo.isEmpty ? "default_picture" : user.photo) // Replace "default_picture" with user's actual photo
                             .resizable()
                             .scaledToFill()
                             .frame(width: showDetail ? 220 : 260, height: showDetail ? 220 : 260)
                             .clipShape(Circle())
                             .overlay(Circle().stroke(Color.white, lineWidth: 4))
                             .shadow(radius: 10)
-                            .opacity(1)
                             .scaleEffect(showDetail ? 1 : 1.1)
                     }
                     Spacer()

@@ -26,7 +26,7 @@ struct MainPageView: View {
                 case .homeView:
                     HomePageView(userModel: user)
                 case .appointmentView:
-                    CreateEventView()
+                    LawyerListView()
                 case .lawyersView:
                     UserListView()
                 case .newsView:
