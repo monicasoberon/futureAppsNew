@@ -1,4 +1,6 @@
 const TESIS = require("../schemas/tesisSchema");
+const mongoose = require("mongoose");
+
 
 exports.getTesis = async (req, res) => {
   try {
@@ -22,6 +24,32 @@ exports.getTesisById = async (req, res) => {
 
     res.status(200).json(tesis);
   } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.getFilteredTesis = async (req, res) => {
+  const { filter } = req.query;
+
+  if (!filter) {
+    return res.status(400).json({ message: "Filter parameter is required" });
+  }
+
+  const registroDigitalArray = filter.split(",").map((id) => id.trim());
+
+  try {
+    // Directly accessing the futureApps database and the tesis collection
+    const tesis = await mongoose.connection.useDb("futureApps").collection("tesis").find({
+      "Registro digital": { $in: registroDigitalArray },
+    }).toArray();
+
+    if (!tesis.length) {
+      return res.status(404).json({ message: "Tesis not found" });
+    }
+
+    res.status(200).json(tesis);
+  } catch (error) {
+    console.error("Error executing query:", error);
     res.status(500).json({ message: error.message });
   }
 };

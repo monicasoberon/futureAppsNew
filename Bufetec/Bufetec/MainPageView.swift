@@ -23,7 +23,7 @@ struct MainPageView: View {
                 case .lawyersView:
                     UserListView()
                 case .newsView:
-                    NovedadesLegales()
+                    NovedadesLegalesView()
                 case .casesView:
                     CaseListView()
                 case .faqView:

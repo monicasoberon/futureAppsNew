@@ -16,7 +16,7 @@ struct LawyerListView: View {
                     .font(.largeTitle)
                     .bold()
                     .foregroundColor(Color(hex: "#003366"))
-                    .padding(.top, 70)
+                    .padding(.top, 20)
 
                 // Scrollable list of lawyers
                 ScrollView {

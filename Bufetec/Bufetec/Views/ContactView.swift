@@ -25,7 +25,6 @@ struct ContactView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(Color(hex: "#003366"))
-                    .padding(.top, 20)
                 
                 Spacer().frame(height: 20)
                 

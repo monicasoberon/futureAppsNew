@@ -1,71 +1,84 @@
 import SwiftUI
 
-struct NovedadesLegales: View {
-    @ObservedObject var viewModel = TesisModelViewModel()
-
+struct NovedadesLegalesView: View {
+    @StateObject private var viewModel = TesisModelViewModel()
+    
     var body: some View {
         ZStack {
-            // Full-screen background gradient
+            // Gradient background
             LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.1), Color.white]),
                            startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea() // Extend the gradient across the entire view
-
+                .edgesIgnoringSafeArea(.all)
+            
             VStack {
-                // Custom Title
+                // Title with styling
                 Text("Novedades Legales")
                     .font(.largeTitle)
-                    .fontWeight(.bold)
+                    .bold()
                     .foregroundColor(Color(hex: "#003366"))
                     .padding(.top, 20)
-                    .padding(.leading, 16)
 
-                // Search Bar
+                // Search Bar with styling
                 TextField("Buscar novedades legales...", text: $viewModel.searchText)
-                    .padding(10)
+                    .padding(12)
                     .background(Color(.systemGray6))
                     .cornerRadius(10)
                     .padding(.horizontal)
-
-                // Legal News List
-                List(viewModel.filteredNews, id: \.id) { news in
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(news.registroDigital)
-                            .font(.headline)
-                            .foregroundColor(Color(hex: "#003366"))
-                        Text(news.tesis)
-                            .font(.subheadline)
-                        Text(news.description)
-                            .font(.footnote)
-                            .foregroundColor(.gray)
-                            .lineLimit(3)
-                            .truncationMode(.tail)
+                    .onSubmit {
+                        viewModel.fetchGPTResponse(for: viewModel.searchText)
                     }
-                    .padding(.vertical, 8)
-                }
-                .background(Color.clear) // Ensure List has a clear background
-                .scrollContentBackground(.hidden) // Hide default background of the List
-
-                // ChatGPT Response
+                
                 if viewModel.isFetchingResponse {
-                    ProgressView("Cargando respuesta...")
+                    ProgressView("Buscando respuesta...")
                         .padding()
-                } else if !viewModel.chatGPTResponse.isEmpty {
-                    Text(viewModel.chatGPTResponse)
-                        .padding()
-                        .background(Color(.systemGray6))
-                        .cornerRadius(10)
-                        .padding(.horizontal)
                 }
 
+                // Filtered List of Tesis with card style and color palette
+                ScrollView {
+                    VStack(spacing: 20) {
+                        ForEach(viewModel.filteredTesis) { tesis in
+                            Link(destination: URL(string: "https://sjfsemanal.scjn.gob.mx/detalle/tesis/\(tesis.registroDigital)")!) {
+                                VStack(alignment: .leading, spacing: 6) {
+                                    Text(tesis.registroDigital)
+                                        .font(.headline)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(Color(hex: "#003366"))
+
+                                    Text(tesis.tesis)
+                                        .font(.subheadline)
+                                        .foregroundColor(Color.blue.opacity(0.7))
+
+                                    Text(tesis.description)
+                                        .font(.footnote)
+                                        .foregroundColor(.gray)
+                                        .lineLimit(3)
+                                        .truncationMode(.tail)
+                                }
+                                .padding(20)
+                                .background(Color.white)
+                                .cornerRadius(15)
+                                .shadow(color: Color.gray.opacity(0.4), radius: 10, x: 0, y: 5)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .stroke(Color.blue.opacity(0.5), lineWidth: 2)
+                                )
+                                .padding(.horizontal, 16)
+                            }
+                        }
+                    }
+                    .padding(.top, 16)
+                }
+                
                 Spacer()
             }
-            .onAppear {
-                viewModel.fetchTesisModel()  // Fetch news when the view appears
-            }
+            .padding(.horizontal)
+        }
+        .onAppear {
+            viewModel.fetchAllTesis()
         }
     }
 }
 
 #Preview {
-    NovedadesLegales()
+    NovedadesLegalesView()
 }

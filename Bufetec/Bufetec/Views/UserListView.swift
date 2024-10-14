@@ -16,7 +16,7 @@ struct UserListView: View {
                     .font(.largeTitle)
                     .bold()
                     .foregroundColor(Color(hex: "#003366"))
-                    .padding(.top, 70)
+                    .padding(.top, 20)
 
                 ScrollView {
                     VStack(spacing: 32) {  // Espaciado para un look más espacioso

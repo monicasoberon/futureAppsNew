@@ -2,65 +2,83 @@ import Foundation
 import Combine
 
 class TesisModelViewModel: ObservableObject {
-    @Published var tesisModel: [TesisModel] = []
-    @Published var searchText = "" {
-        didSet {
-            fetchGPTResponse(for: searchText)  // Trigger ChatGPT call when searchText changes
-        }
-    }
-    @Published var chatGPTResponse = ""
+    @Published var tesisList: [TesisModel] = []
+    @Published var filteredTesis: [TesisModel] = []
+    @Published var gptResponseArray: [Int] = []
+    @Published var searchText = ""
     @Published var isFetchingResponse = false
-
-    var cancellables = Set<AnyCancellable>()
-
-    var filteredNews: [TesisModel] {
-        if searchText.isEmpty {
-            return tesisModel
-        } else {
-            return tesisModel.filter { news in
-                news.tesis.lowercased().contains(searchText.lowercased()) ||
-                news.description.lowercased().contains(searchText.lowercased())
-            }
-        }
+    
+    // Computed property to display the saved `registroDigital` numbers
+    var gptResponseDisplay: String {
+        gptResponseArray.map(String.init).joined(separator: ", ")
     }
+    
+    private let url = URL(string: "http://localhost:3000/api/tesis/")!
 
-    // Fetching the news from the API
-    func fetchTesisModel() {
-        guard let url = URL(string: "http://localhost:3000/api/tesis/") else { return }
-
-        URLSession.shared.dataTaskPublisher(for: url)
-            .map { $0.data }
-            .decode(type: [TesisModel].self, decoder: JSONDecoder())
-            .replaceError(with: [])
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] fetchedNews in
-                self?.tesisModel = fetchedNews
+    func fetchAllTesis() {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("Failed to fetch tesis: \(error)")
+                return
             }
-            .store(in: &cancellables)
-    }
 
-    // Fetching ChatGPT response from the API
+            guard let data = data else {
+                print("No data received")
+                return
+            }
+
+            do {
+                let tesis = try JSONDecoder().decode([TesisModel].self, from: data)
+                DispatchQueue.main.async {
+                    self.tesisList = tesis
+                    self.filteredTesis = tesis
+                }
+            } catch {
+                print("Failed to decode JSON: \(error)")
+            }
+        }.resume()
+    }
+    
     func fetchGPTResponse(for question: String) {
-        // Check for empty or whitespace-only question
         guard !question.trimmingCharacters(in: .whitespaces).isEmpty else {
-            print("Error: Question is empty. No API call made.")
-            self.chatGPTResponse = ""
+            self.filteredTesis = tesisList
             return
         }
-        
+
         isFetchingResponse = true
         SearchModel.shared.callGPTAPI(with: question) { [weak self] result in
             DispatchQueue.main.async {
                 self?.isFetchingResponse = false
                 switch result {
                 case .success(let response):
-                    self?.chatGPTResponse = response["answer"] as? String ?? "No answer found."
-                    print("GPT API Response: \(response)")
+                    print("API call success. Response:", response)  // Debugging print
+                    if let messageString = response["message"] as? String {
+                        // Parse the string into an array of Int
+                        if let data = messageString.data(using: .utf8),
+                           let ids = try? JSONSerialization.jsonObject(with: data, options: []) as? [Int] {
+                            print("Successfully parsed IDs:", ids)  // Confirm successful parsing
+                            self?.gptResponseArray = ids
+                            self?.applyFilterWithResponseIDs()
+                            print("Fetched registroDigital IDs: \(ids)")  // Print the array to console
+                        } else {
+                            print("Failed to parse `message` as [Int]. Original message string:", messageString)
+                            self?.filteredTesis = []
+                        }
+                    } else {
+                        print("Unexpected format: `message` key not a string. Actual response:", response)
+                    }
                 case .failure(let error):
-                    self?.chatGPTResponse = "Error: \(error.localizedDescription)"
-                    print("Error: \(error.localizedDescription)")
+                    print("Error in API call: \(error.localizedDescription)")
                 }
             }
         }
+    }
+
+
+
+    
+    private func applyFilterWithResponseIDs() {
+        let idStrings = gptResponseArray.map(String.init)
+        filteredTesis = tesisList.filter { idStrings.contains($0.registroDigital) }
     }
 }
