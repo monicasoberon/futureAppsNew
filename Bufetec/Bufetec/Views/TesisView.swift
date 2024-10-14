@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct NovedadesLegalesView: View {
+struct TesisView: View {
     @StateObject private var viewModel = TesisModelViewModel()
     
     var body: some View {
@@ -12,7 +12,7 @@ struct NovedadesLegalesView: View {
             
             VStack {
                 // Title with styling
-                Text("Novedades Legales")
+                Text("Tesis Recientes")
                     .font(.largeTitle)
                     .bold()
                     .foregroundColor(Color(hex: "#003366"))
@@ -80,5 +80,5 @@ struct NovedadesLegalesView: View {
 }
 
 #Preview {
-    NovedadesLegalesView()
+    TesisView()
 }

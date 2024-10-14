@@ -12,7 +12,8 @@ enum SideMenuOptionModel: Int, CaseIterable {
     case homeView
     case appointmentView
     case lawyersView
-    case newsView
+    case tesisView
+    case precedentesView
     case casesView
     case faqView
     case contactView
@@ -26,8 +27,10 @@ enum SideMenuOptionModel: Int, CaseIterable {
             return "Agendar Cita"
         case .lawyersView:
             return "Consultar Abogados"
-        case .newsView:
-            return "Novedades y Biblioteca"
+        case .tesisView:
+            return "Tesis Recientes"
+        case .precedentesView:
+            return "Precedentes"
         case .casesView:
             return "Mis Casos"
         case .faqView:
@@ -47,8 +50,10 @@ enum SideMenuOptionModel: Int, CaseIterable {
             return "calendar.badge.plus"
         case .lawyersView:
             return "person.3.fill"
-        case .newsView:
+        case .tesisView:
             return "newspaper.fill"
+        case .precedentesView:
+            return "books.vertical.fill"
         case .casesView:
             return "doc.text.fill"
         case .faqView:

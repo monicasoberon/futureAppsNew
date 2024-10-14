@@ -22,8 +22,10 @@ struct MainPageView: View {
                     LawyerListView()
                 case .lawyersView:
                     UserListView()
-                case .newsView:
-                    NovedadesLegalesView()
+                case .tesisView:
+                    TesisView()
+                case .precedentesView:
+                    PrecedentesView()
                 case .casesView:
                     CaseListView()
                 case .faqView:
@@ -54,15 +56,6 @@ struct MainPageView: View {
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(
-                        destination: ProfileView(),
-                        isActive: $showProfile
-                    ) {
-                        Image(systemName: "person.crop.circle")
-                            .font(.system(size: 20))
-                            .foregroundColor(Color(hex: "#FFFFFF"))
-                            .opacity(0.8)
-                    }
                 }
             }
             .toolbarBackground(Color(hex: "#0164d2"), for: .navigationBar)

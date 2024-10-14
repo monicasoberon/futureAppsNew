@@ -60,3 +60,7 @@ struct SideMenuHeaderView: View {
         }
     }
 }
+
+#Preview {
+    SideMenuHeaderView()
+}
