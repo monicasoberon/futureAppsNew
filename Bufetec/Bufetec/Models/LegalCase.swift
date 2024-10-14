@@ -2,7 +2,6 @@ import Foundation
 
 class LegalCase: Identifiable, Codable, Equatable {
     var id: String
-    var caseID: String
     var caseName: String
     var clientID: String
     var lawyerAssigned: String
@@ -12,7 +11,6 @@ class LegalCase: Identifiable, Codable, Equatable {
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"
-        case caseID = "id"
         case caseName = "nombre"
         case clientID = "cliente_id"
         case lawyerAssigned = "abogado_asignado"
@@ -21,9 +19,8 @@ class LegalCase: Identifiable, Codable, Equatable {
         case files = "archivos"
     }
     
-    init(caseID: String, caseName: String, clientID: String, lawyerAssigned: String, status: String, caseDetails: String, files: [String]) {
-        self.id = UUID().uuidString
-        self.caseID = caseID
+    init(id: String, caseName: String, clientID: String, lawyerAssigned: String, status: String, caseDetails: String, files: [String]) {
+        self.id = id
         self.caseName = caseName
         self.clientID = clientID
         self.lawyerAssigned = lawyerAssigned
@@ -40,7 +37,7 @@ class LegalCase: Identifiable, Codable, Equatable {
 
 extension LegalCase {
     static var defaultValue: LegalCase = LegalCase(
-        caseID: "caso_001",
+        id: "caso_001",
         caseName: "Caso 1",
         clientID: "c001",
         lawyerAssigned: "a001",
@@ -52,7 +49,7 @@ extension LegalCase {
     // Extension to provide multiple default cases
     static var sampleCases: [LegalCase] = [
         LegalCase(
-            caseID: "caso_01",
+            id: "caso_01",
             caseName: "Caso de Robo de Identidad",
             clientID: "c001",
             lawyerAssigned: "a001",
@@ -61,7 +58,7 @@ extension LegalCase {
             files: ["documento_prueba.pdf"]
         ),
         LegalCase(
-            caseID: "caso_02",
+            id: "caso_02",
             caseName: "Divorcio Contencioso",
             clientID: "c001",
             lawyerAssigned: "a002",
@@ -70,7 +67,7 @@ extension LegalCase {
             files: ["acuerdo_divorcio.pdf"]
         ),
         LegalCase(
-            caseID: "caso_03",
+            id: "caso_03",
             caseName: "Disputa de Propiedad",
             clientID: "c002",
             lawyerAssigned: "a001",

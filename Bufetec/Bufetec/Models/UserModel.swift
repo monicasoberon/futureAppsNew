@@ -6,9 +6,8 @@ class UserModel: Identifiable, Codable, ObservableObject {
     var userID: String
     var name: String
     var email: String
-    var especiality: String
-    var caseID: [String]
-    var description: String
+    var especiality: String // Campo opcional
+    var description: String // Campo opcional
     var photo: String
 
     enum CodingKeys: String, CodingKey {
@@ -18,7 +17,6 @@ class UserModel: Identifiable, Codable, ObservableObject {
         case name = "nombre"
         case email = "correo"
         case especiality = "especialidad"
-        case caseID = "caso_id"
         case description = "descripcion"
         case photo = "foto"
     }
@@ -28,7 +26,6 @@ class UserModel: Identifiable, Codable, ObservableObject {
          name: String = "Luis Peréz",
          email: String = "luisperez@bufetec.com",
          especiality: String = "Familiar",
-         caseID: [String] = ["caso_01", "caso_02"],
          description: String = "Abogado con 10 años de experiencia especializado en leyes familiares.",
          photo: String = "default_picture") {
         self.id = UUID().uuidString
@@ -37,13 +34,12 @@ class UserModel: Identifiable, Codable, ObservableObject {
         self.name = name
         self.email = email
         self.especiality = especiality
-        self.caseID = caseID
         self.description = description
         self.photo = photo
     }
 }
 
-// Extension to provide default values
+// Extension para proporcionar valores por defecto
 extension UserModel {
     static var defaultValue: UserModel = UserModel(
         type: "abogado",
@@ -51,7 +47,6 @@ extension UserModel {
         name: "Luis Peréz",
         email: "luisperez@bufetec.com",
         especiality: "Familiar",
-        caseID: ["caso_01", "caso_02"],
         description: "Abogado con 10 años de experiencia especializado en leyes familiares.",
         photo: "default_picture"
     )

@@ -15,7 +15,7 @@ struct LoginView: View {
     private let authentication = Authentication()
     @State private var loginError: String?
 
-    var body: some View {
+    var body: some View { 
         ZStack {
             // Fondo
             LinearGradient(gradient: Gradient(colors: [Color.white, Color.gray.opacity(0.1)]),

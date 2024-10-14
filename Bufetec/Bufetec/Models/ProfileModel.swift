@@ -7,7 +7,6 @@ class ProfileModel: Identifiable, Codable {
     var name: String
     var email: String
     var especiality: String? // Campo opcional
-    var caseID: [String]? // Campo opcional
     var description: String? // Campo opcional
     var photo: String
     
@@ -18,7 +17,6 @@ class ProfileModel: Identifiable, Codable {
         case name = "nombre"
         case email = "correo"
         case especiality = "especialidad"
-        case caseID = "caso_id"
         case description = "descripcion"
         case photo = "foto"
     }

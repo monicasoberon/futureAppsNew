@@ -7,7 +7,6 @@ const usuariosSchema = new mongoose.Schema({
     correo: { type: String, required: true },
     especialidad: { type: String, required: false },
     descripcion: { type: String, required: false},
-    caso_id: [{ type: String, required: false }],
     foto: { type: String, required: true }
 },{
     collection: 'usuarios'

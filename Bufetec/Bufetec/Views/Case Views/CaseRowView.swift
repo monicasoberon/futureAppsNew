@@ -11,7 +11,8 @@ struct CaseRowView: View {
                     .fontWeight(.bold)
                     .foregroundColor(Color(hex: "#003366"))
 
-                Text("N°: \(legalCase.caseID)")
+                // Si deseas mostrar el `id`, puedes usar esta línea en lugar de `caseID`
+                Text("ID: \(legalCase.id)") // Cambiado de `caseID` a `id`
                     .font(.caption)
                     .foregroundColor(Color(hex: "#757575"))
             }

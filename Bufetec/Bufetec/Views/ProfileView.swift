@@ -1,5 +1,3 @@
-// ProfileView.swift
-
 import SwiftUI
 import FirebaseAuth
 
@@ -67,12 +65,6 @@ struct ProfileView: View {
                             }
                             if let description = profile.description {
                                 Text("Description: \(description)")
-                            }
-                        }
-                        
-                        Section(header: Text("Cases")) {
-                            ForEach(profile.caseID ?? [], id: \.self) { caseID in
-                                Text(caseID)
                             }
                         }
                     }

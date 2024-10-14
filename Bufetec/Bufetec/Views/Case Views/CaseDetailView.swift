@@ -15,14 +15,14 @@ struct CaseDetailView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
                     
-                    // CaseID and Status
+                    // Case Name and Status
                     HStack {
                         VStack {
-                            Text("CaseID:")
+                            Text("Nombre del Caso:")
                                 .font(.headline)
                                 .foregroundColor(.secondary)
                             
-                            Text(legalCase.caseID)
+                            Text(legalCase.caseName)
                                 .font(.title2)
                                 .bold()
                         }
@@ -42,7 +42,7 @@ struct CaseDetailView: View {
                                 .frame(width: 16, height: 16)
                             
                             VStack(alignment: .leading) {
-                                Text("Status:")
+                                Text("Estatus:")
                                     .font(.headline)
                                     .foregroundColor(.secondary)
                                 
@@ -78,12 +78,12 @@ struct CaseDetailView: View {
                     .opacity(isVisible ? 1 : 0)
                     .animation(.easeInOut(duration: 0.5).delay(0.2), value: isVisible)
                     
-                    // Affected Person
+                    // Client Info
                     HStack {
                         Image(systemName: "person.fill")
                             .foregroundColor(.gray)
                         
-                        Text("Persona afectada: \(legalCase.clientID)")
+                        Text("Cliente: \(legalCase.clientID)")
                             .font(.body)
                             .padding(.horizontal)
                             .opacity(isVisible ? 1 : 0)
@@ -105,7 +105,7 @@ struct CaseDetailView: View {
                     
                     // Case Details
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Datos en general sobre el caso específico:")
+                        Text("Detalles del Caso:")
                             .font(.headline)
                             .bold()
                         Text(legalCase.caseDetails.isEmpty ? "Detalles no disponibles" : legalCase.caseDetails)
