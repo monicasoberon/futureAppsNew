@@ -9,6 +9,7 @@ const citasRoutes = require("./routes/citasRoutes");
 const casosRoutes = require("./routes/casosRoutes");
 const tareasCasosRoutes = require("./routes/tareasCasosRoutes");
 const chatGPTRoutes = require("./routes/chatGPTRoutes");
+const chatGPTRoutes2 = require("./routes/chatGPTRoutes2");
 const tesisRoutes = require("./routes/tesisRoutes");
 
 dotenv.config();
@@ -19,7 +20,7 @@ var admin = require("firebase-admin");
 var serviceAccount = require("./bufetectest-firebase-adminsdk-cyhvc-6db128251a.json");
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert(serviceAccount),
 });
 
 const app = express();
@@ -36,6 +37,7 @@ app.use("/api/citas", citasRoutes);
 app.use("/api/casos", casosRoutes);
 app.use("/api/tareasCasos", tareasCasosRoutes);
 app.use("/api/gpt", chatGPTRoutes);
+app.use("/api/gpt2", chatGPTRoutes2);
 app.use("/api/tesis", tesisRoutes);
 
 const PORT = process.env.PORT || 3000;
