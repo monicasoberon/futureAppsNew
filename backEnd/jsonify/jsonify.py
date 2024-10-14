@@ -21,7 +21,7 @@ with pdfplumber.open(pdf_path) as pdf:
                 if len(row) >= 5:
                     # Extract the relevant columns (ignoring the first one)
                     registro_digital = row[1]
-                    tesis = row[2]
+                    precedente = row[2]
                     rubro = row[3]
                     localizacion = row[4]
                     

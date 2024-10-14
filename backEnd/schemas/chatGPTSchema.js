@@ -9,7 +9,7 @@ const openai = new OpenAI({
 
 // Assistant variables
 const asstID = "asst_XW6riICPege7OaEWC8wz3drt";
-const threadID = "thread_bdwe0l3Y2P0OGhfbHpVb3FnD";
+const threadID = "thread_xrnCHuy3kbSwIyllprCiEyW6";
 
 // Bring it all together
 async function main(question) {
