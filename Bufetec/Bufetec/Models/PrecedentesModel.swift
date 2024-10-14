@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SentenciasModel: Identifiable, Codable {
+struct PrecedentesModel: Identifiable, Codable {
     let id: String
     let registroDigital: String
     let precedente: String

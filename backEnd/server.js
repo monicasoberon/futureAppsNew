@@ -11,6 +11,7 @@ const tareasCasosRoutes = require("./routes/tareasCasosRoutes");
 const chatGPTRoutes = require("./routes/chatGPTRoutes");
 const chatGPTRoutes2 = require("./routes/chatGPTRoutes2");
 const tesisRoutes = require("./routes/tesisRoutes");
+const precedentesRoutes = require("./routes/precedentesRoutes");
 
 dotenv.config();
 connectDB();
@@ -39,6 +40,7 @@ app.use("/api/tareasCasos", tareasCasosRoutes);
 app.use("/api/gpt", chatGPTRoutes);
 app.use("/api/gpt2", chatGPTRoutes2);
 app.use("/api/tesis", tesisRoutes);
+app.use("/api/precedentes", precedentesRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

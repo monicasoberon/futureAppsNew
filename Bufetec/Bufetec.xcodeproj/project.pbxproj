@@ -40,7 +40,9 @@
 		D87DF1142CA8FBF7000C80E5 /* ContactInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87DF1132CA8FBF7000C80E5 /* ContactInfoView.swift */; };
 		D8905AFB2CBD9180009ADD2F /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8905AFA2CBD9180009ADD2F /* SwiftUIView.swift */; };
 		D8905AFD2CBD95C5009ADD2F /* PrecedentesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8905AFC2CBD95C5009ADD2F /* PrecedentesView.swift */; };
-		D8905AFF2CBD97E4009ADD2F /* SentenciasModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8905AFE2CBD97E4009ADD2F /* SentenciasModel.swift */; };
+		D8905AFF2CBD97E4009ADD2F /* PrecedentesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8905AFE2CBD97E4009ADD2F /* PrecedentesModel.swift */; };
+		D8905B012CBDA00A009ADD2F /* SearchModel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8905B002CBDA00A009ADD2F /* SearchModel2.swift */; };
+		D8905B032CBDA390009ADD2F /* PrecedentesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8905B022CBDA390009ADD2F /* PrecedentesViewModel.swift */; };
 		D8B9380A2CB9B3C90083B335 /* TesisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B938092CB9B3C90083B335 /* TesisView.swift */; };
 		D8C953872CB6FD45003F43E5 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C953862CB6FD45003F43E5 /* SearchModel.swift */; };
 		D8CE74442CAF7C8300F841D7 /* MainPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CE74432CAF7C8300F841D7 /* MainPageView.swift */; };
@@ -95,7 +97,9 @@
 		D87DF1132CA8FBF7000C80E5 /* ContactInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoView.swift; sourceTree = "<group>"; };
 		D8905AFA2CBD9180009ADD2F /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		D8905AFC2CBD95C5009ADD2F /* PrecedentesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrecedentesView.swift; sourceTree = "<group>"; };
-		D8905AFE2CBD97E4009ADD2F /* SentenciasModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentenciasModel.swift; sourceTree = "<group>"; };
+		D8905AFE2CBD97E4009ADD2F /* PrecedentesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrecedentesModel.swift; sourceTree = "<group>"; };
+		D8905B002CBDA00A009ADD2F /* SearchModel2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel2.swift; sourceTree = "<group>"; };
+		D8905B022CBDA390009ADD2F /* PrecedentesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrecedentesViewModel.swift; sourceTree = "<group>"; };
 		D8B938092CB9B3C90083B335 /* TesisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesisView.swift; sourceTree = "<group>"; };
 		D8C953862CB6FD45003F43E5 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		D8CE74432CAF7C8300F841D7 /* MainPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageView.swift; sourceTree = "<group>"; };
@@ -156,7 +160,9 @@
 				8FA1B21A2CB6FDA3006028F2 /* ProfileViewModel.swift */,
 				8FA1B21F2CB74028006028F2 /* SideMenuProfileViewModel.swift */,
 				8F6862B32CAB178900BB397D /* TesisModelViewModel.swift */,
+				D8905B022CBDA390009ADD2F /* PrecedentesViewModel.swift */,
 				D8C953862CB6FD45003F43E5 /* SearchModel.swift */,
+				D8905B002CBDA00A009ADD2F /* SearchModel2.swift */,
 			);
 			path = ViewsModels;
 			sourceTree = "<group>";
@@ -208,7 +214,7 @@
 				D8046B802CB5A55E00768348 /* TesisModel.swift */,
 				8FA1B2182CB6FD8D006028F2 /* ProfileModel.swift */,
 				8FA1B21D2CB7400B006028F2 /* SideMenuProfileModel.swift */,
-				D8905AFE2CBD97E4009ADD2F /* SentenciasModel.swift */,
+				D8905AFE2CBD97E4009ADD2F /* PrecedentesModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -389,11 +395,13 @@
 				D8CE74482CAF7D1800F841D7 /* SideMenuOptionModel.swift in Sources */,
 				8FA1B2192CB6FD8D006028F2 /* ProfileModel.swift in Sources */,
 				8F6862AA2CA86BAB00BB397D /* CaseViewModel.swift in Sources */,
-				D8905AFF2CBD97E4009ADD2F /* SentenciasModel.swift in Sources */,
+				D8905AFF2CBD97E4009ADD2F /* PrecedentesModel.swift in Sources */,
 				D8EE89422C9A1750002BD006 /* LegalCase.swift in Sources */,
 				D8CE744E2CAF7F4600F841D7 /* SideMenuRowView.swift in Sources */,
 				D8CE744A2CAF7EDB00F841D7 /* NavigationMenuView.swift in Sources */,
+				D8905B032CBDA390009ADD2F /* PrecedentesViewModel.swift in Sources */,
 				D8046B7F2CB4531400768348 /* HexColor.swift in Sources */,
+				D8905B012CBDA00A009ADD2F /* SearchModel2.swift in Sources */,
 				B476F19A2CA5D90200BFA846 /* LawyerDetailView.swift in Sources */,
 				D8905AFB2CBD9180009ADD2F /* SwiftUIView.swift in Sources */,
 				FB13834A2CA48B24003AFDCF /* CreateEventView.swift in Sources */,
