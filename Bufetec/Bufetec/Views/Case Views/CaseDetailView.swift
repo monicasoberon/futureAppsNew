@@ -1,51 +1,64 @@
 import SwiftUI
 
 struct CaseDetailView: View {
-    
     var legalCase: LegalCase
     @State private var isVisible: Bool = false
+    @State private var lawyerName: String = "Cargando..."
+    @State private var clientName: String = "Cargando..."
+    @State private var selectedStatus: String = ""
+    @State private var isSaving = false
+    @Environment(\.dismiss) var dismiss
+
+    // Nueva variable para determinar si el usuario es abogado
+    var isAbogado: Bool
 
     var body: some View {
         ZStack {
             // Full-view background gradient
             LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.1), Color.white]),
                            startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea() // Extend the gradient across the entire screen
+                .ignoresSafeArea()
 
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
-                    
-                    // Case Name and Status
+                    // Nombre del Caso y Estatus
                     HStack {
                         VStack {
                             Text("Nombre del Caso:")
                                 .font(.headline)
                                 .foregroundColor(.secondary)
-                            
+
                             Text(legalCase.caseName)
                                 .font(.title2)
                                 .bold()
                         }
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.white.opacity(0.8)) // Lighter background for readability
+                        .background(Color.white.opacity(0.8))
                         .cornerRadius(12)
                         .shadow(color: Color(hex: "#0D214D").opacity(0.3), radius: 4, x: 0, y: 4)
                         .opacity(isVisible ? 1 : 0)
                         .animation(.easeInOut(duration: 0.5), value: isVisible)
-                        
+
                         Spacer()
-                        
-                        HStack {
-                            Circle()
-                                .fill(statusColor(for: legalCase.status))
-                                .frame(width: 16, height: 16)
-                            
-                            VStack(alignment: .leading) {
-                                Text("Estatus:")
-                                    .font(.headline)
-                                    .foregroundColor(.secondary)
-                                
+
+                        // Mostrar y cambiar estatus
+                        VStack {
+                            Text("Estatus:")
+                                .font(.headline)
+                                .foregroundColor(.secondary)
+
+                            if isAbogado {
+                                Picker("Estatus", selection: $selectedStatus) {
+                                    Text("Abierto").tag("abierto")
+                                    Text("En Progreso").tag("en progreso")
+                                    Text("Cerrado").tag("cerrado")
+                                }
+                                .pickerStyle(SegmentedPickerStyle())
+                                .onChange(of: selectedStatus, perform: { newValue in
+                                    changeStatus(newStatus: newValue)
+                                })
+                            } else {
                                 Text(legalCase.status)
                                     .font(.title2)
                                     .bold()
@@ -60,50 +73,45 @@ struct CaseDetailView: View {
                         .animation(.easeInOut(duration: 0.5).delay(0.1), value: isVisible)
                     }
                     .padding(.horizontal)
-                    
-                    // Lawyer Info
+
+                    // Información del abogado
                     HStack {
                         Image(systemName: "person.fill")
                             .foregroundColor(.gray)
-                        
-                        Text("Abogado: \(legalCase.lawyerAssigned)")
+
+                        Text("Abogado: \(lawyerName)")
                             .font(.body)
                     }
                     .padding()
-                    .frame(maxWidth: .infinity, alignment: .leading)
                     .background(Color.white.opacity(0.8))
                     .cornerRadius(12)
                     .shadow(color: Color(hex: "#0D214D").opacity(0.3), radius: 4, x: 0, y: 4)
                     .padding(.horizontal)
                     .opacity(isVisible ? 1 : 0)
                     .animation(.easeInOut(duration: 0.5).delay(0.2), value: isVisible)
-                    
-                    // Client Info
+
+                    // Información del cliente
                     HStack {
                         Image(systemName: "person.fill")
                             .foregroundColor(.gray)
-                        
-                        Text("Cliente: \(legalCase.clientID)")
+
+                        Text("Cliente: \(clientName)")
                             .font(.body)
-                            .padding(.horizontal)
-                            .opacity(isVisible ? 1 : 0)
-                            .animation(.easeInOut(duration: 0.5).delay(0.3), value: isVisible)
                     }
                     .padding()
-                    .frame(maxWidth: .infinity, alignment: .leading)
                     .background(Color.white.opacity(0.8))
                     .cornerRadius(12)
                     .shadow(color: Color(hex: "#0D214D").opacity(0.3), radius: 4, x: 0, y: 4)
                     .padding(.horizontal)
                     .opacity(isVisible ? 1 : 0)
-                    .animation(.easeInOut(duration: 0.5).delay(0.2), value: isVisible)
-                    
+                    .animation(.easeInOut(duration: 0.5).delay(0.3), value: isVisible)
+
                     Divider()
                         .padding(.horizontal)
                         .opacity(isVisible ? 1 : 0)
                         .animation(.easeInOut(duration: 0.5).delay(0.4), value: isVisible)
-                    
-                    // Case Details
+
+                    // Detalles del caso
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Detalles del Caso:")
                             .font(.headline)
@@ -119,53 +127,86 @@ struct CaseDetailView: View {
                     .padding(.horizontal)
                     .opacity(isVisible ? 1 : 0)
                     .animation(.easeInOut(duration: 0.5).delay(0.5), value: isVisible)
-                    
-                    // Documents Section
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Documentos:")
-                            .font(.headline)
-                            .bold()
-                        if legalCase.files.isEmpty {
-                            Text("No hay documentos disponibles")
-                                .font(.body)
-                                .foregroundColor(.secondary)
-                        } else {
-                            ForEach(legalCase.files, id: \.self) { file in
-                                HStack {
-                                    Image(systemName: "doc.fill")
-                                        .foregroundColor(.blue)
-                                    Text(file)
-                                        .font(.body)
-                                        .foregroundColor(.primary)
-                                }
-                                .padding(8)
-                                .background(Color.white.opacity(0.8))
-                                .cornerRadius(8)
-                                .shadow(color: Color(hex: "#0D214D").opacity(0.3), radius: 2, x: 0, y: 2)
-                            }
-                        }
-                    }
-                    .padding()
-                    .background(Color.white.opacity(0.8))
-                    .cornerRadius(12)
-                    .shadow(color: Color(hex: "#0D214D").opacity(0.3), radius: 4, x: 0, y: 4)
-                    .padding(.horizontal)
-                    .opacity(isVisible ? 1 : 0)
-                    .animation(.easeInOut(duration: 0.5).delay(0.6), value: isVisible)
-                    
+
                     Spacer()
                 }
-                .navigationTitle("\(legalCase.caseName)")
-                .padding(.top)
+                .navigationTitle(legalCase.caseName)
                 .onAppear {
                     isVisible = true
+                    fetchUserDetails(for: legalCase.lawyerAssigned) { name in
+                        self.lawyerName = name
+                    }
+                    fetchUserDetails(for: legalCase.clientID) { name in
+                        self.clientName = name
+                    }
+                    selectedStatus = legalCase.status
                 }
             }
         }
     }
+
+    // Función para obtener los detalles del usuario (nombre) a partir del _id
+    func fetchUserDetails(for userId: String, completion: @escaping (String) -> Void) {
+        guard let url = URL(string: "http://localhost:3000/api/usuarios/userById/\(userId)") else {
+            print("URL inválida")
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("Error al obtener detalles del usuario: \(error)")
+                completion("No disponible")
+                return
+            }
+
+            guard let data = data else {
+                print("No se recibió respuesta")
+                completion("No disponible")
+                return
+            }
+
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                   let name = json["nombre"] as? String {
+                    DispatchQueue.main.async {
+                        completion(name)
+                    }
+                }
+            } catch {
+                print("Error al parsear la respuesta: \(error)")
+                completion("No disponible")
+            }
+        }.resume()
+    }
+
+    // Función para cambiar el estatus del caso
+    func changeStatus(newStatus: String) {
+        guard let url = URL(string: "http://localhost:3000/api/casos/cambiarEstatus/\(legalCase.id)") else {
+            print("URL inválida")
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let body: [String: Any] = [
+            "nuevoEstatus": newStatus
+        ]
+
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body)
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error al cambiar estatus: \(error)")
+            } else {
+                print("Estatus cambiado a \(newStatus)")
+            }
+        }.resume()
+    }
 }
 
-// Function that defines the colors for status
+// Función que define los colores del estatus
 func statusColor(for status: String) -> Color {
     switch status.lowercased() {
     case "en progreso":
@@ -180,5 +221,5 @@ func statusColor(for status: String) -> Color {
 }
 
 #Preview {
-    CaseDetailView(legalCase: LegalCase.defaultValue)
+    CaseDetailView(legalCase: LegalCase.defaultValue, isAbogado: true)
 }
