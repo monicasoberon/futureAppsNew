@@ -1,9 +1,3 @@
-//
-//  CitasView.swift
-//  Bufetec
-//
-//  Created by Luis Gzz on 15/10/24.
-//
 import SwiftUI
 
 struct CitasView: View {
@@ -17,45 +11,56 @@ struct CitasView: View {
                         Text("No hay citas para el usuario \(userEmail).")
                             .padding()
                     } else {
-                        List(viewModel.citas, id: \.id) { cita in
-                            CitaRowView(cita: cita)
+                        List(viewModel.citas) { cita in
+                            VStack(alignment: .leading) {
+                                Text("ID de Cita: \(cita.id)")
+                                    .font(.headline)
+                                
+                                if let clienteNombre = cita.cliente_nombre {
+                                    Text("Cliente: \(clienteNombre)")
+                                        .font(.subheadline)
+                                } else {
+                                    Text("Cliente ID: \(cita.cliente_id)")
+                                        .font(.subheadline)
+                                }
+                                
+                                if let abogadoNombre = cita.abogado_nombre {
+                                    Text("Abogado: \(abogadoNombre)")
+                                        .font(.subheadline)
+                                } else {
+                                    Text("Abogado ID: \(cita.abogado_id)")
+                                        .font(.subheadline)
+                                }
+                                
+                                Text("Hora: \(formatDate(cita.hora))")
+                                    .font(.subheadline)
+                            }
+                            .padding()
                         }
                     }
                 } else {
                     Text("Cargando el correo electrónico del usuario...")
                         .padding()
+                        .onAppear {
+                            viewModel.fetchUserEmail()
+                        }
                 }
             }
             .navigationTitle("Citas")
-            .onAppear {
-                viewModel.fetchUserEmail()
-            }
         }
-    }
-}
-
-struct CitaRowView: View {
-    let cita: CitasModel
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text("ID de Cita: \(cita.id)")
-                .font(.headline)
-            Text("Cliente ID: \(cita.cliente_id)")
-                .font(.subheadline)
-            Text("Abogado ID: \(cita.abogado_id)")
-                .font(.subheadline)
-            Text("Hora: \(formatDate(cita.hora))")
-                .font(.subheadline)
+        .alert(isPresented: Binding<Bool>(
+            get: { viewModel.citas.isEmpty && viewModel.userEmail != nil },
+            set: { _ in }
+        )) {
+            Alert(title: Text("Error"), message: Text("No se pudieron cargar las citas"), dismissButton: .default(Text("OK")))
         }
-        .padding()
     }
     
     // Helper function to format the date
     private func formatDate(_ date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .short
+        formatter.dateStyle = .medium    // Ejemplo: Oct 16, 2024
+        formatter.timeStyle = .short     // Ejemplo: 4:00 PM
         return formatter.string(from: date)
     }
 }

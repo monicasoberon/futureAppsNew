@@ -1,30 +1,19 @@
-//
-//  CitasModel.swift
-//  Bufetec
-//
-//  Created by Luis Gzz on 15/10/24.
-//
-
 import Foundation
 
-class CitasModel: Codable {
-
-    var id: Int
-    var cliente_id: Int
-    var abogado_id: Int
+class CitasModel: Codable, Identifiable {
+    var id: String
+    var cliente_id: String
+    var abogado_id: String
     var hora: Date
 
-    init(id: Int, cliente_id: Int, abogado_id: Int, hora: Date) {
-        self.id = id
-        self.cliente_id = cliente_id
-        self.abogado_id = abogado_id
-        self.hora = hora
-    }
+    // Nuevas propiedades opcionales para los nombres
+    var cliente_nombre: String?
+    var abogado_nombre: String?
 
     enum CodingKeys: String, CodingKey {
-        case id
-        case cliente_id = "clienteId"
-        case abogado_id = "abogadoId"
+        case id = "_id"
+        case cliente_id
+        case abogado_id
         case hora
     }
 }
