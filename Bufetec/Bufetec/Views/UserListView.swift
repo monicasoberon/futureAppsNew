@@ -2,6 +2,9 @@ import SwiftUI
 
 struct UserListView: View {
     @StateObject var viewModel = UserViewModel()
+    @State private var isCreatingLawyer = false // Track if we're creating a new lawyer
+    @State private var emailInput = "" // Email input for new lawyer
+    @State private var conversionMessage: String? = nil // Message after lawyer conversion
 
     var body: some View {
         ZStack {
@@ -17,6 +20,22 @@ struct UserListView: View {
                     .bold()
                     .foregroundColor(Color(hex: "#003366"))
                     .padding(.top, 20)
+
+                // Mostrar botón si el usuario autenticado es abogado
+                if viewModel.isCurrentUserLawyer {
+                    Button(action: {
+                        isCreatingLawyer = true
+                    }) {
+                        Text("Crear Nuevo Abogado")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                            .padding(.horizontal)
+                    }
+                }
 
                 ScrollView {
                     VStack(spacing: 32) {  // Espaciado para un look más espacioso
@@ -63,11 +82,60 @@ struct UserListView: View {
                     }
                     .padding(.top, 16)
                 }
+
+                // Modal para agregar nuevo abogado
+                if isCreatingLawyer {
+                    VStack {
+                        Text("Convertir a Cliente en Abogado")
+                            .font(.headline)
+                            .padding()
+
+                        TextField("Ingresa el email del cliente", text: $emailInput)
+                            .padding()
+                            .background(Color.gray.opacity(0.2))
+                            .cornerRadius(10)
+                            .padding(.horizontal)
+
+                        Button(action: {
+                            viewModel.convertToLawyer(email: emailInput)
+                            isCreatingLawyer = false
+                        }) {
+                            Text("Convertir")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(Color.blue)
+                                .cornerRadius(10)
+                                .padding(.horizontal)
+                        }
+
+                        Button("Cancelar") {
+                            isCreatingLawyer = false
+                        }
+                        .padding(.top, 10)
+                    }
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .padding()
+                    .shadow(radius: 10)
+                }
+
+                if let message = conversionMessage {
+                    Text(message)
+                        .font(.body)
+                        .foregroundColor(.green)
+                        .padding()
+                }
             }
             .padding(.horizontal)
         }
         .onAppear {
             viewModel.fetchUsers()
+            viewModel.checkIfCurrentUserIsLawyer()  // Llamar la función para verificar si es abogado
+        }
+        .onChange(of: viewModel.conversionMessage) { newMessage in
+            conversionMessage = newMessage
         }
     }
 }

@@ -224,3 +224,34 @@ exports.updatePicture = async (req, res) => {
         return res.status(500).json({ message: error.message });
     }
 };
+
+exports.convertirAbogado = async (req, res) => {
+    const email = req.params.email; // Get email from URL parameters
+
+    try {
+        const userId = await idByEmail(email);
+
+        if (!userId) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        // Update the user to convert them to an "abogado" and add initial fields if missing
+        const updatedUser = await USUARIOS.findByIdAndUpdate(
+            userId,
+            {
+                tipo: "abogado",
+                descripcion: "Descripción inicial para el abogado",
+                especialidad: "Especialidad inicial para el abogado"
+            },
+            { new: true } // Return the updated document
+        );
+
+        if (!updatedUser) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        res.status(200).json({message: 'Conversion exitosa'});
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};

@@ -12,5 +12,6 @@ router.put("/updateDescriptionAndEspecialidad", usuariosController.updateDescrip
 router.get("/getPicture/:email", usuariosController.getPicture);
 router.post("/updatePicture", usuariosController.updatePicture);
 router.post('/loginOrRegister', verifyFirebaseToken, usuariosController.loginOrRegister);
+router.put('/convertirAbogado/:email', usuariosController.convertirAbogado);
 
 module.exports = router;
