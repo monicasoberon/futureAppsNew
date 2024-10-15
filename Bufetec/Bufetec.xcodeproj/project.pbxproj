@@ -24,6 +24,8 @@
 		B4595C292CA33C0500920969 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4595C282CA33C0500920969 /* HomePage.swift */; };
 		B476F19A2CA5D90200BFA846 /* LawyerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B476F1992CA5D90200BFA846 /* LawyerDetailView.swift */; };
 		B476F19C2CA5D91D00BFA846 /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B476F19B2CA5D91D00BFA846 /* UserListView.swift */; };
+		B4884A0F2CBEFE140011FC23 /* CitasViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4884A0E2CBEFE140011FC23 /* CitasViewModel.swift */; };
+		B4884A112CBEFE510011FC23 /* CitasModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4884A102CBEFE510011FC23 /* CitasModel.swift */; };
 		B4BAC48B2CAA54A800BC2755 /* GoogleAPIClientForRESTCore in Frameworks */ = {isa = PBXBuildFile; productRef = B4BAC48A2CAA54A800BC2755 /* GoogleAPIClientForRESTCore */; };
 		B4BAC48D2CAA54A800BC2755 /* GoogleAPIClientForREST_ACMEDNS in Frameworks */ = {isa = PBXBuildFile; productRef = B4BAC48C2CAA54A800BC2755 /* GoogleAPIClientForREST_ACMEDNS */; };
 		B4BAC48F2CAA54A800BC2755 /* GoogleAPIClientForREST_AIPlatformNotebooks in Frameworks */ = {isa = PBXBuildFile; productRef = B4BAC48E2CAA54A800BC2755 /* GoogleAPIClientForREST_AIPlatformNotebooks */; };
@@ -89,6 +91,8 @@
 		B4595C282CA33C0500920969 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		B476F1992CA5D90200BFA846 /* LawyerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LawyerDetailView.swift; sourceTree = "<group>"; };
 		B476F19B2CA5D91D00BFA846 /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
+		B4884A0E2CBEFE140011FC23 /* CitasViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitasViewModel.swift; sourceTree = "<group>"; };
+		B4884A102CBEFE510011FC23 /* CitasModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitasModel.swift; sourceTree = "<group>"; };
 		D8046B7E2CB4531400768348 /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
 		D8046B802CB5A55E00768348 /* TesisModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesisModel.swift; sourceTree = "<group>"; };
 		D8053CEE2C9CA291006DE5ED /* CaseRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseRowView.swift; sourceTree = "<group>"; };
@@ -165,6 +169,7 @@
 				D8905B022CBDA390009ADD2F /* PrecedentesViewModel.swift */,
 				D8C953862CB6FD45003F43E5 /* SearchModel.swift */,
 				D8905B002CBDA00A009ADD2F /* SearchModel2.swift */,
+				B4884A0E2CBEFE140011FC23 /* CitasViewModel.swift */,
 			);
 			path = ViewsModels;
 			sourceTree = "<group>";
@@ -218,6 +223,7 @@
 				8FA1B2182CB6FD8D006028F2 /* ProfileModel.swift */,
 				8FA1B21D2CB7400B006028F2 /* SideMenuProfileModel.swift */,
 				D8905AFE2CBD97E4009ADD2F /* PrecedentesModel.swift */,
+				B4884A102CBEFE510011FC23 /* CitasModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -417,8 +423,10 @@
 				D860C9722CA48CD70000C728 /* UserModel.swift in Sources */,
 				D8053CEF2C9CA291006DE5ED /* CaseRowView.swift in Sources */,
 				D8046B812CB5A55E00768348 /* TesisModel.swift in Sources */,
+				B4884A112CBEFE510011FC23 /* CitasModel.swift in Sources */,
 				FB1F39C82C9B4E6200C918B3 /* HomeView.swift in Sources */,
 				8F6862B62CAB17B000BB397D /* LegalNews.swift in Sources */,
+				B4884A0F2CBEFE140011FC23 /* CitasViewModel.swift in Sources */,
 				8FA1B2202CB74028006028F2 /* SideMenuProfileViewModel.swift in Sources */,
 				8FAEC9012CA5D1B500CD1860 /* FaqModel.swift in Sources */,
 				D8C953872CB6FD45003F43E5 /* SearchModel.swift in Sources */,
