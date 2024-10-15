@@ -8,4 +8,13 @@ exports.getCitas = async (req, res) => {
       res.status(500).json({ message: error.message });
     }
   };
-  
+
+exports.getCitasByEmail = async (req, res) => {
+  const { email } = req.params;
+  try {
+    const citas = await CITAS.find({ cliente_id: email });
+    res.status(200).json(citas);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
