@@ -1,12 +1,14 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const citasSchema = new mongoose.Schema({
-    id: { type: String, required: true },
+const citasSchema = new mongoose.Schema(
+  {
     cliente_id: { type: String, required: true },
     abogado_id: { type: String, required: true },
     hora: { type: Date, required: true },
-},{
-    collection: 'citas'
-});
+  },
+  {
+    collection: "citas",
+  }
+);
 
-module.exports = mongoose.model('CITAS', citasSchema);
+module.exports = mongoose.model("CITAS", citasSchema);
