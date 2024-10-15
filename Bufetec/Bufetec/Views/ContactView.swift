@@ -20,7 +20,6 @@ struct ContactView: View {
             .edgesIgnoringSafeArea(.all)
             
             VStack {
-                // Title
                 Text("Contactar")
                     .font(.largeTitle)
                     .fontWeight(.bold)
@@ -28,7 +27,6 @@ struct ContactView: View {
                 
                 Spacer().frame(height: 20)
                 
-                // Name Input
                 VStack(alignment: .leading, spacing: 5) {
                     Text("Name")
                         .font(.headline)
@@ -43,7 +41,6 @@ struct ContactView: View {
                 }
                 .padding(.horizontal, 20)
                 
-                // Email Input
                 VStack(alignment: .leading, spacing: 5) {
                     Text("Email")
                         .font(.headline)
@@ -58,7 +55,6 @@ struct ContactView: View {
                 }
                 .padding(.horizontal, 20)
                 
-                // Message Input
                 VStack(alignment: .leading, spacing: 5) {
                     Text("Message")
                         .font(.headline)
@@ -74,9 +70,9 @@ struct ContactView: View {
                 }
                 .padding(.horizontal, 20)
                 
-                // Send Button
                 Button(action: {
-                    isSent = true
+                    // Perform the send action and set isSent to true
+                    sendMessage()
                 }) {
                     Text("Send")
                         .frame(maxWidth: .infinity)
@@ -88,12 +84,15 @@ struct ContactView: View {
                 }
                 .padding(.horizontal, 20)
                 .alert(isPresented: $isSent) {
-                    Alert(title: Text("Message Sent"), message: Text("Thank you for contacting us!"), dismissButton: .default(Text("OK")))
+                    Alert(
+                        title: Text("Message Sent"),
+                        message: Text("Thank you for contacting us!"),
+                        dismissButton: .default(Text("OK"))
+                    )
                 }
                 
                 Spacer().frame(height: 30)
                 
-                // Contact Information Section
                 VStack(alignment: .leading, spacing: 20) {
                     Link(destination: URL(string: "tel:528183284344")!) {
                         ContactInfoView(iconName: "phone.fill", contactDetail: "+52 (81) 8328 4344")
@@ -103,16 +102,23 @@ struct ContactView: View {
                 }
                 .padding(.horizontal, 20)
             }
+            .onAppear {
+                user.fetchAuthenticatedUser()
+            }
             
             Spacer()
-            
         }
+    }
+
+    // Function to handle send action and show alert
+    private func sendMessage() {
+        // Add any necessary logic to send the message here.
+        // Example: Network request, save data, etc.
         
-        Spacer()
-        
+        // After sending the message, show the alert
+        isSent = true
     }
 }
-
 
 #Preview {
     ContactView(user: UserModel.defaultValue)

@@ -86,3 +86,7 @@ func sendIdTokenToBackend(idToken: String) {
     }
     task.resume()
 }
+
+#Preview {
+    HomeView()
+}

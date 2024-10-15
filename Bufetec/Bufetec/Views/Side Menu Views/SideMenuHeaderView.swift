@@ -29,8 +29,6 @@ struct SideMenuHeaderView: View {
                     }
                 }
                 .frame(width: 48, height: 48)
-                .background(.blue)
-                .clipShape(RoundedRectangle(cornerRadius: 6))
                 .padding(.vertical)
                 
                 VStack(alignment: .leading, spacing: 6) {
