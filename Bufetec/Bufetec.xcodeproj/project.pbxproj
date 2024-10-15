@@ -26,6 +26,7 @@
 		B476F19C2CA5D91D00BFA846 /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B476F19B2CA5D91D00BFA846 /* UserListView.swift */; };
 		B4884A0F2CBEFE140011FC23 /* CitasViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4884A0E2CBEFE140011FC23 /* CitasViewModel.swift */; };
 		B4884A112CBEFE510011FC23 /* CitasModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4884A102CBEFE510011FC23 /* CitasModel.swift */; };
+		B4884A132CBF04580011FC23 /* CitasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4884A122CBF04580011FC23 /* CitasView.swift */; };
 		B4BAC48B2CAA54A800BC2755 /* GoogleAPIClientForRESTCore in Frameworks */ = {isa = PBXBuildFile; productRef = B4BAC48A2CAA54A800BC2755 /* GoogleAPIClientForRESTCore */; };
 		B4BAC48D2CAA54A800BC2755 /* GoogleAPIClientForREST_ACMEDNS in Frameworks */ = {isa = PBXBuildFile; productRef = B4BAC48C2CAA54A800BC2755 /* GoogleAPIClientForREST_ACMEDNS */; };
 		B4BAC48F2CAA54A800BC2755 /* GoogleAPIClientForREST_AIPlatformNotebooks in Frameworks */ = {isa = PBXBuildFile; productRef = B4BAC48E2CAA54A800BC2755 /* GoogleAPIClientForREST_AIPlatformNotebooks */; };
@@ -93,6 +94,7 @@
 		B476F19B2CA5D91D00BFA846 /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
 		B4884A0E2CBEFE140011FC23 /* CitasViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitasViewModel.swift; sourceTree = "<group>"; };
 		B4884A102CBEFE510011FC23 /* CitasModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitasModel.swift; sourceTree = "<group>"; };
+		B4884A122CBF04580011FC23 /* CitasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitasView.swift; sourceTree = "<group>"; };
 		D8046B7E2CB4531400768348 /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
 		D8046B802CB5A55E00768348 /* TesisModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesisModel.swift; sourceTree = "<group>"; };
 		D8053CEE2C9CA291006DE5ED /* CaseRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseRowView.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				8FAEC9042CA5D4E200CD1860 /* FaqListView.swift */,
 				D87DF1112CA8FB7A000C80E5 /* ContactView.swift */,
 				D87DF1132CA8FBF7000C80E5 /* ContactInfoView.swift */,
+				B4884A122CBF04580011FC23 /* CitasView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 				D860C96C2CA4859D0000C728 /* ProfileView.swift in Sources */,
 				B476F19C2CA5D91D00BFA846 /* UserListView.swift in Sources */,
 				D8CE74482CAF7D1800F841D7 /* SideMenuOptionModel.swift in Sources */,
+				B4884A132CBF04580011FC23 /* CitasView.swift in Sources */,
 				8FA1B2192CB6FD8D006028F2 /* ProfileModel.swift in Sources */,
 				8F6862AA2CA86BAB00BB397D /* CaseViewModel.swift in Sources */,
 				D8905AFF2CBD97E4009ADD2F /* PrecedentesModel.swift in Sources */,

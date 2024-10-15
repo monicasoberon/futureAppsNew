@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import FirebaseAuth
 
 class CitasViewModel: ObservableObject {
     @Published var citas: [CitasModel] = []
