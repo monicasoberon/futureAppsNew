@@ -14,7 +14,6 @@ struct LawyerAvailabilityView: View {
                 .padding(.top, 50)
                 .foregroundColor(Color(hex: "#003366"))
 
-            // Date picker to choose a date
             DatePicker("Selecciona una fecha", selection: $selectedDate, displayedComponents: .date)
                 .datePickerStyle(GraphicalDatePickerStyle())
                 .padding()
@@ -31,7 +30,6 @@ struct LawyerAvailabilityView: View {
                     .foregroundColor(Color(hex: "#003366"))
                     .padding(.top)
 
-                // List of available times
                 ScrollView {
                     VStack(spacing: 16) {
                         ForEach(viewModel.availableTimes, id: \.self) { time in
@@ -55,7 +53,6 @@ struct LawyerAvailabilityView: View {
 
             Spacer()
 
-            // Button to confirm and create the meeting
             Button(action: {
                 if let selectedTime = selectedTime {
                     viewModel.createMeeting(with: lawyer, at: selectedTime)
@@ -69,15 +66,13 @@ struct LawyerAvailabilityView: View {
                     .cornerRadius(10)
                     .padding(.horizontal)
             }
-            .disabled(selectedTime == nil)  // Disable if no time is selected
+            .disabled(selectedTime == nil)
             .alert(isPresented: Binding<Bool>(
                 get: { viewModel.successMessage != nil },
                 set: { _ in viewModel.successMessage = nil }
             )) {
                 Alert(title: Text("Cita creada"), message: Text(viewModel.successMessage ?? ""), dismissButton: .default(Text("OK")))
             }
-
-            // Error message alert using `showErrorAlert`
             .alert(isPresented: $viewModel.showErrorAlert) {
                 Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? ""), dismissButton: .default(Text("OK")))
             }
@@ -88,7 +83,6 @@ struct LawyerAvailabilityView: View {
         }
     }
     
-    // Helper function to format the time as a string
     func timeString(for date: Date) -> String {
         let formatter = DateFormatter()
         formatter.timeStyle = .short

@@ -23,6 +23,7 @@ exports.getCitas = async (req, res) => {
 
 exports.getCitasByEmail = async (req, res) => {
   const { email } = req.params;
+  console.log(email);
 
   try {
     const id = await idByEmail(email);
@@ -65,38 +66,5 @@ exports.createCita = async (req, res) => {
     res.status(201).json(savedCita);
   } catch (error) {
     res.status(500).json({ message: "Error creating appointment", error: error.message });
-  }
-};
-
-exports.getBookedTimes = async (req, res) => {
-  const { lawyerId } = req.params;
-  const { date } = req.query;  // Expected format: "YYYY-MM-DD"
-
-  if (!lawyerId || !date) {
-    return res.status(400).json({ message: 'Missing required parameters: lawyerId or date' });
-  }
-
-  try {
-    const selectedDate = new Date(date);
-    
-    // Set the start and end of the day (from 9 AM to 5 PM)
-    const startDate = new Date(selectedDate);
-    startDate.setHours(9, 0, 0, 0);  // Start at 9:00 AM
-
-    const endDate = new Date(selectedDate);
-    endDate.setHours(17, 0, 0, 0);  // End at 5:00 PM
-
-    // Fetch all booked appointments for this lawyer on the selected date
-    const bookedCitas = await CITAS.find({
-      abogado_id: lawyerId,
-      hora: { $gte: startDate, $lte: endDate }  // Find citas between 9 AM and 5 PM
-    });
-
-    // Return booked times as ISO 8601 strings
-    const bookedTimes = bookedCitas.map(cita => cita.hora.toISOString());
-
-    res.status(200).json(bookedTimes);  // Send booked time slots
-  } catch (error) {
-    res.status(500).json({ message: error.message });
   }
 };
