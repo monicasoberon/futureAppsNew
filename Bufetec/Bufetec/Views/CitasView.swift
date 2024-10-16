@@ -2,16 +2,16 @@ import SwiftUI
 
 struct CitasView: View {
     @StateObject private var viewModel = CitasViewModel()
-    @State private var showCitas = false  // State to control the animation
-    
+    @State private var showCitas = false  // Estado para controlar la animación
+
     var body: some View {
         ZStack {
-            // Light blue gradient background
+            // Fondo degradado azul claro
             LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.2), Color.blue.opacity(0.05)]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
-            
+
             VStack(alignment: .center, spacing: 20) {
-                // Custom title for Citas
+                // Título personalizado para Citas
                 Text("Mis Citas")
                     .font(.largeTitle)
                     .bold()
@@ -39,7 +39,7 @@ struct CitasView: View {
                         .padding()
                         .foregroundColor(.gray)
                 }
-                
+
                 Spacer()
             }
             .padding(.horizontal)
@@ -53,42 +53,24 @@ struct CitasView: View {
     }
 }
 
-// Sub-view to display each cita as a card
+// Sub-vista para mostrar cada cita como una tarjeta
 struct CitaCardView: View {
     let cita: CitasModel
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("ID de Cita: \(cita.id)")
+            // Mostrar solo el nombre del cliente y la hora
+            Text("Cliente: \(cita.cliente_nombre ?? "N/A")")
                 .font(.headline)
                 .foregroundColor(.primary)
 
-            if let clienteNombre = cita.cliente_nombre {
-                Text("Cliente: \(clienteNombre)")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-            } else {
-                Text("Cliente ID: \(cita.cliente_id)")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-            }
-            
-            if let abogadoNombre = cita.abogado_nombre {
-                Text("Abogado: \(abogadoNombre)")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-            } else {
-                Text("Abogado ID: \(cita.abogado_id)")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-            }
-            
             Text("Hora: \(formatDate(cita.hora))")
                 .font(.subheadline)
-                .foregroundColor(.primary)
-            
+                .foregroundColor(.secondary)
         }
         .padding()
+        .frame(height: 120) // Establecer una altura fija para todas las tarjetas
+        .frame(maxWidth: .infinity) // Opcional: hacer que la tarjeta ocupe todo el ancho disponible
         .background(
             RoundedRectangle(cornerRadius: 15)
                 .fill(Color.white)
@@ -100,12 +82,12 @@ struct CitaCardView: View {
         )
         .padding(.top, 10)
     }
-    
-    // Helper function to format the date
+
+    // Función auxiliar para formatear la fecha
     private func formatDate(_ date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateStyle = .medium    // Example: Oct 16, 2024
-        formatter.timeStyle = .short     // Example: 4:00 PM
+        formatter.dateStyle = .medium    // Ejemplo: 16 oct. 2024
+        formatter.timeStyle = .short     // Ejemplo: 4:00 p. m.
         return formatter.string(from: date)
     }
 }
