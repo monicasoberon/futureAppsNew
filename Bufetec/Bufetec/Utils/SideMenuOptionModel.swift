@@ -1,14 +1,7 @@
-//
-//  SideMenuOptionModel.swift
-//  Bufetec
-//
-//  Created by Jorge on 03/10/24.
-//
-
 import Foundation
 import SwiftUI
 
-enum SideMenuOptionModel: Int, CaseIterable {
+enum SideMenuOptionModel: Int, CaseIterable, Identifiable {
     case homeView
     case lawyersView
     case appointmentView
@@ -18,9 +11,10 @@ enum SideMenuOptionModel: Int, CaseIterable {
     case precedentesView
     case faqView
     case contactView
-    
     case signOut
-    
+
+    var id: Int { return self.rawValue }
+
     var title: String {
         switch self {
         case .homeView:
@@ -41,12 +35,11 @@ enum SideMenuOptionModel: Int, CaseIterable {
             return "Preguntas Frecuentes"
         case .contactView:
             return "Contactar"
-
         case .signOut:
             return "Sign Out"
         }
     }
-    
+
     var systemImageName: String {
         switch self {
         case .homeView:
@@ -67,16 +60,26 @@ enum SideMenuOptionModel: Int, CaseIterable {
             return "questionmark.circle.fill"
         case .contactView:
             return "phone.fill"
-
         case .signOut:
             return "rectangle.portrait.and.arrow.forward"
         }
     }
-}
 
+    var isForClient: Bool {
+        switch self {
+        case .homeView, .appointmentView, .lawyersView, .casesView, .faqView, .contactView:
+            return true
+        default:
+            return false
+        }
+    }
 
-
-
-extension SideMenuOptionModel: Identifiable {
-    var id: Int {return self.rawValue}
+    var isForLawyer: Bool {
+        switch self {
+        case .homeView, .citasView, .tesisView, .lawyersView, .precedentesView, .casesView:
+            return true
+        default:
+            return false
+        }
+    }
 }
