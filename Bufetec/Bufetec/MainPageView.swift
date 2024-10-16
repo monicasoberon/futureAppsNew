@@ -27,10 +27,13 @@ struct MainPageView: View {
                     PrecedentesView()
                 case .casesView:
                     CaseListView()
+                case .citasView:
+                    CitasView()
                 case .faqView:
                     FaqListView()
                 case .contactView:
                     ContactView(user: user)
+
                 case .signOut:
                     Color.clear
                 }

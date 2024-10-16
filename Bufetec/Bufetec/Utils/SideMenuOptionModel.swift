@@ -17,6 +17,7 @@ enum SideMenuOptionModel: Int, CaseIterable {
     case casesView
     case faqView
     case contactView
+    case citasView
     case signOut
     
     var title: String {
@@ -37,6 +38,8 @@ enum SideMenuOptionModel: Int, CaseIterable {
             return "Preguntas Frecuentes"
         case .contactView:
             return "Contactar"
+        case .citasView:
+            return "Mis Citas"
         case .signOut:
             return "Sign Out"
         }
@@ -60,6 +63,8 @@ enum SideMenuOptionModel: Int, CaseIterable {
             return "questionmark.circle.fill"
         case .contactView:
             return "phone.fill"
+        case .citasView:
+            return "calendar.badge.minus"
         case .signOut:
             return "rectangle.portrait.and.arrow.forward"
         }

@@ -1,10 +1,3 @@
-//
-//  HomePage.swift
-//  Bufetec
-//
-//  Created by Luis Gzz on 24/09/24.
-//
-
 import SwiftUI
 
 struct HomePageView: View {
@@ -17,17 +10,22 @@ struct HomePageView: View {
         "Recent Family Law Updates",
         "Civil Rights Legal Changes"
     ]
+    
+    // Computed property to get 3 random lawyers
+    private var randomLawyers: [UserModel] {
+        Array(lawyerviewModel.users.shuffled().prefix(3))
+    }
 
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                // Hero Section
+                // Hero Section with logo and shadow effect
                 Image("bufetec_logo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 300)
                     .frame(maxWidth: .infinity)
-                    .frame(maxHeight: .infinity)
+                    .shadow(color: Color(hex: "#0D214D").opacity(0.3), radius: 10, x: 0, y: 5)
 
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Justicia al Alcance de Todos")
@@ -44,7 +42,7 @@ struct HomePageView: View {
                                 .padding()
                                 .background(Color.blue)
                                 .foregroundColor(.white)
-                                .cornerRadius(8)
+                                .cornerRadius(10)
                         }
 
                         Button(action: {
@@ -54,7 +52,7 @@ struct HomePageView: View {
                                 .padding()
                                 .background(Color.green)
                                 .foregroundColor(.white)
-                                .cornerRadius(8)
+                                .cornerRadius(10)
                         }
 
                         Button(action: {
@@ -64,39 +62,39 @@ struct HomePageView: View {
                                 .padding()
                                 .background(Color.orange)
                                 .foregroundColor(.white)
-                                .cornerRadius(8)
+                                .cornerRadius(10)
                         }
                     }
                     .padding(.vertical, 5)
                 }
                 .padding()
-                .background(Color(.systemGray6))
-                .cornerRadius(10)
+                .background(Color.white)
+                .cornerRadius(15)
+                .shadow(color: Color.gray.opacity(0.4), radius: 10, x: 0, y: 5)
 
-                // Featured Lawyers
+                // Featured Lawyers (Random 3 Lawyers)
                 VStack(alignment: .leading, spacing: 15) {
                     Text("Abogados")
                         .font(.headline)
-                        .fontWeight(.bold)
                         .foregroundColor(Color(hex: "#003366"))
-                        .shadow(color: Color(hex: "#0D214D").opacity(0.3), radius: 4, x: 0, y: 4)
 
-                    ForEach(lawyerviewModel.users.prefix(3), id: \.id) { user in
-                        LawyerCardView(name: user.name, especialty: user.especiality
+                    ForEach(randomLawyers, id: \.id) { user in
+                        LawyerCardView(
+                            name: user.name,
+                            especialty: user.especiality
                         )
                     }
                 }
                 .padding()
-                .background(Color(.systemGray6))
-                .cornerRadius(10)
+                .background(Color.white)
+                .cornerRadius(15)
+                .shadow(color: Color.gray.opacity(0.4), radius: 10, x: 0, y: 5)
 
                 // Legal News Feed
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Tesis Recientes")
                         .font(.headline)
-                        .fontWeight(.bold)
                         .foregroundColor(Color(hex: "#003366"))
-                        .shadow(color: Color(hex: "#0D214D").opacity(0.3), radius: 4, x: 0, y: 4)
 
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
@@ -107,17 +105,16 @@ struct HomePageView: View {
                     }
                 }
                 .padding()
-                .background(Color(.systemGray6))
-                .cornerRadius(10)
+                .background(Color.white)
+                .cornerRadius(15)
+                .shadow(color: Color.gray.opacity(0.4), radius: 10, x: 0, y: 5)
 
                 // Contact and Support
                 VStack(alignment: .leading, spacing: 10) {
                     HStack {
                         Text("Necesitas Ayuda?")
                             .font(.headline)
-                            .fontWeight(.bold)
                             .foregroundColor(Color(hex: "#003366"))
-                            .shadow(color: Color(hex: "#0D214D").opacity(0.3), radius: 4, x: 0, y: 4)
 
                         Button("Contactar Soporte") {
                             selectedMenuOption = .contactView
@@ -130,10 +127,8 @@ struct HomePageView: View {
                         .cornerRadius(8)
 
                         Text("Dudas?")
-                            .font(.title)
-                            .fontWeight(.bold)
+                            .font(.headline)
                             .foregroundColor(Color(hex: "#003366"))
-                            .shadow(color: Color(hex: "#0D214D").opacity(0.3), radius: 4, x: 0, y: 4)
 
                         Button("FAQ") {
                             selectedMenuOption = .faqView
@@ -146,8 +141,9 @@ struct HomePageView: View {
                     }
                 }
                 .padding()
-                .background(Color(.systemGray6))
-                .cornerRadius(10)
+                .background(Color.white)
+                .cornerRadius(15)
+                .shadow(color: Color.gray.opacity(0.4), radius: 10, x: 0, y: 5)
             }
             .padding()
         }
@@ -166,19 +162,27 @@ struct LawyerCardView: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("\(name), \(especialty)")
+                Text("\(name)")
                     .font(.subheadline).bold()
+                    .foregroundColor(Color(hex: "#003366"))
+                Text(especialty)
+                    .font(.caption)
+                    .foregroundColor(Color.blue.opacity(0.7))
             }
             Spacer()
-            Button("View Profile") {
+            Button("Ver Perfil") {
                 // Navigation action
             }
             .padding(.horizontal)
             .padding(.vertical, 6)
             .background(Color.blue)
             .foregroundColor(.white)
-            .cornerRadius(5)
+            .cornerRadius(8)
         }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(15)
+        .shadow(color: Color.gray.opacity(0.4), radius: 5, x: 0, y: 3)
     }
 }
 
@@ -190,6 +194,7 @@ struct NewsCardView: View {
             Text(title)
                 .font(.subheadline)
                 .bold()
+                .foregroundColor(Color(hex: "#003366"))
             Text("Click to read more")
                 .font(.caption)
                 .foregroundColor(.blue)
@@ -197,12 +202,11 @@ struct NewsCardView: View {
         .padding()
         .background(Color.white)
         .cornerRadius(10)
-        .shadow(radius: 3)
+        .shadow(color: Color.gray.opacity(0.3), radius: 3)
     }
 }
 
-
-// Vista previa
+// Preview
 #Preview {
     HomePageView(lawyerviewModel: UserViewModel(), selectedMenuOption: .constant(.homeView))
 }
