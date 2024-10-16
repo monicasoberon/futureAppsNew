@@ -11,7 +11,6 @@ import FirebaseAuth
 struct NavigationMenu: View {
     
     @ObservedObject var user: UserModel
-    
     @Binding var isShowing: Bool
     @Binding var selectedTab: SideMenuOptionModel
     @Binding var showLogoutAlert: Bool
@@ -26,7 +25,6 @@ struct NavigationMenu: View {
                     .opacity(0.3)
                     .ignoresSafeArea()
                     .onTapGesture {
-                        // Cierra el menú al hacer clic en el fondo
                         withAnimation {
                             isShowing = false
                         }
@@ -34,9 +32,7 @@ struct NavigationMenu: View {
                 
                 HStack {
                     VStack(alignment: .leading, spacing: 32) {
-                        // Envolver el header en un botón para mostrar ProfileView
                         Button(action: {
-                            // Cierra el menú y muestra la vista de perfil
                             withAnimation {
                                 isShowing = false
                             }
@@ -47,7 +43,6 @@ struct NavigationMenu: View {
                         .buttonStyle(PlainButtonStyle())
                         
                         VStack {
-                            // Mostrar todas las opciones excepto Sign Out
                             ForEach(SideMenuOptionModel.allCases.filter { $0 != .signOut }) { option in
                                 Button(action: {
                                     onOptionTapped(option)
@@ -59,7 +54,6 @@ struct NavigationMenu: View {
                         
                         Spacer()
                         
-                        // Botón de Sign Out en la parte inferior
                         Button(action: {
                             showLogoutAlert = true
                         }, label: {
@@ -81,9 +75,12 @@ struct NavigationMenu: View {
                 .transition(.move(edge: .leading))
             }
         }
-        // Mostrar la ProfileView cuando showProfileView es verdadero
         .fullScreenCover(isPresented: $showProfileView) {
             ProfileView()
+        }
+        .onChange(of: selectedTab) { newTab in
+            // Sync selectedOption with selectedTab
+            selectedOption = newTab
         }
     }
     
@@ -95,6 +92,7 @@ struct NavigationMenu: View {
         }
     }
 }
+
 
 #Preview {
     @State var isShowingMenu = true

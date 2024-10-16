@@ -2,7 +2,6 @@ import SwiftUI
 import FirebaseAuth
 
 struct MainPageView: View {
-    
     @StateObject private var user = UserModel()
     
     @State private var showMenu = false
@@ -14,10 +13,9 @@ struct MainPageView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                // Conditionally show different views based on the selectedMenuOption
                 switch selectedMenuOption {
                 case .homeView:
-                    HomePageView(userModel: user)
+                    HomePageView(selectedMenuOption: $selectedMenuOption)
                 case .appointmentView:
                     LawyerListView()
                 case .lawyersView:
@@ -36,7 +34,7 @@ struct MainPageView: View {
                     Color.clear
                 }
                 
-                // Pass showLogoutAlert to NavigationMenu
+                // Navigation menu for side options
                 NavigationMenu(
                     user: user,
                     isShowing: $showMenu,
@@ -54,8 +52,6 @@ struct MainPageView: View {
                             .foregroundColor(Color(hex: "#FFFFFF"))
                             .opacity(0.8)
                     }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
                 }
             }
             .toolbarBackground(Color(hex: "#0164d2"), for: .navigationBar)
@@ -86,6 +82,7 @@ struct MainPageView: View {
         }
     }
 }
+
 
 // Preview
 struct MainPageView_Previews: PreviewProvider {

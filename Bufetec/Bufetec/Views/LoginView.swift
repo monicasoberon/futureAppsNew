@@ -25,7 +25,7 @@ struct LoginView: View {
             VStack(spacing: 40) {
                 // Logo con animación de Fade-In
                 Spacer()
-                Text("Justicia al alcance de todos")
+                Text("Justicia al Alcance de Todos")
                     .font(.largeTitle) // Tamaño grande para el eslogan
                     .fontWeight(.bold) // Negrita para mayor impacto
                     .foregroundColor(Color(hex: "#003366")) // Color azul oscuro
