@@ -47,6 +47,7 @@ struct MainPageView: View {
                     showLogoutAlert: $showLogoutAlert
                 )
             }
+            .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
