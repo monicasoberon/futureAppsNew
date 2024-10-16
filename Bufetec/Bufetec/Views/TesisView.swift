@@ -39,16 +39,16 @@ struct TesisView: View {
                         ForEach(viewModel.filteredTesis) { tesis in
                             Link(destination: URL(string: "https://sjfsemanal.scjn.gob.mx/detalle/tesis/\(tesis.registroDigital)")!) {
                                 VStack(alignment: .leading, spacing: 6) {
-                                    Text(tesis.registroDigital)
+//                                    Text(tesis.registroDigital)
+//                                        .font(.headline)
+//                                        .fontWeight(.bold)
+//                                        .foregroundColor(Color(hex: "#003366"))
+
+                                    Text(tesis.tesis.replacingOccurrences(of: "\n", with: " "))
                                         .font(.headline)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(Color(hex: "#003366"))
+                                        .foregroundColor(Color.blue.opacity(0.8))
 
-                                    Text(tesis.tesis)
-                                        .font(.subheadline)
-                                        .foregroundColor(Color.blue.opacity(0.7))
-
-                                    Text(tesis.description)
+                                    Text(tesis.description.replacingOccurrences(of: "\n", with: " "))
                                         .font(.footnote)
                                         .foregroundColor(.gray)
                                         .lineLimit(3)

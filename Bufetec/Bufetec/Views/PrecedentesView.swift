@@ -40,14 +40,14 @@ struct PrecedentesView: View {
                         ForEach(viewModel.filteredPrecedentes) { precedente in
                             Link(destination: URL(string: "https://sjfsemanal.scjn.gob.mx/detalle/ejecutoria/\(precedente.registroDigital)")!) {
                                 VStack(alignment: .leading, spacing: 6) { // Changes to centered alignment
-                                    Text(precedente.registroDigital)
-                                        .font(.headline)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(Color(hex: "#003366"))
+//                                    Text(precedente.registroDigital)
+//                                        .font(.headline)
+//                                        .fontWeight(.bold)
+//                                        .foregroundColor(Color(hex: "#003366"))
 
                                     Text(precedente.precedente.replacingOccurrences(of: "\n", with: " "))
-                                        .font(.subheadline)
-                                        .foregroundColor(Color.blue.opacity(0.7))
+                                        .font(.headline)
+                                        .foregroundColor(Color.blue.opacity(0.8))
                                         .lineLimit(3)
                                         .truncationMode(.tail)
 
