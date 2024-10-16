@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomePageView: View {
-    
+    @ObservedObject var lawyerviewModel: UserViewModel
     @Binding var selectedMenuOption: SideMenuOptionModel
 
     @State private var searchQuery = ""
@@ -17,19 +17,18 @@ struct HomePageView: View {
         "Recent Family Law Updates",
         "Civil Rights Legal Changes"
     ]
-    
+
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
                 // Hero Section
-                    Image("bufetec_logo")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 300)
-                        .frame(maxWidth: .infinity)
-                        .frame(maxHeight: .infinity)
-                    
-                
+                Image("bufetec_logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 300)
+                    .frame(maxWidth: .infinity)
+                    .frame(maxHeight: .infinity)
+
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Justicia al Alcance de Todos")
                         .font(.title)
@@ -37,7 +36,6 @@ struct HomePageView: View {
                         .foregroundColor(Color(hex: "#003366"))
                         .shadow(color: Color(hex: "#0D214D").opacity(0.3), radius: 4, x: 0, y: 4)
 
-                    
                     HStack(spacing: 15) {
                         Button(action: {
                             selectedMenuOption = .lawyersView
@@ -48,7 +46,7 @@ struct HomePageView: View {
                                 .foregroundColor(.white)
                                 .cornerRadius(8)
                         }
-                        
+
                         Button(action: {
                             selectedMenuOption = .appointmentView
                         }) {
@@ -58,7 +56,7 @@ struct HomePageView: View {
                                 .foregroundColor(.white)
                                 .cornerRadius(8)
                         }
-                        
+
                         Button(action: {
                             selectedMenuOption = .tesisView
                         }) {
@@ -74,25 +72,32 @@ struct HomePageView: View {
                 .padding()
                 .background(Color(.systemGray6))
                 .cornerRadius(10)
-                
+
                 // Featured Lawyers
                 VStack(alignment: .leading, spacing: 15) {
                     Text("Abogados")
                         .font(.headline)
-                    
-                    ForEach(0..<3) { index in
-                        LawyerCardView(name: "Lawyer \(index + 1)", specialty: "Specialty \(index + 1)", experience: "10 years experience")
+                        .fontWeight(.bold)
+                        .foregroundColor(Color(hex: "#003366"))
+                        .shadow(color: Color(hex: "#0D214D").opacity(0.3), radius: 4, x: 0, y: 4)
+
+                    ForEach(lawyerviewModel.users.prefix(3), id: \.id) { user in
+                        LawyerCardView(name: user.name, especialty: user.especiality
+                        )
                     }
                 }
                 .padding()
                 .background(Color(.systemGray6))
                 .cornerRadius(10)
-  
+
                 // Legal News Feed
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Tesis Recientes")
                         .font(.headline)
-                    
+                        .fontWeight(.bold)
+                        .foregroundColor(Color(hex: "#003366"))
+                        .shadow(color: Color(hex: "#0D214D").opacity(0.3), radius: 4, x: 0, y: 4)
+
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
                             ForEach(legalNews, id: \.self) { news in
@@ -104,16 +109,17 @@ struct HomePageView: View {
                 .padding()
                 .background(Color(.systemGray6))
                 .cornerRadius(10)
-                
+
                 // Contact and Support
                 VStack(alignment: .leading, spacing: 10) {
                     HStack {
-                        //Contact Support
                         Text("Necesitas Ayuda?")
                             .font(.headline)
-                        
+                            .fontWeight(.bold)
+                            .foregroundColor(Color(hex: "#003366"))
+                            .shadow(color: Color(hex: "#0D214D").opacity(0.3), radius: 4, x: 0, y: 4)
+
                         Button("Contactar Soporte") {
-                            // Support action
                             selectedMenuOption = .contactView
                         }
                         .font(.system(size: 13.5))
@@ -122,13 +128,14 @@ struct HomePageView: View {
                         .background(Color.blue)
                         .foregroundColor(.white)
                         .cornerRadius(8)
-                        
-                        // FAQ
+
                         Text("Dudas?")
-                        .font(.headline)
-                        
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color(hex: "#003366"))
+                            .shadow(color: Color(hex: "#0D214D").opacity(0.3), radius: 4, x: 0, y: 4)
+
                         Button("FAQ") {
-                            // Support action
                             selectedMenuOption = .faqView
                         }
                         .padding(.vertical, 5)
@@ -141,9 +148,11 @@ struct HomePageView: View {
                 .padding()
                 .background(Color(.systemGray6))
                 .cornerRadius(10)
-                
             }
             .padding()
+        }
+        .onAppear {
+            lawyerviewModel.fetchUsers() // Ensure users are fetched
         }
     }
 }
@@ -152,24 +161,13 @@ struct HomePageView: View {
 
 struct LawyerCardView: View {
     var name: String
-    var specialty: String
-    var experience: String
+    var especialty: String
     
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("\(name), \(specialty)")
+                Text("\(name), \(especialty)")
                     .font(.subheadline).bold()
-                Text(experience)
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                HStack {
-                    ForEach(0..<5) { _ in
-                        Image(systemName: "star.fill")
-                            .foregroundColor(.yellow)
-                            .font(.caption)
-                    }
-                }
             }
             Spacer()
             Button("View Profile") {
@@ -206,5 +204,5 @@ struct NewsCardView: View {
 
 // Vista previa
 #Preview {
-    HomePageView(selectedMenuOption: .constant(.homeView))
+    HomePageView(lawyerviewModel: UserViewModel(), selectedMenuOption: .constant(.homeView))
 }
