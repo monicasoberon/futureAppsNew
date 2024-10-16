@@ -38,6 +38,7 @@ struct LoginView: View {
                     .resizable()
                     .scaledToFit()
                     .padding(.top, 50)
+                    .padding(.horizontal, 20)
                     .opacity(animateLogo ? 1 : 0) // Animamos la opacidad
                     .animation(.easeIn(duration: 1.5), value: animateLogo) // Duración de la animación
                     .onAppear {
