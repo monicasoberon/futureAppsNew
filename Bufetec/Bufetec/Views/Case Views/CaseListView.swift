@@ -2,7 +2,6 @@ import SwiftUI
 
 struct CaseListView: View {
     @StateObject var viewModel = CaseViewModel()
-    @State private var isVisible: [Bool] = [] // Array para rastrear la visibilidad de cada elemento
     @State private var showCreateCaseView = false // Variable de estado para mostrar la vista de creación de casos
 
     var body: some View {
@@ -21,10 +20,6 @@ struct CaseListView: View {
         }
         .onAppear {
             viewModel.fetchUserId() // Obtener el _id del usuario
-            initializeVisibility()  // Inicializar la visibilidad de las animaciones
-        }
-        .onChange(of: viewModel.cases) { _ in
-            initializeVisibility()
         }
     }
     
@@ -48,15 +43,9 @@ struct CaseListView: View {
     // Lista de casos
     private func caseListView() -> some View {
         List {
-            ForEach(Array(viewModel.cases.enumerated()), id: \.element.id) { index, legalCase in
-                NavigationLink(destination: CaseDetailView(legalCase: legalCase, isAbogado: viewModel.isAbogado)) { // Pasa `isAbogado` al destino
+            ForEach(viewModel.cases, id: \.id) { legalCase in
+                NavigationLink(destination: CaseDetailView(legalCase: legalCase, isAbogado: viewModel.isAbogado)) {
                     CaseRowView(legalCase: legalCase)
-                        .opacity(isVisibleForIndex(index))
-                        .offset(y: offsetForIndex(index))
-                        .animation(animationForIndex(index), value: isVisible.indices.contains(index) ? isVisible[index] : false)
-                        .onAppear {
-                            setVisible(index: index)
-                        }
                 }
                 .buttonStyle(PlainButtonStyle())
             }
@@ -81,33 +70,6 @@ struct CaseListView: View {
                     .padding()
             }
             .transition(.opacity)
-        }
-    }
-
-    // Funciones auxiliares para la animación y visibilidad
-    private func isVisibleForIndex(_ index: Int) -> Double {
-        isVisible.indices.contains(index) && isVisible[index] ? 1 : 0
-    }
-
-    private func offsetForIndex(_ index: Int) -> CGFloat {
-        isVisible.indices.contains(index) && isVisible[index] ? 0 : 10
-    }
-
-    private func animationForIndex(_ index: Int) -> Animation {
-        .easeOut(duration: 0.6).delay(Double(index) * 0.1)
-    }
-
-    private func setVisible(index: Int) {
-        if index < isVisible.count {
-            withAnimation {
-                isVisible[index] = true
-            }
-        }
-    }
-
-    private func initializeVisibility() {
-        DispatchQueue.main.async {
-            self.isVisible = Array(repeating: false, count: viewModel.cases.count)
         }
     }
 }

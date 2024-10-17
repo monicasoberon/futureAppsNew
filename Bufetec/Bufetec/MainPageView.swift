@@ -5,7 +5,7 @@ import FirebaseAuth
 struct MainPageView: View {
     @StateObject private var user = UserModel()
     @StateObject private var userViewModel = UserViewModel()
-    @StateObject private var tesisViewModel = TesisModelViewModel() 
+    @StateObject private var citasViewModel = CitasViewModel()
     
     @State private var showMenu = false
     @State private var showProfile = false
@@ -18,7 +18,7 @@ struct MainPageView: View {
             ZStack {
                 switch selectedMenuOption {
                 case .homeView:
-                    HomePageView(viewModel: userViewModel, tesisViewModel: tesisViewModel, selectedMenuOption: $selectedMenuOption)
+                    HomePageView(viewModel: userViewModel, citasViewModel: citasViewModel, selectedMenuOption: $selectedMenuOption)
                 case .lawyersView:
                     UserListView()
                 case .appointmentView:

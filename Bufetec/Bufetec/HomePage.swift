@@ -2,7 +2,10 @@ import SwiftUI
 
 struct HomePageView: View {
     @ObservedObject var viewModel: UserViewModel
-    @ObservedObject var tesisViewModel: TesisModelViewModel
+    @ObservedObject var citasViewModel: CitasViewModel
+    @StateObject private var citasviewModel2 = CitasViewModel()
+
+    
     @Binding var selectedMenuOption: SideMenuOptionModel
 
     // State variable to hold the selected lawyer for navigation
@@ -11,9 +14,9 @@ struct HomePageView: View {
     // State variable to hold random lawyers
     @State private var randomLawyers: [UserModel] = []
 
-    // Computed property to get 3 random tesis
-    private var randomTesis: [TesisModel] {
-        Array(tesisViewModel.tesisList.shuffled().prefix(3))
+    // Computed property to get the first 3 citas
+    private var topCitas: [CitasModel] {
+        Array(citasViewModel.citas.prefix(3))
     }
 
     var body: some View {
@@ -100,15 +103,27 @@ struct HomePageView: View {
                         .background(Color(.systemGray6))
                         .cornerRadius(10)
 
-                        // Legal News Feed - Random 3 Tesis
+                        // Citas Recientes - Top 3 Citas
                         VStack(alignment: .leading, spacing: 10) {
-                            Text("Tesis Recientes")
+                            Text("Citas Recientes")
                                 .font(.headline)
+                                .padding(.horizontal)
 
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(spacing: 10) {
-                                    ForEach(randomTesis, id: \.registroDigital) { tesis in
-                                        NewsCardView(title: tesis.tesis)
+                            if let userEmail = citasviewModel2.userEmail {
+                                if citasviewModel2.citas.isEmpty {
+                                    Text("No hay citas para el usuario \(userEmail).")
+                                        .padding()
+                                        .foregroundColor(.gray)
+                                } else {
+                                    ScrollView(.horizontal, showsIndicators: false) {
+                                        HStack(spacing: 10) { // Wrap in HStack for horizontal layout
+                                            ForEach(citasviewModel2.citas) { cita in
+                                                NewsCardView(cita: cita)
+                                                    .frame(width: 300) // Set a fixed width for each card
+                                                    .padding(.vertical) // Adjust padding as needed
+                                            }
+                                        }
+                                        .padding(.horizontal) // Optional padding around HStack
                                     }
                                 }
                             }
@@ -154,13 +169,19 @@ struct HomePageView: View {
                 }
             }
             .onAppear {
-                viewModel.fetchUsers()
-                tesisViewModel.fetchAllTesis()
+                DispatchQueue.main.async {
+                    viewModel.fetchUsers()
+                    citasviewModel2.fetchUserEmail()
+                }
             }
             .onReceive(viewModel.$users) { users in
                 if randomLawyers.isEmpty && !users.isEmpty {
                     randomLawyers = Array(users.shuffled().prefix(3))
                 }
+            }
+            .onReceive(citasViewModel.$citas) { citas in
+                print("Number of citas loaded in HomePageView: \(citas.count)") // Debugging
+                print("Top 3 citas: \(topCitas)") // To confirm the top 3 citas
             }
             // Navigation to LawyerDetailView
             .navigationDestination(isPresented: .constant(selectedLawyer != nil)) {
@@ -175,7 +196,6 @@ struct HomePageView: View {
         }
     }
 }
-
 
 
 
@@ -215,25 +235,42 @@ struct LawyerCardView: View {
 
 
 struct NewsCardView: View {
-    var title: String
-    
+    var cita: CitasModel
+
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(title)
+        VStack(alignment: .leading, spacing: 8) {
+            // Client Name
+            Text("Cliente: \(cita.cliente_nombre ?? "N/A")")
                 .font(.subheadline)
                 .bold()
                 .foregroundColor(Color(hex: "#003366"))
-            Text("Click to read more")
+            
+            // Lawyer Name
+            Text("Abogado: \(cita.abogado_nombre ?? "N/A")")
+                .font(.subheadline)
+                .foregroundColor(Color.blue.opacity(0.7))
+
+            // Appointment Time
+            Text("Hora: \(formatDate(cita.hora))")
                 .font(.caption)
-                .foregroundColor(.blue)
+                .foregroundColor(.gray)
         }
         .padding()
         .background(Color.white)
         .cornerRadius(10)
         .shadow(color: Color.gray.opacity(0.3), radius: 3)
     }
+
+    // Helper function to format the date
+    private func formatDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium    // Example: Oct 16, 2024
+        formatter.timeStyle = .short     // Example: 4:00 PM
+        return formatter.string(from: date)
+    }
 }
 
+
 #Preview {
-    HomePageView(viewModel: UserViewModel(), tesisViewModel: TesisModelViewModel(), selectedMenuOption: .constant(.homeView))
+    HomePageView(viewModel: UserViewModel(), citasViewModel: CitasViewModel(), selectedMenuOption: .constant(.homeView))
 }
