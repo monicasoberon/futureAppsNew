@@ -11,6 +11,15 @@ const idByEmail = async (email) => {
   }
 };
 
+const idByUid = async (uid) => {
+  try {
+    const usuario = await USUARIOS.findOne({ uid: uid });
+    return usuario ? usuario._id : null;
+  } catch (error) {
+    throw new Error("Error al buscar el usuario por uid");
+  }
+};
+
 // Get all citas
 exports.getCitas = async (req, res) => {
   try {
@@ -23,10 +32,9 @@ exports.getCitas = async (req, res) => {
 
 exports.getCitasByEmail = async (req, res) => {
   const { email } = req.params;
-  console.log(email);
 
   try {
-    const id = await idByEmail(email);
+    const id = await idByEmail(email);  // Find user ID by email
 
     if (!id) {
       return res.status(404).json({ message: "Usuario no encontrado" });
@@ -39,43 +47,40 @@ exports.getCitasByEmail = async (req, res) => {
 
     // Format the "hora" field as an ISO 8601 string
     const formattedCitas = citas.map((cita) => ({
-      ...cita.toObject(), // Convert Mongoose document to a plain object
-      hora: cita.hora.toISOString(), // Convert MongoDB Date to ISO 8601 string
+      ...cita.toObject(),
+      hora: cita.hora.toISOString(),  // Convert MongoDB Date to ISO 8601 string
     }));
 
-    res.status(200).json(formattedCitas); // Send formatted citas
+    res.status(200).json(formattedCitas);  // Send formatted citas
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-// Create a new cita
 exports.createCita = async (req, res) => {
   const { cliente_id, abogado_id, hora } = req.body;
-
-  if (!cliente_id || !abogado_id || !hora) {
-    return res
-      .status(400)
-      .json({
-        message: "Missing required fields: cliente_id, abogado_id, and hora",
-      });
-  }
-
+  
   try {
-    const newCita = new CITAS({ cliente_id, abogado_id, hora });
-    const savedCita = await newCita.save();
-    console.log(
-      "Cita hecha con",
-      cliente_id,
-      " y ",
-      abogado_id,
-      " a las",
+    // Use idByUid helper function to resolve Firebase UIDs to MongoDB _id
+    const clientId = await idByUid(cliente_id);
+    if (!clientId) {
+      return res.status(404).json({ message: "Cliente no encontrado" });
+    }
+
+
+    console.log(clientId);
+
+    // Create and save new cita with the resolved client and lawyer IDs
+    const newCita = new CITAS({
+      cliente_id: clientId,  // Resolved MongoDB ID for the client
+      abogado_id,  // Resolved MongoDB ID for the lawyer
       hora
-    );
+    });
+
+    const savedCita = await newCita.save();
+    console.log(savedCita);
     res.status(201).json(savedCita);
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error creating appointment", error: error.message });
+    res.status(500).json({ message: error.message });
   }
 };

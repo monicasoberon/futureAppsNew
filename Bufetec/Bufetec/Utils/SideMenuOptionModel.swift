@@ -67,7 +67,7 @@ enum SideMenuOptionModel: Int, CaseIterable, Identifiable {
 
     var isForClient: Bool {
         switch self {
-        case .homeView, .appointmentView, .lawyersView, .casesView, .faqView, .contactView:
+        case .homeView, .citasView, .appointmentView, .lawyersView, .casesView, .faqView, .contactView:
             return true
         default:
             return false
