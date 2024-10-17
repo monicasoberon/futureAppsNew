@@ -1,29 +1,29 @@
 import SwiftUI
 
 struct LawyerListView: View {
-    @StateObject var viewModel = UserViewModel()  // Use your existing ViewModel
+    @StateObject var viewModel = UserViewModel()  // Usa tu ViewModel existente
 
     var body: some View {
         ZStack {
-            // Background Gradient from light blue to white
+            // Fondo degradado de azul claro a blanco
             LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.1), Color.white]),
                            startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
 
             VStack {
-                // Stylized Title
+                // Título estilizado
                 Text("Selecciona un Abogado")
                     .font(.largeTitle)
                     .bold()
                     .foregroundColor(Color(hex: "#003366"))
                     .padding(.top, 20)
 
-                // Scrollable list of lawyers
+                // Lista desplazable de abogados
                 ScrollView {
                     VStack(spacing: 32) {
-                        // Loop through users (lawyers) and render each one
+                        // Recorre los usuarios (abogados) y renderiza cada uno
                         ForEach(viewModel.users, id: \.id) { user in
-                            lawyerRow(for: user)  // Refactored to a separate function for readability
+                            lawyerRow(for: user)  // Refactorizado a una función separada para mayor legibilidad
                         }
                     }
                     .padding(.top, 16)
@@ -32,26 +32,44 @@ struct LawyerListView: View {
             .padding(.horizontal)
         }
         .onAppear {
-            viewModel.fetchUsers()  // Fetch lawyers (users)
+            viewModel.fetchUsers()  // Obtiene los abogados (usuarios)
         }
     }
 
-    // Function to render each lawyer row
+    // Función para renderizar cada fila de abogado
     @ViewBuilder
     func lawyerRow(for user: UserModel) -> some View {
         NavigationLink(destination: LawyerAvailabilityView(lawyer: user)) {
             HStack(spacing: 20) {
-                // Lawyer's profile image
-                Image(systemName: "person.crop.circle.fill")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 80, height: 80)
-                    .foregroundColor(.gray)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.white, lineWidth: 2))  // Thicker white border
-                    .shadow(color: Color.blue.opacity(0.3), radius: 6)
+                // Imagen de perfil del abogado con AsyncImage
+                AsyncImage(url: URL(string: user.photo)) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                            .frame(width: 80, height: 80)
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 80, height: 80)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                            .shadow(color: Color.blue.opacity(0.3), radius: 6)
+                    case .failure:
+                        Image(systemName: "person.crop.circle.fill.badge.exclamationmark")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 80, height: 80)
+                            .foregroundColor(.gray)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                            .shadow(color: Color.blue.opacity(0.3), radius: 6)
+                    @unknown default:
+                        EmptyView()
+                    }
+                }
 
-                // Lawyer's name and specialty
+                // Nombre y especialidad del abogado
                 VStack(alignment: .leading, spacing: 5) {
                     Text(user.name)
                         .font(.headline)

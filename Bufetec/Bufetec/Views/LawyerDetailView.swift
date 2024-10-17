@@ -12,7 +12,7 @@ struct LawyerDetailView: View {
                 .edgesIgnoringSafeArea(.all)
 
             VStack(alignment: .center, spacing: 20) {
-                
+
                 // Título personalizado para los detalles del abogado
                 Text("Detalles del Abogado")
                     .font(.largeTitle)
@@ -28,15 +28,36 @@ struct LawyerDetailView: View {
                             .fill(Color.blue.opacity(0.2))
                             .frame(width: showDetail ? 240 : 280, height: showDetail ? 240 : 280) // Animación de escala
                             .shadow(color: Color.blue.opacity(0.4), radius: 20, x: 0, y: 10)
-                        
-                        Image(user.photo.isEmpty ? "default_picture" : user.photo) // Replace "default_picture" with user's actual photo
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: showDetail ? 220 : 260, height: showDetail ? 220 : 260)
-                            .clipShape(Circle())
-                            .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                            .shadow(radius: 10)
-                            .scaleEffect(showDetail ? 1 : 1.1)
+
+                        // Utilizamos AsyncImage para cargar la imagen desde la URL
+                        AsyncImage(url: URL(string: user.photo)) { phase in
+                            switch phase {
+                            case .empty:
+                                ProgressView()
+                                    .frame(width: showDetail ? 220 : 260, height: showDetail ? 220 : 260)
+                            case .success(let image):
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: showDetail ? 220 : 260, height: showDetail ? 220 : 260)
+                                    .clipShape(Circle())
+                                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                                    .shadow(radius: 10)
+                                    .scaleEffect(showDetail ? 1 : 1.1)
+                            case .failure:
+                                // Imagen de marcador de posición si falla la carga
+                                Image("default_picture")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: showDetail ? 220 : 260, height: showDetail ? 220 : 260)
+                                    .clipShape(Circle())
+                                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                                    .shadow(radius: 10)
+                                    .scaleEffect(showDetail ? 1 : 1.1)
+                            @unknown default:
+                                EmptyView()
+                            }
+                        }
                     }
                     Spacer()
                 }
