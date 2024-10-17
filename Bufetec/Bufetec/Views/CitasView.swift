@@ -63,6 +63,10 @@ struct CitaCardView: View {
             Text("Cliente: \(cita.cliente_nombre ?? "N/A")")
                 .font(.headline)
                 .foregroundColor(.primary)
+            
+            Text("Abogado: \(cita.abogado_nombre ?? "N/A")")
+                .font(.headline)
+                .foregroundColor(.secondary)
 
             Text("Hora: \(formatDate(cita.hora))")
                 .font(.subheadline)
