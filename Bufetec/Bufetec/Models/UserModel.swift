@@ -1,7 +1,7 @@
 import Foundation
 import FirebaseAuth
 
-class UserModel: Identifiable, Codable, ObservableObject {
+class UserModel: Identifiable, Codable, ObservableObject, Hashable {
     var id: String
     var type: String
     var userID: String
@@ -71,6 +71,15 @@ class UserModel: Identifiable, Codable, ObservableObject {
             self.email = user.email ?? self.email
             self.userID = user.uid
         }
+    }
+
+    // Conformance to Hashable
+    static func == (lhs: UserModel, rhs: UserModel) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 
     // Default value
