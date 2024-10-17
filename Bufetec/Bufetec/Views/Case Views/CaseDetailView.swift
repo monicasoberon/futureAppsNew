@@ -8,13 +8,14 @@ struct CaseDetailView: View {
     @State private var selectedStatus: String = ""
     @State private var isSaving = false
     @Environment(\.dismiss) var dismiss
+    @Environment(\.openURL) var openURL  // Variable de entorno añadida
 
-    // Nueva variable para determinar si el usuario es abogado
+    // Variable para determinar si el usuario es abogado
     var isAbogado: Bool
 
     var body: some View {
         ZStack {
-            // Full-view background gradient
+            // Fondo degradado de toda la vista
             LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.1), Color.white]),
                            startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
@@ -128,6 +129,46 @@ struct CaseDetailView: View {
                     .opacity(isVisible ? 1 : 0)
                     .animation(.easeInOut(duration: 0.5).delay(0.5), value: isVisible)
 
+                    // Sección de Archivos
+                    if !legalCase.files.isEmpty {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Archivos:")
+                                .font(.headline)
+                                .bold()
+
+                            ForEach(legalCase.files, id: \.self) { fileURLString in
+                                if let fileURL = URL(string: fileURLString) {
+                                    // Extraer un nombre de archivo para mostrar
+                                    let fileName = fileURL.lastPathComponent.isEmpty ? "Archivo" : fileURL.lastPathComponent
+
+                                    Button(action: {
+                                        openURL(fileURL)
+                                    }) {
+                                        HStack {
+                                            Image(systemName: "doc.text")
+                                                .foregroundColor(.blue)
+                                            Text(fileName)
+                                                .foregroundColor(.blue)
+                                                .underline()
+                                        }
+                                        .padding(8)
+                                        .background(Color.white.opacity(0.8))
+                                        .cornerRadius(8)
+                                        .shadow(color: Color.gray.opacity(0.3), radius: 2, x: 0, y: 2)
+                                    }
+                                    .padding(.vertical, 4)
+                                }
+                            }
+                        }
+                        .padding()
+                        .background(Color.white.opacity(0.8))
+                        .cornerRadius(12)
+                        .shadow(color: Color(hex: "#0D214D").opacity(0.3), radius: 4, x: 0, y: 4)
+                        .padding(.horizontal)
+                        .opacity(isVisible ? 1 : 0)
+                        .animation(.easeInOut(duration: 0.5).delay(0.6), value: isVisible)
+                    }
+
                     Spacer()
                 }
                 .navigationTitle(legalCase.caseName)
@@ -149,6 +190,7 @@ struct CaseDetailView: View {
     func fetchUserDetails(for userId: String, completion: @escaping (String) -> Void) {
         guard let url = URL(string: "http://localhost:3000/api/usuarios/userById/\(userId)") else {
             print("URL inválida")
+            completion("No disponible")
             return
         }
 

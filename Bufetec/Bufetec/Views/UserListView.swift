@@ -95,9 +95,52 @@ struct UserListView: View {
                     .padding(.top, 16)
                 }
 
-                // Resto de tu código...
+                if let message = conversionMessage {
+                    Text(message)
+                        .font(.body)
+                        .foregroundColor(.green)
+                        .padding()
+                }
             }
             .padding(.horizontal)
+
+            // Modal para agregar nuevo abogado
+            if isCreatingLawyer {
+                VStack {
+                    Text("Convertir a Cliente en Abogado")
+                        .font(.headline)
+                        .padding()
+
+                    TextField("Ingresa el email del cliente", text: $emailInput)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+
+                    Button(action: {
+                        viewModel.convertToLawyer(email: emailInput)
+                        isCreatingLawyer = false
+                    }) {
+                        Text("Convertir")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                            .padding(.horizontal)
+                    }
+
+                    Button("Cancelar") {
+                        isCreatingLawyer = false
+                    }
+                    .padding(.top, 10)
+                }
+                .background(Color.white)
+                .cornerRadius(10)
+                .padding()
+                .shadow(radius: 10)
+            }
         }
         .onAppear {
             viewModel.fetchUsers()
